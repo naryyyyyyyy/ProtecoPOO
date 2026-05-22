@@ -41,3 +41,9 @@ INSERT INTO historial_juegos(UsuarioId, Juego, Ganancia) VALUES
 (8, 'Ruleta', -45.50),             
 (9, 'BlackJack', 120.00),          
 (10, 'Carrera de caballos', -30.00);
+
+-- QUERIES
+
+SELECT Id
+FROM usuarios u 
+WHERE nombre = u.Nombre AND contrasena = u.Contrasena;
