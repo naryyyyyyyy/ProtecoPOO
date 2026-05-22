@@ -16,5 +16,10 @@ namespace ProtecoPOO
         {
             InitializeComponent();
         }
+
+        public bool UsuarioValido(string usuario)
+        {
+
+        }
     }
 }

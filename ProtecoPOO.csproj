@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarreraDeCaballos.cs" />
+    <Compile Include="CasinoSQL\historial_juegoDB.cs" />
     <Compile Include="CasinoSQL\usuariosDB.cs" />
     <Compile Include="CasinoSQL\SqlConnectionExtensions.cs" />
     <Compile Include="Historial.cs" />
