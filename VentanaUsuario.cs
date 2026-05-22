@@ -10,18 +10,17 @@ using System.Windows.Forms;
 
 namespace ProtecoPOO
 {
-    public partial class Form1 : Form
+    public partial class VentanaUsuario : Form
     {
-        public Form1()
+        public VentanaUsuario()
         {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void btnblackjack_Click(object sender, EventArgs e)
         {
-            //valodacion por si es un usuario o un admin
-
-            VentanaUsuario frm = new VentanaUsuario();
+            //validacion de que si tenga almas para jugar
+            VentanaBlackJack frm=new VentanaBlackJack();
             frm.ShowDialog();
         }
     }
