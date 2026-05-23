@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bj
+namespace ProtecoPOO
 {
     public abstract class Juego
     {
-        public virtual void IniciarJuego()
-        {
-
-        }
+        public string Nombre { get; protected set; }
+        public int JuegoId { get; protected set; }
+        public abstract decimal Jugar(decimal montoApuesta);
+        
     }
 }

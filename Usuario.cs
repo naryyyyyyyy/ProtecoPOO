@@ -11,8 +11,8 @@ namespace bj
         string Nombre {  get; set; }
         int Id { get; set; }
         private string Contrasena { get; set; }
-        double Saldo { get; set; }
-        public Usuario(string nombre, int id, string contrasena, double saldo)
+        decimal Saldo { get; set; }
+        public Usuario(string nombre, int id, string contrasena, decimal saldo)
         {
             Nombre = nombre;
             Id = id;

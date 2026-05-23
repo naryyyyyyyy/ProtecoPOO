@@ -34,19 +34,19 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
         }
-        public void AgregarUsuario(string nombre, string contrasena, string personaje)
+        public void AgregarUsuario(string nombre, string contrasena, int personajeId)
         {
             using (var conn = new SqliteConnection(cadenaConexion))
             {
                 conn.Open();
 
-                string query = "INSERT INTO Usuarios (Nombre, Contrasena, Saldo, Personaje) VALUES (@nombre, @contrasena, 1000, @personaje);";
+                string query = "INSERT INTO usuarios (Nombre, Contrasena, Saldo, PersonajeId) VALUES\r\n(@nombre, @contrasena, 1000, @personajeid);";
 
                 conn.ExecuteNonQuery(query, 
                     ("@nombre", nombre), 
                     ("@contrasena", contrasena), 
                     ("1000",1000),
-                    ("@personaje", personaje));
+                    ("@personajeid", personajeId));
             }
         }
         public void BorrarUsuario(int UsuarioId)
@@ -64,25 +64,22 @@ namespace ProtecoPOO.CasinoSQL
                 conn.ExecuteNonQuery(queryUsuario, ("@id", UsuarioId));
             }
         }
-        public List<Usuario> UsuariosPorPersonaje(string personaje)
+        public void AgregarRegistro(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
         {
-            var filtro = new List<Usuario>();
+            RegistroPartida partida = new RegistroPartida(usuarioId, juegoId, saldoInicial, numReapuestas, ganancia);
+
             using (var conn = new SqliteConnection(cadenaConexion))
             {
-                string query = "SELECT Id, Nombre, Saldo, Personaje\r\nFROM usuarios\r\nWHERE Personaje = @personaje;";
-
-                var rs = conn.ExecuteReader(query, ("@personaje", personaje));
-                while (rs.Read())
-                {
-                    filtro.Add(new Usuario(rs.GetString("Nombre"),
-                                           rs.GetInt("Id"),
-                                           "",
-                                           rs.GetDouble("Saldo")));
-                }
+                conn.Open();
+                string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
+                conn.ExecuteNonQuery(query,
+                ("@usuarioId", partida.UsuarioId),
+                ("@juego", partida.JuegoId),
+                ("@saldoInicial", partida.SaldoInicial),
+                ("@numReapuestas", partida.NumReapuestas),
+                ("@ganancia", partida.Ganancia)
+                );
             }
-            return filtro;
         }
-        
-
     }
 }

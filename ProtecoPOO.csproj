@@ -72,12 +72,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarreraDeCaballos.cs" />
-    <Compile Include="CasinoSQL\historial_juegoDB.cs" />
+    <Compile Include="CasinoSQL\ReportesDB.cs" />
     <Compile Include="CasinoSQL\usuariosDB.cs" />
     <Compile Include="CasinoSQL\SqlConnectionExtensions.cs" />
-    <Compile Include="Historial.cs" />
+    <Compile Include="Personaje.cs" />
+    <Compile Include="RegistroPartida.cs" />
     <Compile Include="Juego.cs" />
-    <Compile Include="RegistroJuego.cs" />
+    <Compile Include="Ruleta.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="VentanaPincipal.cs">
       <SubType>Form</SubType>

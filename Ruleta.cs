@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProtecoPOO
 {
-    public class CarreraDeCaballos : Juego
+    public class Ruleta : Juego
     {
-        public CarreraDeCaballos()
+        public Ruleta()
         {
-            Nombre = "Carrera de caballos";
-            JuegoId = 3;
+            Nombre = "Ruleta";
+            JuegoId = 2;
         }
 
         public override decimal Jugar(decimal montoApuesta)
