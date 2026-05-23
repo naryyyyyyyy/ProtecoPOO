@@ -9,10 +9,8 @@ namespace ProtecoPOO
 {
     public class Ruleta : Juego
     {
-        public Ruleta()
+        public Ruleta() : base("Ruleta", 2)
         {
-            Nombre = "Ruleta";
-            JuegoId = 2;
         }
 
         public override decimal Jugar(decimal montoApuesta)

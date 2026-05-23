@@ -8,12 +8,9 @@ namespace ProtecoPOO
 {
     public class CarreraDeCaballos : Juego
     {
-        public CarreraDeCaballos()
+        public CarreraDeCaballos(string nombre, int juegoId) : base(nombre, juegoId)
         {
-            Nombre = "Carrera de caballos";
-            JuegoId = 3;
         }
-
         public override decimal Jugar(decimal montoApuesta)
         {
             decimal ganancia = 0;

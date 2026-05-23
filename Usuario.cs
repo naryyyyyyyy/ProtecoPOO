@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bj
+namespace ProtecoPOO
 {
     public class Usuario
     {
-        string Nombre {  get; set; }
-        int Id { get; set; }
+        public string Nombre { get; set; }
+        public int Id { get; set; }
         private string Contrasena { get; set; }
-        decimal Saldo { get; set; }
+        public decimal Saldo { get; set; }
         public Usuario(string nombre, int id, string contrasena, decimal saldo)
         {
             Nombre = nombre;

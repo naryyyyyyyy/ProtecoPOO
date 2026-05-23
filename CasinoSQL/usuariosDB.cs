@@ -1,5 +1,4 @@
-﻿using bj;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +79,44 @@ namespace ProtecoPOO.CasinoSQL
                 ("@ganancia", partida.Ganancia)
                 );
             }
+        }
+        public void AgregarRegistro(RegistroPartida registro)
+        {
+            using (var conn = new SqliteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
+                conn.ExecuteNonQuery(query,
+                ("@usuarioId", registro.UsuarioId),
+                ("@juego", registro.JuegoId),
+                ("@saldoInicial", registro.SaldoInicial),
+                ("@numReapuestas", registro.NumReapuestas),
+                ("@ganancia", registro.Ganancia)
+                );
+            }
+        }
+        public List<Usuario> GetAllUsuarios()
+        {
+            var usuarios = new List<Usuario>();
+
+            using (var conn = new SqliteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = @"SELECT Id, Nombre 
+                                FROM personajes 
+                                ORDER BY Id ASC;";
+
+                var rs = conn.ExecuteReader(query);
+                while (rs.Read())
+                {
+                    usuarios.Add(new Usuario(rs.GetString("Nombre"),
+                                             rs.GetInt("Id"),
+                                             "",
+                                             Convert.ToDecimal(rs.GetDouble("Saldo"))));
+                }
+            }
+
+            return usuarios;
         }
     }
 }

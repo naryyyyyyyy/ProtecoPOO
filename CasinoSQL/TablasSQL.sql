@@ -163,7 +163,8 @@ SELECT Id, Nombre
 FROM juegos 
 ORDER BY Id ASC;
 
---Filtro usuarios por personaje
+--USUARIOS POR PERSONAJE
+--  dado el nombre
 SELECT 
     u.Id AS UsuarioId, 
     u.Nombre AS Jugador, 
@@ -171,4 +172,26 @@ SELECT
     p.Nombre AS PersonajeElegido
 FROM usuarios u
 INNER JOIN personajes p ON u.PersonajeId = p.Id
-WHERE p.Nombre = @nombrePersonaje;
+WHERE p.Nombre = @nombrePersonaje; --> nombre solicitado
+
+--  dado el id
+SELECT Id, Nombre, Saldo 
+FROM usuarios 
+WHERE PersonajeId = @idPersonaje;
+
+--USUARIOS POR JUEGO
+--  dado el nombre
+SELECT DISTINCT 
+    u.Id AS UsuarioId, 
+    u.Nombre AS Jugador, 
+    u.Saldo
+FROM usuarios u
+INNER JOIN historial_juegos h ON u.Id = h.UsuarioId
+INNER JOIN juegos j ON h.JuegoId = j.Id
+WHERE j.Nombre = @nombreJuego; --> nombre solicitado
+
+--  dado el id
+SELECT DISTINCT u.Id, u.Nombre, u.Saldo 
+FROM usuarios u
+INNER JOIN historial_juegos h ON u.Id = h.UsuarioId
+WHERE h.JuegoId = @idJuego;

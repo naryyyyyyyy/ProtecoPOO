@@ -8,8 +8,8 @@ namespace ProtecoPOO
 {
     public class Personaje
     {
-        string Nombre { get; set; }
-        int Id { get; set; }
+        public string Nombre { get; }
+        public int Id { get; }
         public Personaje(string nombre, int id)
         {
             Nombre = nombre;

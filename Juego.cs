@@ -8,9 +8,14 @@ namespace ProtecoPOO
 {
     public abstract class Juego
     {
-        public string Nombre { get; protected set; }
-        public int JuegoId { get; protected set; }
+
+        public string Nombre { get; }
+        public int JuegoId { get; }
         public abstract decimal Jugar(decimal montoApuesta);
-        
+        protected Juego(string nombre, int juegoId)
+        {
+            Nombre = nombre;
+            JuegoId = juegoId;
+        }
     }
 }
