@@ -63,7 +63,7 @@ namespace ProtecoPOO.CasinoSQL
                 conn.ExecuteNonQuery(queryUsuario, ("@id", UsuarioId));
             }
         }
-        public void AgregarRegistro(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
+        public void AgregarRegistroPartida(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
         {
             RegistroPartida partida = new RegistroPartida(usuarioId, juegoId, saldoInicial, numReapuestas, ganancia);
 
@@ -80,7 +80,7 @@ namespace ProtecoPOO.CasinoSQL
                 );
             }
         }
-        public void AgregarRegistro(RegistroPartida registro)
+        public void AgregarRegistroPartida(RegistroPartida registro)
         {
             using (var conn = new SqliteConnection(cadenaConexion))
             {
