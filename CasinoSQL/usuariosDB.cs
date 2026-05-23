@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using bj;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,46 +12,77 @@ namespace ProtecoPOO.CasinoSQL
     public class usuariosDB
     {
         private string cadenaConexion = "Data Source=CasinoDB.db;";
-
-        // Método para inicializar la base de datos (crear las tablas si no existen)
-        public void CrearTablaSiNoExiste()
+        public bool UsuarioExistente(string nombre, string contrasena)
         {
-            // El bloque 'using' abre la conexión y la cierra automáticamente al terminar
-            using (var conexion = new SqliteConnection(cadenaConexion))
+            // 'using' asegura que la conexión se cierre automáticamente al terminar
+            using (var conn = new SqliteConnection(cadenaConexion))
             {
-                conexion.Open(); // Abrimos la conexión
+                conn.Open();
 
-                string sql = @"CREATE TABLE IF NOT EXISTS Historial (
-                                  Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                  NombreJuego TEXT,
-                                  Ganancia DECIMAL
-                               );";
+                string query = "SELECT Id FROM usuarios WHERE Nombre = @nombre AND Contrasena = @contrasena;";
 
-                // AQUÍ usamos el método de tu archivo SqlConnectionExtensions.cs
-                conexion.ExecuteNonQuery(sql);
+                using (var rs = conn.ExecuteReader(query, ("@nombre", nombre), ("@contrasena", contrasena)))
+                {
+                    if (rs.Read())
+                    {
+                        return true; // El usuario existe y la contraseña es correcta
+                    }
+                    else
+                    {
+                        return false; // El usuario no existe o la contraseña está mal
+                    }
+                }
             }
         }
-
-        public void GuardarRegistro(string nombreJuego, decimal ganancia)
+        public void AgregarUsuario(string nombre, string contrasena, string personaje)
         {
-            using (var conexion = new SqliteConnection(cadenaConexion))
+            using (var conn = new SqliteConnection(cadenaConexion))
             {
-                conexion.Open();
+                conn.Open();
 
-                string sql = "INSERT INTO Historial (NombreJuego, Ganancia) VALUES (@juego, @ganancia)";
+                string query = "INSERT INTO Usuarios (Nombre, Contrasena, Saldo, Personaje) VALUES (@nombre, @contrasena, 1000, @personaje);";
 
-                // Otra vez usamos tu archivo, pasándole los parámetros súper fácil
-                conexion.ExecuteNonQuery(sql,
-                    ("@juego", nombreJuego),
-                    ("@ganancia", ganancia)
-                );
+                conn.ExecuteNonQuery(query, 
+                    ("@nombre", nombre), 
+                    ("@contrasena", contrasena), 
+                    ("1000",1000),
+                    ("@personaje", personaje));
             }
         }
-
-        public bool UsuarioValido(string usuario, string contrasena)
+        public void BorrarUsuario(int UsuarioId)
         {
-            string query = "SELECT Id \r\nFROM usuarios u \r\nWHERE Nombre = u.Nombre AND Contrasena = u.Contrasena;"
-            var rs = cadenaConexion.ExecuteReader(query, ("nombre", usuario), ("contrasena",contrasena));
+            using (var conn = new SqliteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // Limpiar el historial del usuario
+                string queryHistorial = "DELETE FROM historial_juegos WHERE UsuarioId = @id;";
+                conn.ExecuteNonQuery(queryHistorial, ("@id", UsuarioId));
+
+                // Borrar al usuario de la base de datos
+                string queryUsuario = "DELETE FROM usuarios WHERE Id = @id;";
+                conn.ExecuteNonQuery(queryUsuario, ("@id", UsuarioId));
+            }
         }
+        public List<Usuario> UsuariosPorPersonaje(string personaje)
+        {
+            var filtro = new List<Usuario>();
+            using (var conn = new SqliteConnection(cadenaConexion))
+            {
+                string query = "SELECT Id, Nombre, Saldo, Personaje\r\nFROM usuarios\r\nWHERE Personaje = @personaje;";
+
+                var rs = conn.ExecuteReader(query, ("@personaje", personaje));
+                while (rs.Read())
+                {
+                    filtro.Add(new Usuario(rs.GetString("Nombre"),
+                                           rs.GetInt("Id"),
+                                           "",
+                                           rs.GetDouble("Saldo")));
+                }
+            }
+            return filtro;
+        }
+        
+
     }
 }

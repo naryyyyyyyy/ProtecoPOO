@@ -1,11 +1,14 @@
-﻿DROP TABLE IF EXISTS [usuarios];
+﻿-- Primero borramos el historial (el hijo) que depende de los usuarios
 DROP TABLE IF EXISTS [historial_juegos];
+-- Ahora sí, como ya no hay nadie que dependa de ella, borramos la de usuarios
+DROP TABLE IF EXISTS [usuarios];
 
 CREATE TABLE usuarios(
-    Nombre TEXT NOT NULL,
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nombre TEXT NOT NULL,
     Contrasena TEXT NOT NULL,
-    Saldo DECIMAL NOT NULL
+    Saldo DECIMAL NOT NULL,
+    Personaje TEXT NOT NULL
 );
 
 CREATE TABLE historial_juegos(
@@ -16,17 +19,17 @@ CREATE TABLE historial_juegos(
     FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id)
 );
 
-INSERT INTO usuarios (Nombre, Contrasena, Saldo) VALUES 
-('Juan Perez', 'clave123', 1500.50),
-('Maria Garcia', 'maria_pass', 500.00),
-('Luis Fernandez', 'luis2026', 0.00),
-('Carmen Salinas', 'carmen1', 3200.75),
-('Jorge Nitales', 'jorgepwd', 150.20),
-('Andrea Lopez', 'andy_l', 850.00),
-('Roberto Gomez', 'rob1234', 12000.00),
-('Sofia Torres', 'sofi_t', 45.50),
-('Miguel Diaz', 'mikediaz', 600.00),
-('Elena Navarro', 'elena99', 1000.00);
+INSERT INTO usuarios (Nombre, Contrasena, Saldo, Personaje) VALUES 
+('Juan Perez', 'clave123', 1500.50, 'Personaje 1'),
+('Maria Garcia', 'maria_pass', 500.00, 'Personaje 2'),
+('Luis Fernandez', 'luis2026', 0.00, 'Personaje 3'),
+('Carmen Salinas', 'carmen1', 3200.75, 'Personaje 1'),
+('Jorge Nitales', 'jorgepwd', 150.20, 'Personaje 2'),
+('Andrea Lopez', 'andy_l', 850.00, 'Personaje 3'),
+('Roberto Gomez', 'rob1234', 12000.00, 'Personaje 1'),
+('Sofia Torres', 'sofi_t', 45.50, 'Personaje 2'),
+('Miguel Diaz', 'mikediaz', 600.00, 'Personaje 3'),
+('Elena Navarro', 'elena99', 1000.00, 'Personaje 1');
 
 INSERT INTO historial_juegos(UsuarioId, Juego, Ganancia) VALUES
 (1, 'Ruleta', 150.00),             
@@ -44,6 +47,24 @@ INSERT INTO historial_juegos(UsuarioId, Juego, Ganancia) VALUES
 
 -- QUERIES
 
+--Validar usuario
 SELECT Id
-FROM usuarios u 
-WHERE nombre = u.Nombre AND contrasena = u.Contrasena;
+FROM usuarios
+WHERE Nombre = @nombre AND Contrasena = @contrasena;
+
+--Guardar registro de partida
+INSERT INTO Historial (NombreJuego, Ganancia) VALUES
+(@juego, @ganancia);
+
+--Añadir usuario
+INSERT INTO Usuarios (Nombre, Contrasena, Saldo, Personaje) VALUES
+(@nombre, @contrasena, 1000, @personaje);
+
+--Borrar usuario
+DELETE FROM historial_juegos WHERE UsuarioId = @id;
+DELETE FROM usuarios WHERE Id = @id;
+
+--Filtro usuarios por personaje
+SELECT Id, Nombre, Saldo, Personaje
+FROM usuarios
+WHERE Personaje = @personaje;

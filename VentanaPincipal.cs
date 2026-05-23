@@ -13,7 +13,7 @@ namespace ProtecoPOO
 {
     public partial class Form1 : Form
     {
-        usuariosDB usuario = new usuariosDB;
+        //usuariosDB usuario = new usuariosDB;
         public Form1()
         {
             InitializeComponent();
