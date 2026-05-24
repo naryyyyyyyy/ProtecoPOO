@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtecoPOO.CasinoSQL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace ProtecoPOO
 {
     public partial class Form1 : Form
     {
+        usuariosDB usuariodb = new usuariosDB();
+        ReportesDB reportedb = new ReportesDB();
         public Form1()
         {
             InitializeComponent();
