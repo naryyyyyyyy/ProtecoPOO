@@ -19,5 +19,13 @@ namespace ProtecoPOO
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            //valodacion por si es un usuario o un admin
+
+            VentanaUsuario frm = new VentanaUsuario();
+            frm.ShowDialog();
+        }
     }
 }
