@@ -78,7 +78,7 @@
     <Compile Include="Personaje.cs" />
     <Compile Include="RegistroPartida.cs" />
     <Compile Include="Juego.cs" />
-    <Compile Include="Ruleta.cs" />
+    <Compile Include="BlackJack.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="VentanaPincipal.cs">
       <SubType>Form</SubType>

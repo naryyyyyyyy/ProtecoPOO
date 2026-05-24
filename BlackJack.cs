@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProtecoPOO
 {
-    public class Ruleta : Juego
+    public class BlackJack : Juego
     {
-        public Ruleta() : base("Ruleta", 2)
+        public BlackJack(string nombre, int id) : base(nombre,id)
         {
         }
 

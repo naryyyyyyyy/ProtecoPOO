@@ -55,9 +55,9 @@ INSERT INTO juegos (Nombre) VALUES
 
 -- Personajes (Id 1: Personaje 1, Id 2: Personaje 2, Id 3: Personaje 3)
 INSERT INTO personajes (Nombre) VALUES 
-('Personaje 1'), 
-('Personaje 2'), 
-('Personaje 3');
+('Mago'), 
+('Caballero'), 
+('Picaro');
 
 -- ========================================================
 -- 5. INSERCIÓN DE LOS 10 USUARIOS (Usando PersonajeId)
