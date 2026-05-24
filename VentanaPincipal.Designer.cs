@@ -76,12 +76,12 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::ProtecoPOO.Properties.Resources.descarga;
+           /* this.pictureBox1.Image = global::ProtecoPOO.Properties.Resources.descarga;
             this.pictureBox1.Location = new System.Drawing.Point(92, 58);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(228, 222);
             this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox1.TabStop = false;*/
             // 
             // tbxLogin
             // 
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ProtecoPOO.Properties.Resources.Gemini_Generated_Image_6mmjh36mmjh36mmj;
+//            this.BackgroundImage = global::ProtecoPOO.Properties.Resources.Gemini_Generated_Image_6mmjh36mmjh36mmj;
             this.ClientSize = new System.Drawing.Size(876, 500);
             this.Controls.Add(this.tbxLogin);
             this.Controls.Add(this.pictureBox1);
