@@ -11,7 +11,9 @@ using System.Windows.Forms;
 namespace ProtecoPOO
 {
     public partial class VentanaBlackJack : Form
-    {// La baraja será una lista de textos. Ej: "c1", "p12", "t5"
+    {
+        /*
+        // La baraja será una lista de textos. Ej: "c1", "p12", "t5"
         private List<string> baraja = new List<string>();
 
         // Las manos del jugador y la banca/casa
@@ -183,6 +185,247 @@ namespace ProtecoPOO
         private void btnReiniciar_Click(object sender, EventArgs e)
         {
             IniciarPartida();
+        }*/
+        // Instancia global del juego de Blackjack (ID 1 por ejemplo)
+        private BlackJack juegoBJ = new BlackJack("Blackjack 21", 1);
+
+        // Nombre del jugador en sesión (Esto vendrá del formulario de Login)
+        private string nombreUsuarioActual = "Juan Pérez";
+
+        public VentanaBlackJack()
+        {
+            InitializeComponent();
+
+            // SIMULACIÓN PUNTO 2: Simulamos la extracción de la base de datos como entero/decimal
+            // En el Login harías la consulta SQL y le pasarías el resultado aquí:
+            decimal saldoDeBaseDatos = 1000;
+
+            juegoBJ.CargarSaldoInicial(saldoDeBaseDatos);
+
+            // Reflejamos el saldo inicial en la interfaz visual
+            lbsaldo.Text = "Tu Saldo: $" + juegoBJ.SaldoJugador;
+            lblApuestaEnJuego.Text = "Apuesta en juego: $0";
+            
+
+            // Apagamos los botones de juego hasta que el jugador realice una apuesta válida
+            btnPedir.Enabled = false;
+            btnPlantarse.Enabled = false;
         }
-    }
+
+        // BOTÓN: Aceptar Apuesta e Iniciar Mano
+        private void btnAceptarApuesta_Click(object sender, EventArgs e)
+        {
+            // Validamos que el texto ingresado sea un número decimal correcto
+            if (!decimal.TryParse(txtApuesta.Text, out decimal monto) || monto <= 0)
+            {
+                MessageBox.Show("Por favor, ingresa un monto de apuesta válido.", "Atención");
+                return;
+            }
+
+            // PUNTO 2: Validación de saldo usando la clase padre Juego
+            if (!juegoBJ.ValidarYColocarApuesta(monto))
+            {
+                // Si la función regresa false, es porque la apuesta supera su saldo disponible
+                MessageBox.Show("No cuentas con saldo suficiente para realizar esta apuesta.", "Fondos Insuficientes");
+                return;
+            }
+
+            // Actualizamos los labels en tiempo real para mostrar la retención del dinero
+            lbsaldo.Text = "Tu Saldo: $" + juegoBJ.SaldoJugador;
+            lblApuestaEnJuego.Text = "Apuesta en juego: $" + juegoBJ.ApuestaActual;
+
+            // Bloqueamos el botón de apostar para que no pueda cambiar la apuesta a mitad de la mano
+            btnAceptarApuesta.Enabled = false;
+            txtApuesta.Enabled = false;
+
+            // Activamos los botones de acción del juego
+            btnPedir.Enabled = true;
+            btnPlantarse.Enabled = true;
+
+            // Iniciamos la ronda lógica y limpiamos paneles visuales
+            juegoBJ.IniciarNuevaMano();
+            flowJugador.Controls.Clear();
+            flowCasa.Controls.Clear();
+            lblResultado.Text = "Tu turno. ¿Pides o te plantas?";
+
+            // Repartimos las cartas iniciales (2 al jugador, 1 a la casa)
+            RepartirCartaVisual(juegoBJ.cartasJugador, flowJugador);
+            RepartirCartaVisual(juegoBJ.cartasJugador, flowJugador);
+            RepartirCartaVisual(juegoBJ.cartasCasa, flowCasa);
+
+            // Actualizamos los puntajes iniciales en pantalla
+            lblPuntosJugador.Text = "Puntos Jugador: " + juegoBJ.CalcularPuntos(juegoBJ.cartasJugador);
+            lblPuntosCasa.Text = "Puntos Casa: ?";
+        }
+
+        // Conecta la extracción lógica de la carta con la creación del control de imagen en el formulario
+        private void RepartirCartaVisual(List<string> mano, FlowLayoutPanel panel)
+        {
+            string nombreCarta = juegoBJ.ExtraerCartaAlAzar();
+            if (nombreCarta == null) return;
+
+            // Agregarla a la lista lógica de la mano correspondiente
+            mano.Add(nombreCarta);
+
+            // Crear el control de imagen visualmente
+            PictureBox pic = new PictureBox();
+            pic.Size = new System.Drawing.Size(90, 130); // Tamaño de la carta
+            pic.SizeMode = PictureBoxSizeMode.StretchImage; // Ajustar imagen al tamaño
+
+            // Buscar la imagen en tus recursos por su nombre (c1, d5, etc.) usando el espacio de nombres del equipo
+            pic.Image = (System.Drawing.Image)ProtecoPOO.Properties.Resources.ResourceManager.GetObject(nombreCarta);
+
+            // Agregar la imagen al panel visual (flowJugador o flowCasa)
+            panel.Controls.Add(pic);
+        }
+
+        // BOTÓN: Pedir Carta
+        private void btnPedir_Click(object sender, EventArgs e)
+        {
+            // Le damos una carta más al jugador y la dibujamos
+            RepartirCartaVisual(juegoBJ.cartasJugador, flowJugador);
+
+            // Calculamos sus nuevos puntos
+            int puntosJugador = juegoBJ.CalcularPuntos(juegoBJ.cartasJugador);
+            lblPuntosJugador.Text = "Puntos Jugador: " + puntosJugador;
+
+            // Verificamos si perdió al exceder los 21 puntos
+            if (puntosJugador > 21)
+            {
+                lblResultado.Text = "¡TE PASASTE! La casa gana.";
+                FinalizarManoMesa("PERDIO");
+            }
+        }
+
+        // BOTÓN: Plantarse (Turno de la IA de la Casa)
+        private void btnPlantarse_Click(object sender, EventArgs e)
+        {
+            btnPedir.Enabled = false;
+            btnPlantarse.Enabled = false;
+
+            // La IA de la casa pide cartas automáticamente si tiene menos de 17 puntos
+            while (juegoBJ.CalcularPuntos(juegoBJ.cartasCasa) < 17)
+            {
+                RepartirCartaVisual(juegoBJ.cartasCasa, flowCasa);
+            }
+
+            // Calculamos los puntajes finales de ambos desde la clase de lógica
+            int puntosJugador = juegoBJ.CalcularPuntos(juegoBJ.cartasJugador);
+            int puntosCasa = juegoBJ.CalcularPuntos(juegoBJ.cartasCasa);
+
+            // Mostramos el puntaje final de la casa en su Label
+            lblPuntosCasa.Text = "Puntos Casa: " + puntosCasa;
+
+            // Definimos quién ganó según las reglas del Blackjack y actualizamos el estado
+            if (puntosCasa > 21)
+            {
+                lblResultado.Text = "¡La casa se pasó de 21! ¡TÚ GANAS! 🎉";
+                FinalizarManoMesa("GANASTE");
+            }
+            else if (puntosJugador > puntosCasa)
+            {
+                lblResultado.Text = "¡Ganaste! Tienes mejor puntuación. 🏆";
+                FinalizarManoMesa("GANASTE");
+            }
+            else if (puntosJugador < puntosCasa)
+            {
+                lblResultado.Text = "La casa gana. Más suerte la próxima. 🏠";
+                FinalizarManoMesa("PERDIO");
+            }
+            else
+            {
+                lblResultado.Text = "Empate. Se devuelven las apuestas. 🤝";
+                FinalizarManoMesa("EMPATE");
+            }
+        }
+
+        // Centraliza el cobro/pago y la actualización de los textos al terminar la jugada
+        private void FinalizarManoMesa(string dictamen)
+        {
+            // Apagamos controles de acción
+            btnPedir.Enabled = false;
+            btnPlantarse.Enabled = false;
+
+            // Calculamos la ganancia correspondiente usando las reglas de negocio
+            decimal dineroDevuelto = juegoBJ.CalcularPagoPorResultado(dictamen);
+
+            // Impactamos el saldo en memoria de la clase Juego
+            juegoBJ.RegistrarResultado(dineroDevuelto);
+
+            // PUNTO 2: Actualizamos los componentes gráficos con los saldos nuevos
+            lbsaldo.Text = "Tu Saldo: $" + juegoBJ.SaldoJugador;
+            lblApuestaEnJuego.Text = "Apuesta en juego: $0";
+
+            // Habilitamos el botón de reiniciar para otra ronda
+            btnReiniciar.Enabled = true;
+        }
+
+        // BOTÓN: Volver a Jugar (Nueva Ronda)
+        private void btnReiniciar_Click(object sender, EventArgs e)
+        {
+            // PUNTO 2: Si se quedó sin saldo, salta el aviso y lo saca de inmediato
+            if (juegoBJ.SaldoJugador <= 0)
+            {
+                MessageBox.Show("Te has quedado sin dinero en tu cuenta de casino. Serás redirigido al menú.", "Fin del Juego");
+                this.Close(); // Cierra de manera inmediata la ventana actual
+                return;
+            }
+
+            // Si tiene saldo, limpiamos cajas listas para recibir la nueva cantidad a apostar
+            txtApuesta.Clear();
+            txtApuesta.Enabled = true;
+            btnAceptarApuesta.Enabled = true;
+
+            flowJugador.Controls.Clear();
+            flowCasa.Controls.Clear();
+            lblPuntosJugador.Text = "Puntos Jugador: 0";
+            lblPuntosCasa.Text = "Puntos Casa: 0";
+            lblResultado.Text = "Ingresa una nueva apuesta para comenzar.";
+        }
+
+        // BOTÓN: Salir (Envío final de reportes y persistencia a Base de Datos)
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            // =========================================================================
+            // COMENTARIOS DE SQL REQUERIDOS (CÓMO DEBERÍA LUCIR LA CONEXIÓN)
+            // =========================================================================
+            /*
+               try
+               {
+                   // 1. Abrir la conexión con el string configurado de SQL Server
+                   using (SqlConnection conexion = new SqlConnection("Server=TU_SERVIDOR; Database=CasinoPOO; Integrated Security=True;"))
+                   {
+                       conexion.Open();
+
+                       // SQL DE ACTUALIZACIÓN DE SALDO (Punto 2): Actualiza la cartera del usuario con su saldo final de la ventana
+                       string querySaldo = "UPDATE Usuarios SET Saldo = @saldoFinal WHERE NombreUsuario = @usuario";
+                       using (SqlCommand cmdSaldo = new SqlCommand(querySaldo, conexion))
+                       {
+                           cmdSaldo.Parameters.AddWithValue("@saldoFinal", juegoBJ.SaldoJugador);
+                           cmdSaldo.Parameters.AddWithValue("@usuario", nombreUsuarioActual);
+                           cmdSaldo.ExecuteNonQuery();
+                       }
+
+                       // SQL DE REPORTE (Punto 2): Registra la bitácora "El jugador x jugó en el juego x y se retiró con x"
+                       string queryHistorial = "INSERT INTO HistorialJugadas (Usuario, JuegoID, SaldoFinalRetiro, Fecha) VALUES (@usuario, @juegoId, @saldoFinal, GETDATE())";
+                       using (SqlCommand cmdHist = new SqlCommand(queryHistorial, conexion))
+                       {
+                           cmdHist.Parameters.AddWithValue("@usuario", nombreUsuarioActual);
+                           cmdHist.Parameters.AddWithValue("@juegoId", juegoBJ.JuegoId);
+                           cmdHist.Parameters.AddWithValue("@saldoFinal", juegoBJ.SaldoJugador);
+                           cmdHist.ExecuteNonQuery();
+                       }
+                   }
+               }
+               catch(Exception ex)
+               {
+                   MessageBox.Show("Error al sincronizar con la Base de Datos: " + ex.Message);
+               }
+            */
+
+            // Cerramos la ventana de manera normal regresando al menú principal
+            this.Close();
+        }
+    
+     }
 }

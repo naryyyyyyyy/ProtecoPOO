@@ -39,6 +39,9 @@
             this.txtApuesta = new System.Windows.Forms.TextBox();
             this.lblSaldo = new System.Windows.Forms.Label();
             this.btnAcetarApuesta = new System.Windows.Forms.Button();
+            this.lbsaldo = new System.Windows.Forms.Label();
+            this.lblApuestaEnJuego = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // flowJugador
@@ -77,7 +80,7 @@
             // 
             this.lblPuntosCasa.AutoSize = true;
             this.lblPuntosCasa.BackColor = System.Drawing.SystemColors.Window;
-            this.lblPuntosCasa.Location = new System.Drawing.Point(188, 18);
+            this.lblPuntosCasa.Location = new System.Drawing.Point(321, 52);
             this.lblPuntosCasa.Name = "lblPuntosCasa";
             this.lblPuntosCasa.Size = new System.Drawing.Size(16, 13);
             this.lblPuntosCasa.TabIndex = 9;
@@ -85,7 +88,7 @@
             // 
             // btnReiniciar
             // 
-            this.btnReiniciar.Location = new System.Drawing.Point(488, 415);
+            this.btnReiniciar.Location = new System.Drawing.Point(694, 222);
             this.btnReiniciar.Name = "btnReiniciar";
             this.btnReiniciar.Size = new System.Drawing.Size(75, 23);
             this.btnReiniciar.TabIndex = 4;
@@ -105,7 +108,7 @@
             // 
             // btnPedir
             // 
-            this.btnPedir.Location = new System.Drawing.Point(245, 352);
+            this.btnPedir.Location = new System.Drawing.Point(234, 352);
             this.btnPedir.Name = "btnPedir";
             this.btnPedir.Size = new System.Drawing.Size(75, 23);
             this.btnPedir.TabIndex = 6;
@@ -115,7 +118,7 @@
             // 
             // txtApuesta
             // 
-            this.txtApuesta.Location = new System.Drawing.Point(463, 354);
+            this.txtApuesta.Location = new System.Drawing.Point(679, 138);
             this.txtApuesta.Name = "txtApuesta";
             this.txtApuesta.Size = new System.Drawing.Size(100, 20);
             this.txtApuesta.TabIndex = 12;
@@ -123,7 +126,7 @@
             // lblSaldo
             // 
             this.lblSaldo.AutoSize = true;
-            this.lblSaldo.Location = new System.Drawing.Point(604, 361);
+            this.lblSaldo.Location = new System.Drawing.Point(490, 362);
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(35, 13);
             this.lblSaldo.TabIndex = 13;
@@ -131,18 +134,49 @@
             // 
             // btnAcetarApuesta
             // 
-            this.btnAcetarApuesta.Location = new System.Drawing.Point(607, 389);
+            this.btnAcetarApuesta.Location = new System.Drawing.Point(694, 180);
             this.btnAcetarApuesta.Name = "btnAcetarApuesta";
             this.btnAcetarApuesta.Size = new System.Drawing.Size(75, 23);
             this.btnAcetarApuesta.TabIndex = 14;
             this.btnAcetarApuesta.Text = "Aceptar Apuesta";
             this.btnAcetarApuesta.UseVisualStyleBackColor = true;
+            this.btnAcetarApuesta.Click += new System.EventHandler(this.btnAceptarApuesta_Click);
+            // 
+            // lbsaldo
+            // 
+            this.lbsaldo.AutoSize = true;
+            this.lbsaldo.Location = new System.Drawing.Point(679, 80);
+            this.lbsaldo.Name = "lbsaldo";
+            this.lbsaldo.Size = new System.Drawing.Size(19, 13);
+            this.lbsaldo.TabIndex = 15;
+            this.lbsaldo.Text = "....";
+            // 
+            // lblApuestaEnJuego
+            // 
+            this.lblApuestaEnJuego.AutoSize = true;
+            this.lblApuestaEnJuego.Location = new System.Drawing.Point(679, 105);
+            this.lblApuestaEnJuego.Name = "lblApuestaEnJuego";
+            this.lblApuestaEnJuego.Size = new System.Drawing.Size(19, 13);
+            this.lblApuestaEnJuego.TabIndex = 15;
+            this.lblApuestaEnJuego.Text = "....";
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(704, 415);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 16;
+            this.btnSalir.Text = "volver";
+            this.btnSalir.UseVisualStyleBackColor = true;
             // 
             // VentanaBlackJack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(796, 450);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.lblApuestaEnJuego);
+            this.Controls.Add(this.lbsaldo);
             this.Controls.Add(this.btnAcetarApuesta);
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.txtApuesta);
@@ -174,5 +208,8 @@
         private System.Windows.Forms.TextBox txtApuesta;
         private System.Windows.Forms.Label lblSaldo;
         private System.Windows.Forms.Button btnAcetarApuesta;
+        private System.Windows.Forms.Label lbsaldo;
+        private System.Windows.Forms.Label lblApuestaEnJuego;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
