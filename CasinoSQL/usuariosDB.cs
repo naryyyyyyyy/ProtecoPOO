@@ -73,7 +73,7 @@ namespace ProtecoPOO.CasinoSQL
                 string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
                 conn.ExecuteNonQuery(query,
                 ("@usuarioId", partida.UsuarioId),
-                ("@juego", partida.JuegoId),
+                ("@juegoid", partida.JuegoId),
                 ("@saldoInicial", partida.SaldoInicial),
                 ("@numReapuestas", partida.NumReapuestas),
                 ("@ganancia", partida.Ganancia)
@@ -88,7 +88,7 @@ namespace ProtecoPOO.CasinoSQL
                 string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
                 conn.ExecuteNonQuery(query,
                 ("@usuarioId", registro.UsuarioId),
-                ("@juego", registro.JuegoId),
+                ("@juegoid", registro.JuegoId),
                 ("@saldoInicial", registro.SaldoInicial),
                 ("@numReapuestas", registro.NumReapuestas),
                 ("@ganancia", registro.Ganancia)
