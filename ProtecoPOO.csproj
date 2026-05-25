@@ -80,11 +80,11 @@
     <Compile Include="VentanaBlackJack.Designer.cs">
       <DependentUpon>VentanaBlackJack.cs</DependentUpon>
     </Compile>
-    <Compile Include="Caballo.cs" />
-    <Compile Include="CaballoBetweener.cs" />
-    <Compile Include="CaballoChaser.cs" />
-    <Compile Include="CaballoLeader.cs" />
-    <Compile Include="CaballoRunner.cs" />
+    <Compile Include="Caballos\Caballo.cs" />
+    <Compile Include="Caballos\CaballoBetweener.cs" />
+    <Compile Include="Caballos\CaballoChaser.cs" />
+    <Compile Include="Caballos\CaballoLeader.cs" />
+    <Compile Include="Caballos\CaballoRunner.cs" />
     <Compile Include="Carrera.cs" />
     <Compile Include="CarreraCaballos.cs">
       <SubType>Form</SubType>
@@ -92,7 +92,7 @@
     <Compile Include="CarreraCaballos.Designer.cs">
       <DependentUpon>CarreraCaballos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Goldship.cs" />
+    <Compile Include="Caballos\Goldship.cs" />
     <Compile Include="CarreraDeCaballos.cs" />
     <Compile Include="CasinoSQL\ReportesDB.cs" />
     <Compile Include="CasinoSQL\usuariosDB.cs" />
