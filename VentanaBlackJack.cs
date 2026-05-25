@@ -191,14 +191,7 @@ namespace ProtecoPOO
 
         private void VentanaBlackJack_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                reporte.AgregarRegistroPartida();
-            }
-            catch
-            {
-
-            }
+            
         }
     }
 }

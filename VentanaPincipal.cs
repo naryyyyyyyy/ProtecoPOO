@@ -25,7 +25,7 @@ namespace ProtecoPOO
             string usuario = txtUsuario.Text;
             string contraseña = txtContrasena.Text;
 
-            if(string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contraseña))
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contraseña))
             {
                 MessageBox.Show("Llene los campos", "AVISO",
                     MessageBoxButtons.OK,
