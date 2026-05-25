@@ -16,7 +16,7 @@ namespace ProtecoPOO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CarreraCaballos());
+            Application.Run(new Form1());
         }
     }
 }
