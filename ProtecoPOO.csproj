@@ -164,6 +164,9 @@
     <EmbeddedResource Include="VentanaBlackJack.resx">
       <DependentUpon>VentanaBlackJack.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VentanaCrearCuenta.resx">
+      <DependentUpon>VentanaCrearCuenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VentanaPincipal.resx">
       <DependentUpon>VentanaPincipal.cs</DependentUpon>
     </EmbeddedResource>
