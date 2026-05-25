@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
+using ProtecoPOO.CasinoSQL;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -11,7 +13,9 @@ using System.Windows.Forms;
 namespace ProtecoPOO
 {
     public partial class VentanaBlackJack : Form
-    {// La baraja será una lista de textos. Ej: "c1", "p12", "t5"
+    {
+        usuariosDB reporte = new usuariosDB();
+        // La baraja será una lista de textos. Ej: "c1", "p12", "t5"
         private List<string> baraja = new List<string>();
 
         // Las manos del jugador y la banca/casa
@@ -183,6 +187,18 @@ namespace ProtecoPOO
         private void btnReiniciar_Click(object sender, EventArgs e)
         {
             IniciarPartida();
+        }
+
+        private void VentanaBlackJack_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                reporte.AgregarRegistroPartida();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
