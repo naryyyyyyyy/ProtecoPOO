@@ -20,11 +20,11 @@ namespace CarreraCaballos
 
             if (progreso < 0.70)
             {
-                PositionX += 1.3 + (random.NextDouble()) * 0.6;
+                PositionX += 1.6 + (random.NextDouble()) * 0.5;
             }
             else
             {
-                PositionX += 5.0 + (random.NextDouble() * 2.5);
+                PositionX += 5.0 + (random.NextDouble() * 3.0);
             }
 
         }

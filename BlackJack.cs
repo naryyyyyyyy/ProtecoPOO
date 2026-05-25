@@ -111,12 +111,12 @@ namespace ProtecoPOO
 
         // POLIMORFISMO: Implementación obligatoria de Jugar para determinar las ganancias del BJ
         // Recibe un código de resultado y calcula cuánto dinero regresa según las reglas del punto 2
-        public override decimal Jugar(decimal montoApuesta)
+        /*public override decimal Jugar(decimal montoApuesta)
         {
             // Este método lo exige la estructura, pero las ganancias las procesaremos
             // mediante el análisis del estado final de las cartas en el Form.
             return 0;
-        }
+        }*/
 
         // Método auxiliar para calcular el pago exacto (Punto 2: paga el doble si gana)
         public decimal CalcularPagoPorResultado(string resultado)
