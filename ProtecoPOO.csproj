@@ -93,7 +93,6 @@
       <DependentUpon>CarreraCaballos.cs</DependentUpon>
     </Compile>
     <Compile Include="Caballos\Goldship.cs" />
-    <Compile Include="CarreraDeCaballos.cs" />
     <Compile Include="CasinoSQL\ReportesDB.cs" />
     <Compile Include="CasinoSQL\usuariosDB.cs" />
     <Compile Include="CasinoSQL\SqlConnectionExtensions.cs" />
