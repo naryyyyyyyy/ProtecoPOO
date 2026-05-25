@@ -32,9 +32,8 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tbxLogin = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtContrasena = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -48,7 +47,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(466, 188);
+            this.btnLogin.Location = new System.Drawing.Point(491, 198);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 1;
@@ -74,8 +73,12 @@
             this.button3.Text = "salir";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // txtUsuario
             // 
+            this.txtUsuario.Location = new System.Drawing.Point(466, 147);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtUsuario.TabIndex = 3;
            /* this.pictureBox1.Image = global::ProtecoPOO.Properties.Resources.descarga;
             this.pictureBox1.Location = new System.Drawing.Point(92, 58);
             this.pictureBox1.Name = "pictureBox1";
@@ -83,12 +86,12 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;*/
             // 
-            // tbxLogin
+            // txtContrasena
             // 
-            this.tbxLogin.Location = new System.Drawing.Point(466, 147);
-            this.tbxLogin.Name = "tbxLogin";
-            this.tbxLogin.Size = new System.Drawing.Size(100, 20);
-            this.tbxLogin.TabIndex = 3;
+            this.txtContrasena.Location = new System.Drawing.Point(466, 173);
+            this.txtContrasena.Name = "txtContrasena";
+            this.txtContrasena.Size = new System.Drawing.Size(100, 20);
+            this.txtContrasena.TabIndex = 3;
             // 
             // Form1
             // 
@@ -96,15 +99,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 //            this.BackgroundImage = global::ProtecoPOO.Properties.Resources.Gemini_Generated_Image_6mmjh36mmjh36mmj;
             this.ClientSize = new System.Drawing.Size(876, 500);
-            this.Controls.Add(this.tbxLogin);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.txtContrasena);
+            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,8 +118,8 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox tbxLogin;
+        private System.Windows.Forms.TextBox txtUsuario;
+        private System.Windows.Forms.TextBox txtContrasena;
     }
 }
 

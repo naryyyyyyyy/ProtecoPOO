@@ -158,6 +158,8 @@
   <ItemGroup>
     <None Include="Resources\Gemini_Generated_Image_6mmjh36mmjh36mmj.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="J.caballos\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
