@@ -30,6 +30,7 @@ namespace ProtecoPOO
                 MessageBox.Show("Llene los campos", "AVISO",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return;
             }
 
             if (usuariodb.UsuarioExistente(usuario, contraseña))
@@ -43,6 +44,7 @@ namespace ProtecoPOO
                 MessageBox.Show("Usuario no encontrado", "AVISO",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return;
             }
         }
     }

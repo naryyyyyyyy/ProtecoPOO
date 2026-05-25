@@ -133,6 +133,12 @@
     <Compile Include="Juego.cs" />
     <Compile Include="BlackJack.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="VentanaCrearCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaCrearCuenta.Designer.cs">
+      <DependentUpon>VentanaCrearCuenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaPincipal.cs">
       <SubType>Form</SubType>
     </Compile>
