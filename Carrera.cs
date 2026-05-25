@@ -6,16 +6,25 @@ using System.Text;
 using System.Threading.Tasks;
 using ProtecoPOO;
 
-public class Carrera : CarreraDeCaballos
+public class Carrera : Juego
 {
     private List<Caballo> rooster;
     public List<Caballo> Competidores { get; set; }
     public List<Caballo> Podio { get; set; } = new List<Caballo>();
     public double DistanciaMeta { get; set; }
+    public override decimal Jugar(decimal montoApuesta)
+    {
+        decimal ganancia = 0;
+
+        // Toda la lógica de las apuestas
+
+        return ganancia;
+    }
     public Carrera(string nombre, int juegoId, double distanciaMeta) : base(nombre, juegoId)
     {
         this.DistanciaMeta = distanciaMeta;
         this.Competidores = new List<Caballo>();
+
 
         LlenarRooster();
     }
