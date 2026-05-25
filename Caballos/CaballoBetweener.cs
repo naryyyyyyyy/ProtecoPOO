@@ -18,7 +18,7 @@ namespace CarreraCaballos
         {
             double progreso = PositionX / distanciaMeta;
 
-            if (progreso < 0.60)
+            if (progreso < 0.55)
             {
                 PositionX += 1.8 + (random.NextDouble()) * 0.8;
             }

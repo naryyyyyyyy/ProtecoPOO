@@ -53,12 +53,24 @@ namespace ProtecoPOO
         }
 
         // Método abstracto que cada juego implementará a su manera para calcular premios
-        public abstract decimal Jugar(decimal montoApuesta);
+        //public abstract decimal Jugar(decimal montoApuesta);
 
         // Actualiza el saldo sumando las ganancias obtenidas al terminar la mano
         public void RegistrarResultado(decimal ganancias)
         {
             SaldoJugador += ganancias;
+        }
+        public virtual decimal CalcularPagoEstandar(string dictamen)
+        {
+            if (dictamen == "GANASTE")
+            {
+                return ApuestaActual * 2;
+            }
+            if (dictamen == "EMPATE")
+            {
+                return ApuestaActual;
+            }
+            return 0;
         }
     }
 }
