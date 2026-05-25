@@ -385,7 +385,8 @@ namespace ProtecoPOO
 
         // BOTÓN: Salir (Envío final de reportes y persistencia a Base de Datos)
         private void btnSalir_Click(object sender, EventArgs e)
-        {
+        {//esto me lo imagino como un metodo en el que doy en id del usuario id de juego monto y talves un estatus tipo 1 si la casa perdio y 0 se la casa gano
+            //y aparte otro en donde yo le doy id y saldo para modificar el saldo del jugador
             // =========================================================================
             // COMENTARIOS DE SQL REQUERIDOS (CÓMO DEBERÍA LUCIR LA CONEXIÓN)
             // =========================================================================

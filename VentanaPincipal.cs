@@ -22,9 +22,9 @@ namespace ProtecoPOO
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //valodacion por si es un usuario o un admin
+            
 
-            VentanaUsuario frm = new VentanaUsuario();
+             VentanaUsuario frm = new VentanaUsuario();
             frm.ShowDialog();
         }
     }

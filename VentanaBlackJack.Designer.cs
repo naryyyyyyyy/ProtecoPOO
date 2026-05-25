@@ -38,7 +38,7 @@
             this.btnPedir = new System.Windows.Forms.Button();
             this.txtApuesta = new System.Windows.Forms.TextBox();
             this.lblSaldo = new System.Windows.Forms.Label();
-            this.btnAcetarApuesta = new System.Windows.Forms.Button();
+            this.btnAceptarApuesta = new System.Windows.Forms.Button();
             this.lbsaldo = new System.Windows.Forms.Label();
             this.lblApuestaEnJuego = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -132,15 +132,15 @@
             this.lblSaldo.TabIndex = 13;
             this.lblSaldo.Text = "label1";
             // 
-            // btnAcetarApuesta
+            // btnAceptarApuesta
             // 
-            this.btnAcetarApuesta.Location = new System.Drawing.Point(694, 180);
-            this.btnAcetarApuesta.Name = "btnAcetarApuesta";
-            this.btnAcetarApuesta.Size = new System.Drawing.Size(75, 23);
-            this.btnAcetarApuesta.TabIndex = 14;
-            this.btnAcetarApuesta.Text = "Aceptar Apuesta";
-            this.btnAcetarApuesta.UseVisualStyleBackColor = true;
-            this.btnAcetarApuesta.Click += new System.EventHandler(this.btnAceptarApuesta_Click);
+            this.btnAceptarApuesta.Location = new System.Drawing.Point(694, 180);
+            this.btnAceptarApuesta.Name = "btnAceptarApuesta";
+            this.btnAceptarApuesta.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptarApuesta.TabIndex = 14;
+            this.btnAceptarApuesta.Text = "Aceptar Apuesta";
+            this.btnAceptarApuesta.UseVisualStyleBackColor = true;
+            this.btnAceptarApuesta.Click += new System.EventHandler(this.btnAceptarApuesta_Click);
             // 
             // lbsaldo
             // 
@@ -177,7 +177,7 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.lblApuestaEnJuego);
             this.Controls.Add(this.lbsaldo);
-            this.Controls.Add(this.btnAcetarApuesta);
+            this.Controls.Add(this.btnAceptarApuesta);
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.txtApuesta);
             this.Controls.Add(this.flowJugador);
@@ -207,7 +207,7 @@
         private System.Windows.Forms.Button btnPedir;
         private System.Windows.Forms.TextBox txtApuesta;
         private System.Windows.Forms.Label lblSaldo;
-        private System.Windows.Forms.Button btnAcetarApuesta;
+        private System.Windows.Forms.Button btnAceptarApuesta;
         private System.Windows.Forms.Label lbsaldo;
         private System.Windows.Forms.Label lblApuestaEnJuego;
         private System.Windows.Forms.Button btnSalir;
