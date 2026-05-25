@@ -139,6 +139,12 @@
     <Compile Include="VentanaCrearCuenta.Designer.cs">
       <DependentUpon>VentanaCrearCuenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="VentanaElegirPersonaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaElegirPersonaje.Designer.cs">
+      <DependentUpon>VentanaElegirPersonaje.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaPincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaCrearCuenta.resx">
       <DependentUpon>VentanaCrearCuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentanaElegirPersonaje.resx">
+      <DependentUpon>VentanaElegirPersonaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaPincipal.resx">
       <DependentUpon>VentanaPincipal.cs</DependentUpon>

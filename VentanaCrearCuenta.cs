@@ -14,16 +14,16 @@ namespace ProtecoPOO
     public partial class VentanaCrearCuenta : Form
     {
         usuariosDB usuarios = new usuariosDB();
-        public VentanaCrearCuenta()
+        int personajeId;
+        public VentanaCrearCuenta(int personajeElegido)
         {
             InitializeComponent();
+            personajeId = personajeElegido;
         }
-
         private void btnCrearCuenta_Click(object sender, EventArgs e)
         {
-            //CODIGO DE PRUEBA <----------------------------------
 
-            /*string usuario = txtUsuario.Text;
+            string usuario = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
 
             if(string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contraseña))
@@ -36,8 +36,13 @@ namespace ProtecoPOO
 
             if(!usuarios.UsuarioExistente(usuario, contraseña))
             {
-            // HACE FALTA LA SELECCION DE PERSONAJE <---------------------------
-                usuarios.AgregarUsuario(usuario, contraseña, 2);
+                usuarios.AgregarUsuario(usuario, contraseña, personajeId);
+                MessageBox.Show("Usuario creado exitosamente!", "AVISO",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                VentanaElegirPersonaje ventanaPadre = (VentanaElegirPersonaje)this.ParentForm;
+                ventanaPadre.AbrirFormEnPanel(new Form1());
             }
             else
             {
@@ -45,7 +50,7 @@ namespace ProtecoPOO
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
-            }*/
+            }
         }
     }
 }
