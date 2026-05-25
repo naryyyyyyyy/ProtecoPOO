@@ -63,12 +63,19 @@ namespace ProtecoPOO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap c1 {
-            get {
-                object obj = ResourceManager.GetObject("c1", resourceCulture);
         internal static System.Drawing.Bitmap between {
             get {
                 object obj = ResourceManager.GetObject("between", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap c1 {
+            get {
+                object obj = ResourceManager.GetObject("c1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -189,6 +196,16 @@ namespace ProtecoPOO.Properties {
         internal static System.Drawing.Bitmap c9 {
             get {
                 object obj = ResourceManager.GetObject("c9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chaser {
+            get {
+                object obj = ResourceManager.GetObject("chaser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -319,9 +336,6 @@ namespace ProtecoPOO.Properties {
         internal static System.Drawing.Bitmap d9 {
             get {
                 object obj = ResourceManager.GetObject("d9", resourceCulture);
-        internal static System.Drawing.Bitmap chaser {
-            get {
-                object obj = ResourceManager.GetObject("chaser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -349,9 +363,6 @@ namespace ProtecoPOO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap p1 {
-            get {
-                object obj = ResourceManager.GetObject("p1", resourceCulture);
         internal static System.Drawing.Bitmap goldship {
             get {
                 object obj = ResourceManager.GetObject("goldship", resourceCulture);
@@ -362,12 +373,29 @@ namespace ProtecoPOO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap p10 {
-            get {
-                object obj = ResourceManager.GetObject("p10", resourceCulture);
         internal static System.Drawing.Bitmap leader {
             get {
                 object obj = ResourceManager.GetObject("leader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap p1 {
+            get {
+                object obj = ResourceManager.GetObject("p1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap p10 {
+            get {
+                object obj = ResourceManager.GetObject("p10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -478,6 +506,16 @@ namespace ProtecoPOO.Properties {
         internal static System.Drawing.Bitmap p9 {
             get {
                 object obj = ResourceManager.GetObject("p9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap runner {
+            get {
+                object obj = ResourceManager.GetObject("runner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -608,9 +646,6 @@ namespace ProtecoPOO.Properties {
         internal static System.Drawing.Bitmap t9 {
             get {
                 object obj = ResourceManager.GetObject("t9", resourceCulture);
-        internal static System.Drawing.Bitmap runner {
-            get {
-                object obj = ResourceManager.GetObject("runner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
