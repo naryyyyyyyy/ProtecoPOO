@@ -47,6 +47,12 @@
             this.picCarril3 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.lblsaldo = new System.Windows.Forms.Label();
+            this.lblApuestaEnJuego = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.txtApuesta = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCarril6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCarril5)).BeginInit();
@@ -59,7 +65,7 @@
             // lblPuesto
             // 
             this.lblPuesto.AutoSize = true;
-            this.lblPuesto.Location = new System.Drawing.Point(773, 387);
+            this.lblPuesto.Location = new System.Drawing.Point(796, 368);
             this.lblPuesto.Name = "lblPuesto";
             this.lblPuesto.Size = new System.Drawing.Size(49, 16);
             this.lblPuesto.TabIndex = 24;
@@ -68,7 +74,7 @@
             // lblCaballo
             // 
             this.lblCaballo.AutoSize = true;
-            this.lblCaballo.Location = new System.Drawing.Point(773, 370);
+            this.lblCaballo.Location = new System.Drawing.Point(796, 344);
             this.lblCaballo.Name = "lblCaballo";
             this.lblCaballo.Size = new System.Drawing.Size(180, 16);
             this.lblCaballo.TabIndex = 23;
@@ -82,14 +88,14 @@
             "1",
             "2",
             "3"});
-            this.cmbApuestaPuesto.Location = new System.Drawing.Point(776, 405);
+            this.cmbApuestaPuesto.Location = new System.Drawing.Point(799, 387);
             this.cmbApuestaPuesto.Name = "cmbApuestaPuesto";
             this.cmbApuestaPuesto.Size = new System.Drawing.Size(37, 24);
             this.cmbApuestaPuesto.TabIndex = 22;
             // 
             // btnApostar
             // 
-            this.btnApostar.Location = new System.Drawing.Point(828, 405);
+            this.btnApostar.Location = new System.Drawing.Point(957, 384);
             this.btnApostar.Name = "btnApostar";
             this.btnApostar.Size = new System.Drawing.Size(75, 23);
             this.btnApostar.TabIndex = 21;
@@ -101,9 +107,9 @@
             // 
             this.lstCompetidores.FormattingEnabled = true;
             this.lstCompetidores.ItemHeight = 16;
-            this.lstCompetidores.Location = new System.Drawing.Point(776, 219);
+            this.lstCompetidores.Location = new System.Drawing.Point(799, 193);
             this.lstCompetidores.Name = "lstCompetidores";
-            this.lstCompetidores.Size = new System.Drawing.Size(221, 148);
+            this.lstCompetidores.Size = new System.Drawing.Size(308, 148);
             this.lstCompetidores.TabIndex = 20;
             // 
             // label1
@@ -117,7 +123,7 @@
             // 
             // btnIniciarCarrera
             // 
-            this.btnIniciarCarrera.Location = new System.Drawing.Point(367, 406);
+            this.btnIniciarCarrera.Location = new System.Drawing.Point(235, 406);
             this.btnIniciarCarrera.Name = "btnIniciarCarrera";
             this.btnIniciarCarrera.Size = new System.Drawing.Size(79, 54);
             this.btnIniciarCarrera.TabIndex = 18;
@@ -141,7 +147,7 @@
             this.listBox1.ForeColor = System.Drawing.Color.Gold;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(776, 46);
+            this.listBox1.Location = new System.Drawing.Point(799, 22);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(217, 148);
             this.listBox1.TabIndex = 16;
@@ -214,11 +220,70 @@
             this.timer1.Interval = 30;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
+            // lblsaldo
+            // 
+            this.lblsaldo.AutoSize = true;
+            this.lblsaldo.Location = new System.Drawing.Point(796, 414);
+            this.lblsaldo.Name = "lblsaldo";
+            this.lblsaldo.Size = new System.Drawing.Size(64, 16);
+            this.lblsaldo.TabIndex = 25;
+            this.lblsaldo.Text = "Saldo act";
+            // 
+            // lblApuestaEnJuego
+            // 
+            this.lblApuestaEnJuego.AutoSize = true;
+            this.lblApuestaEnJuego.Location = new System.Drawing.Point(963, 365);
+            this.lblApuestaEnJuego.Name = "lblApuestaEnJuego";
+            this.lblApuestaEnJuego.Size = new System.Drawing.Size(111, 16);
+            this.lblApuestaEnJuego.TabIndex = 26;
+            this.lblApuestaEnJuego.Text = "ApuestaEnJuego";
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(342, 406);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 54);
+            this.btnSalir.TabIndex = 27;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // txtApuesta
+            // 
+            this.txtApuesta.Location = new System.Drawing.Point(851, 384);
+            this.txtApuesta.Name = "txtApuesta";
+            this.txtApuesta.Size = new System.Drawing.Size(100, 22);
+            this.txtApuesta.TabIndex = 28;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(799, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 16);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Podio:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(802, 174);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 16);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Competidores actuales:";
+            // 
             // CarreraCaballos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1123, 506);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtApuesta);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.lblApuestaEnJuego);
+            this.Controls.Add(this.lblsaldo);
             this.Controls.Add(this.lblPuesto);
             this.Controls.Add(this.lblCaballo);
             this.Controls.Add(this.cmbApuestaPuesto);
@@ -263,5 +328,11 @@
         private System.Windows.Forms.PictureBox picCarril3;
         private System.Windows.Forms.Timer timer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label lblsaldo;
+        private System.Windows.Forms.Label lblApuestaEnJuego;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TextBox txtApuesta;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -1,30 +1,30 @@
-﻿using ProtecoPOO.Properties;
+﻿using ProtecoPOO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CarreraCaballos
 {
-    public class CaballoChaser : Caballo
+    public class CaballoBetweener : Caballo
     {
-        public CaballoChaser(int id, string name) : base(id, name)
+        public CaballoBetweener(int id, string name) : base(id, name)
         {
-            this.Icon = Resources.chaser;
+            this.Icon = ProtecoPOO.Properties.Resources.between;
         }
-
         public override void Avanzar(double distanciaMeta)
         {
             double progreso = PositionX / distanciaMeta;
 
-            if (progreso < 0.70)
+            if (progreso < 0.55)
             {
-                PositionX += 1.3 + (random.NextDouble()) * 0.6;
+                PositionX += 1.8 + (random.NextDouble()) * 0.8;
             }
             else
             {
-                PositionX += 5.0 + (random.NextDouble() * 2.5);
+                PositionX += 3.5 + (random.NextDouble() * 1.5);
             }
 
         }

@@ -82,7 +82,7 @@
             this.button3.Text = "salir";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // txtUsuario
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -144,7 +144,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

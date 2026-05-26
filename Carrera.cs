@@ -1,27 +1,40 @@
-﻿using System;
+﻿using CarreraCaballos;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProtecoPOO;
 
-namespace CarreraCaballos
+public class Carrera : Juego
 {
-    public class Carrera
-    {
-        private List<Caballo> rooster;
-        public List<Caballo> Competidores { get; private set; }
-        public List<Caballo> Podio { get; private set; } = new List<Caballo>();
-        public double DistanciaMeta { get; private set; }
+    private List<Caballo> rooster;
+    public List<Caballo> Competidores { get; set; }
+    public List<Caballo> Podio { get; set; } = new List<Caballo>();
+    public double DistanciaMeta { get; set; }
 
-        public Carrera(double distanciaMeta)
-        {
-            DistanciaMeta = distanciaMeta;
-            Competidores = new List<Caballo>();
-            LlenarRooster();
-        }
-        public void LlenarRooster()
-        {
-            rooster = new List<Caballo> {
+    public Carrera(string nombre, int juegoId, double distanciaMeta) : base(nombre, juegoId)
+    {
+        this.DistanciaMeta = distanciaMeta;
+        this.Competidores = new List<Caballo>();
+        LlenarRooster();
+    }
+
+    /*public override decimal Jugar(decimal montoApuesta)
+    {
+        // Implementación requerida por la estructura abstracta
+        return 0;
+    }*/
+
+    // Evalúa el resultado final basándose en el caballo seleccionado y el puesto apostado
+    public string EvaluarResultadoApuesta(Caballo caballoApostado, int puestoApostado)
+    {
+        if (caballoApostado == null || Podio.Count == 0) return "PERDIO";
+
+        int lugarReal = Podio.IndexOf(caballoApostado) + 1;
+        return (lugarReal == puestoApostado) ? "GANASTE" : "PERDIO";
+    }
+
+    public void LlenarRooster()
+    {
+        rooster = new List<Caballo> {
             new CaballoChaser(1,"Great Grey Silf"),
             new CaballoChaser(2, "Furtive Pygmy"),
             new Goldship(3, "Gold Ship"),
@@ -33,38 +46,30 @@ namespace CarreraCaballos
             new CaballoLeader(9, "Iron Golem"),
             new CaballoRunner(10, "Lord of Cinder"),
             new CaballoRunner(11, "Slayer Ornstein"),
-            new CaballoRunner(12, "Father Manus")};
-        }
+            new CaballoRunner(12, "Father Manus")
+        };
+    }
 
-        public void SelecRooster()
+    public void SelecRooster()
+    {
+        Competidores.Clear();
+        Random rng = new Random();
+        List<Caballo> temp = new List<Caballo>(rooster);
+        for (int i = 0; i < 6; i++)
         {
-            Competidores.Clear();
-            Random rng = new Random();
-            List<Caballo> temp = new List<Caballo>(rooster);
-            for (int i = 0; i < 6; i++)
-            {
-                int num = rng.Next(temp.Count);
-                Competidores.Add(temp[num]);
-                temp.RemoveAt(num);
-            }
+            int num = rng.Next(temp.Count);
+            Competidores.Add(temp[num]);
+            temp.RemoveAt(num);
         }
-        public void Simular(double distanciaMeta)
+    }
+
+    public void Simular(double distanciaMeta)
+    {
+        foreach (var caballo in Competidores)
         {
-            foreach (var caballo in Competidores)
+            if (caballo.PositionX < distanciaMeta)
             {
-                if (caballo.PositionX < distanciaMeta)
-                {
-                    caballo.Avanzar(distanciaMeta);
-                }
-            }
-        }
-        public void PrepPista()
-        {
-            Podio.Clear();
-            SelecRooster();
-            foreach (var caballo in Competidores)
-            {
-                caballo.PositionX = 0;
+                caballo.Avanzar(distanciaMeta);
             }
         }
     }
