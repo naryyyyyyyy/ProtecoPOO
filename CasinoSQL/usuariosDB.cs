@@ -11,6 +11,7 @@ namespace ProtecoPOO.CasinoSQL
     public class usuariosDB
     {
         // CLICK DERECHO A LA CARPETA "CasinoSQL"
+        //click en "abrir en el explorador de archivos"
         // click derecho al archivo "CasinoDB.db"
         // pegar lo copiado DESPUES DEL IGUAL         |
         //                                            |
