@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaUsuario));
             this.btnblackjack = new System.Windows.Forms.Button();
             this.btnCarreraCaballos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnblackjack
             // 
-            this.btnblackjack.Location = new System.Drawing.Point(336, 126);
-            this.btnblackjack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnblackjack.Location = new System.Drawing.Point(479, 265);
+            this.btnblackjack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnblackjack.Name = "btnblackjack";
-            this.btnblackjack.Size = new System.Drawing.Size(100, 28);
+            this.btnblackjack.Size = new System.Drawing.Size(112, 35);
             this.btnblackjack.TabIndex = 0;
             this.btnblackjack.Text = "blackjack";
             this.btnblackjack.UseVisualStyleBackColor = true;
@@ -45,10 +46,10 @@
             // 
             // btnCarreraCaballos
             // 
-            this.btnCarreraCaballos.Location = new System.Drawing.Point(336, 181);
-            this.btnCarreraCaballos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCarreraCaballos.Location = new System.Drawing.Point(479, 332);
+            this.btnCarreraCaballos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCarreraCaballos.Name = "btnCarreraCaballos";
-            this.btnCarreraCaballos.Size = new System.Drawing.Size(115, 50);
+            this.btnCarreraCaballos.Size = new System.Drawing.Size(129, 62);
             this.btnCarreraCaballos.TabIndex = 0;
             this.btnCarreraCaballos.Text = "Carrera de caballos";
             this.btnCarreraCaballos.UseVisualStyleBackColor = true;
@@ -56,12 +57,14 @@
             // 
             // VentanaUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(748, 543);
             this.Controls.Add(this.btnCarreraCaballos);
             this.Controls.Add(this.btnblackjack);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "VentanaUsuario";
             this.Text = "VentanaUsuario";
             this.ResumeLayout(false);
