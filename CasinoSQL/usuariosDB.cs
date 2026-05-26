@@ -111,6 +111,7 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     usuarios.Add(new Usuario(rs.GetString("Nombre"),
                                              rs.GetInt("Id"),
+                                             rs.GetInt("PersonajeId"),
                                              "",
                                              Convert.ToDecimal(rs.GetDouble("Saldo"))));
                 }

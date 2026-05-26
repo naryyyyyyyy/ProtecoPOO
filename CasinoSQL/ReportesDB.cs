@@ -86,6 +86,7 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     filtro.Add(new Usuario(rs.GetString("Nombre"),
                                            rs.GetInt("Id"),
+                                           rs.GetInt("PersonajeId"),
                                            "",
                                            Convert.ToDecimal(rs.GetDouble("Saldo"))));
                 }
@@ -109,6 +110,7 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     filtro.Add(new Usuario(rs.GetString("Nombre"),
                                            rs.GetInt("Id"),
+                                           rs.GetInt("PersonajeId"),
                                            "",
                                            Convert.ToDecimal(rs.GetDouble("Saldo"))));
                 }
@@ -160,6 +162,7 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     filtro.Add(new Usuario(rs.GetString("Nombre"),
                                            rs.GetInt("Id"),
+                                           rs.GetInt("PersonajeId"),
                                            "",
                                            Convert.ToDecimal(rs.GetDouble("Saldo"))));
                 }
@@ -184,6 +187,7 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     filtro.Add(new Usuario(rs.GetString("Nombre"),
                                            rs.GetInt("Id"),
+                                           rs.GetInt("PersonajeId"),
                                            "",
                                            Convert.ToDecimal(rs.GetDouble("Saldo"))));
                 }
