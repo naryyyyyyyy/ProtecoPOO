@@ -10,7 +10,13 @@ namespace ProtecoPOO.CasinoSQL
 {
     public class usuariosDB
     {
-        private string cadenaConexion = "Data Source=CasinoDB.db;";
+        // CLICK DERECHO A LA CARPETA "CasinoSQL"
+        //click en "abrir en el explorador de archivos"
+        // click derecho al archivo "CasinoDB.db"
+        // pegar lo copiado DESPUES DEL IGUAL         |
+        //                                            |
+        //                                            v
+        private string cadenaConexion = @"Data Source=C:\Users\josue\OneDrive\Desktop\CARPETAS\C#\OTRAVEZ3\CasinoSQL\CasinoDB.db;";
         public bool UsuarioExistente(string nombre, string contrasena)
         {
             // 'using' asegura que la conexión se cierre automáticamente al terminar

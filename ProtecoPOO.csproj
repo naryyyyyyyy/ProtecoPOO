@@ -107,6 +107,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="VentanaAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaAdmin.Designer.cs">
+      <DependentUpon>VentanaAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaBlackJack.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="VentanaAdmin.resx">
+      <DependentUpon>VentanaAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VentanaBlackJack.resx">
       <DependentUpon>VentanaBlackJack.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +192,9 @@
     <EmbeddedResource Include="VentanaUsuario.resx">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="CasinoSQL\CasinoDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
