@@ -34,33 +34,45 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnblackjack
             // 
-            this.btnblackjack.Location = new System.Drawing.Point(479, 264);
+            this.btnblackjack.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnblackjack.BackColor = System.Drawing.Color.SeaShell;
+            this.btnblackjack.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnblackjack.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnblackjack.Location = new System.Drawing.Point(470, 176);
             this.btnblackjack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnblackjack.Name = "btnblackjack";
-            this.btnblackjack.Size = new System.Drawing.Size(129, 44);
+            this.btnblackjack.Size = new System.Drawing.Size(161, 53);
             this.btnblackjack.TabIndex = 0;
             this.btnblackjack.Text = "blackjack";
-            this.btnblackjack.UseVisualStyleBackColor = true;
+            this.btnblackjack.UseVisualStyleBackColor = false;
             this.btnblackjack.Click += new System.EventHandler(this.btnblackjack_Click);
             // 
             // btnCarreraCaballos
             // 
-            this.btnCarreraCaballos.Location = new System.Drawing.Point(479, 355);
+            this.btnCarreraCaballos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCarreraCaballos.BackColor = System.Drawing.Color.SeaShell;
+            this.btnCarreraCaballos.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCarreraCaballos.Location = new System.Drawing.Point(470, 306);
             this.btnCarreraCaballos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCarreraCaballos.Name = "btnCarreraCaballos";
-            this.btnCarreraCaballos.Size = new System.Drawing.Size(129, 62);
+            this.btnCarreraCaballos.Size = new System.Drawing.Size(161, 80);
             this.btnCarreraCaballos.TabIndex = 0;
             this.btnCarreraCaballos.Text = "Carrera de caballos";
-            this.btnCarreraCaballos.UseVisualStyleBackColor = true;
+            this.btnCarreraCaballos.UseVisualStyleBackColor = false;
             this.btnCarreraCaballos.Click += new System.EventHandler(this.btnCarreraCaballos_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(55, 289);
             this.dataGridView1.Name = "dataGridView1";
@@ -71,6 +83,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Papyrus", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -82,14 +95,63 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Papyrus", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(484, 56);
+            this.label2.Location = new System.Drawing.Point(487, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 51);
             this.label2.TabIndex = 2;
             this.label2.Text = "Jugar";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(60, 146);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 31);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Nombre:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(74, 246);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(156, 31);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Mis partidas:";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(89, 187);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 31);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Saldo:";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(397, 107);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(301, 29);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "--------------------------------";
             // 
             // VentanaUsuario
             // 
@@ -98,6 +160,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(748, 543);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -119,5 +185,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
