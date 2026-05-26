@@ -363,4 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 !*.sql
+!*.db
 !**/CasinoDB.db
+!**/TablasSQL.sql
