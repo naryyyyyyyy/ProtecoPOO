@@ -22,10 +22,36 @@ namespace ProtecoPOO
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            
+            string usuario = txtUsuario.Text;
+            string contraseña = txtContrasena.Text;
 
-             VentanaUsuario frm = new VentanaUsuario();
-            frm.ShowDialog();
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contraseña))
+            {
+                MessageBox.Show("Llene los campos", "AVISO",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (usuariodb.UsuarioExistente(usuario, contraseña))
+            {
+                VentanaUsuario frm = new VentanaUsuario();
+                frm.ShowDialog();
+            }
+
+            else
+            {
+                MessageBox.Show("Usuario no encontrado", "AVISO",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
+        private void btnCrearCuenta_Click(object sender, EventArgs e)
+        {
+            VentanaElegirPersonaje pers = new VentanaElegirPersonaje();
+            pers.ShowDialog();
         }
     }
 }

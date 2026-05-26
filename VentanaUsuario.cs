@@ -23,5 +23,11 @@ namespace ProtecoPOO
             VentanaBlackJack frm=new VentanaBlackJack();
             frm.ShowDialog();
         }
+
+        private void btnCarreraCaballos_Click(object sender, EventArgs e)
+        {
+            CarreraCaballos carreracaballo = new CarreraCaballos();
+            carreracaballo.ShowDialog();
+        }
     }
 }

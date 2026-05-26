@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
+using ProtecoPOO.CasinoSQL;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -12,6 +14,7 @@ namespace ProtecoPOO
 {
     public partial class VentanaBlackJack : Form
     {
+        usuariosDB reporte = new usuariosDB();
         /*
         // La baraja será una lista de textos. Ej: "c1", "p12", "t5"
         private List<string> baraja = new List<string>();
@@ -427,6 +430,12 @@ namespace ProtecoPOO
             // Cerramos la ventana de manera normal regresando al menú principal
             this.Close();
         }
+
+        private void VentanaBlackJack_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+    }
     
      }
 }

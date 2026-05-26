@@ -46,33 +46,37 @@
             // 
             // flowJugador
             // 
-            this.flowJugador.Location = new System.Drawing.Point(27, 222);
+            this.flowJugador.Location = new System.Drawing.Point(36, 273);
+            this.flowJugador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowJugador.Name = "flowJugador";
-            this.flowJugador.Size = new System.Drawing.Size(632, 111);
+            this.flowJugador.Size = new System.Drawing.Size(843, 137);
             this.flowJugador.TabIndex = 11;
             // 
             // flowCasa
             // 
-            this.flowCasa.Location = new System.Drawing.Point(34, 80);
+            this.flowCasa.Location = new System.Drawing.Point(45, 98);
+            this.flowCasa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowCasa.Name = "flowCasa";
-            this.flowCasa.Size = new System.Drawing.Size(625, 123);
+            this.flowCasa.Size = new System.Drawing.Size(833, 151);
             this.flowCasa.TabIndex = 10;
             // 
             // lblResultado
             // 
             this.lblResultado.AutoSize = true;
-            this.lblResultado.Location = new System.Drawing.Point(500, 336);
+            this.lblResultado.Location = new System.Drawing.Point(667, 414);
+            this.lblResultado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(16, 13);
+            this.lblResultado.Size = new System.Drawing.Size(16, 16);
             this.lblResultado.TabIndex = 7;
             this.lblResultado.Text = "...";
             // 
             // lblPuntosJugador
             // 
             this.lblPuntosJugador.AutoSize = true;
-            this.lblPuntosJugador.Location = new System.Drawing.Point(321, 336);
+            this.lblPuntosJugador.Location = new System.Drawing.Point(428, 414);
+            this.lblPuntosJugador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPuntosJugador.Name = "lblPuntosJugador";
-            this.lblPuntosJugador.Size = new System.Drawing.Size(16, 13);
+            this.lblPuntosJugador.Size = new System.Drawing.Size(16, 16);
             this.lblPuntosJugador.TabIndex = 8;
             this.lblPuntosJugador.Text = "...";
             // 
@@ -82,7 +86,7 @@
             this.lblPuntosCasa.BackColor = System.Drawing.SystemColors.Window;
             this.lblPuntosCasa.Location = new System.Drawing.Point(321, 52);
             this.lblPuntosCasa.Name = "lblPuntosCasa";
-            this.lblPuntosCasa.Size = new System.Drawing.Size(16, 13);
+            this.lblPuntosCasa.Size = new System.Drawing.Size(16, 16);
             this.lblPuntosCasa.TabIndex = 9;
             this.lblPuntosCasa.Text = "...";
             // 
@@ -90,7 +94,7 @@
             // 
             this.btnReiniciar.Location = new System.Drawing.Point(694, 222);
             this.btnReiniciar.Name = "btnReiniciar";
-            this.btnReiniciar.Size = new System.Drawing.Size(75, 23);
+            this.btnReiniciar.Size = new System.Drawing.Size(100, 28);
             this.btnReiniciar.TabIndex = 4;
             this.btnReiniciar.Text = "reiniciar";
             this.btnReiniciar.UseVisualStyleBackColor = true;
@@ -98,9 +102,10 @@
             // 
             // btnPlantarse
             // 
-            this.btnPlantarse.Location = new System.Drawing.Point(348, 352);
+            this.btnPlantarse.Location = new System.Drawing.Point(464, 433);
+            this.btnPlantarse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPlantarse.Name = "btnPlantarse";
-            this.btnPlantarse.Size = new System.Drawing.Size(75, 23);
+            this.btnPlantarse.Size = new System.Drawing.Size(100, 28);
             this.btnPlantarse.TabIndex = 5;
             this.btnPlantarse.Text = "plantarse";
             this.btnPlantarse.UseVisualStyleBackColor = true;
@@ -110,7 +115,7 @@
             // 
             this.btnPedir.Location = new System.Drawing.Point(234, 352);
             this.btnPedir.Name = "btnPedir";
-            this.btnPedir.Size = new System.Drawing.Size(75, 23);
+            this.btnPedir.Size = new System.Drawing.Size(100, 28);
             this.btnPedir.TabIndex = 6;
             this.btnPedir.Text = "pedir";
             this.btnPedir.UseVisualStyleBackColor = true;
@@ -120,7 +125,7 @@
             // 
             this.txtApuesta.Location = new System.Drawing.Point(679, 138);
             this.txtApuesta.Name = "txtApuesta";
-            this.txtApuesta.Size = new System.Drawing.Size(100, 20);
+            this.txtApuesta.Size = new System.Drawing.Size(132, 22);
             this.txtApuesta.TabIndex = 12;
             // 
             // lblSaldo
@@ -128,7 +133,7 @@
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Location = new System.Drawing.Point(490, 362);
             this.lblSaldo.Name = "lblSaldo";
-            this.lblSaldo.Size = new System.Drawing.Size(35, 13);
+            this.lblSaldo.Size = new System.Drawing.Size(44, 16);
             this.lblSaldo.TabIndex = 13;
             this.lblSaldo.Text = "label1";
             // 
@@ -171,7 +176,7 @@
             // 
             // VentanaBlackJack
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 450);
             this.Controls.Add(this.btnSalir);
@@ -188,8 +193,10 @@
             this.Controls.Add(this.btnReiniciar);
             this.Controls.Add(this.btnPlantarse);
             this.Controls.Add(this.btnPedir);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "VentanaBlackJack";
             this.Text = "VentanaBlackJack";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VentanaBlackJack_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
