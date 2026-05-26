@@ -107,6 +107,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="VentanaAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaAdmin.Designer.cs">
+      <DependentUpon>VentanaAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaBlackJack.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentanaAdmin.resx">
+      <DependentUpon>VentanaAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaBlackJack.resx">
       <DependentUpon>VentanaBlackJack.cs</DependentUpon>
