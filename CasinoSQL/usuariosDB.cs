@@ -47,12 +47,11 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                string query = "INSERT INTO usuarios (Nombre, Contrasena, Saldo, PersonajeId) VALUES\r\n(@nombre, @contrasena, 1000, @personajeid);";
+                string query = "INSERT INTO usuarios (Nombre, Contrasena, PersonajeId) VALUES\r\n(@nombre, @contrasena, @personajeid);";
 
                 conn.ExecuteNonQuery(query, 
                     ("@nombre", nombre), 
-                    ("@contrasena", contrasena), 
-                    ("1000",1000),
+                    ("@contrasena", contrasena),
                     ("@personajeid", personajeId));
             }
         }
