@@ -1,9 +1,12 @@
-﻿using System;
+﻿using ProtecoPOO.CasinoSQL;
+using ProtecoPOO.Ruleta;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -67,6 +70,34 @@ namespace ProtecoPOO
             btnCarreraCaballos.Eneble=false;
               }
             */
+        }
+
+        private void btnRuleta_Click(object sender, EventArgs e)
+        {
+           VentanaRuleta frm=new VentanaRuleta();
+            frm.ShowDialog();
+            CargarHistorial();
+            ValidacionDeRecursos();
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnCambiarPersonaje_Click(object sender, EventArgs e)
+        {
+            VentanaEditarPersonaje frm=new VentanaEditarPersonaje();
+            frm.ShowDialog();
+            CargarHistorial();
+            ValidacionDeRecursos();
+
+        }
+
+        private void reportesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportesUsuario frm=new ReportesUsuario();
+            frm.ShowDialog();
         }
     }
 }

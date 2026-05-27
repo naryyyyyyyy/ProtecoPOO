@@ -106,6 +106,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ReporteAdmin.cs" />
+    <Compile Include="ReportesUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportesUsuario.Designer.cs">
+      <DependentUpon>ReportesUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ruleta\Ruleta.cs" />
     <Compile Include="Ruleta\RuletaApuesta.cs" />
     <Compile Include="SesionGlobal.cs" />
@@ -202,6 +208,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportesUsuario.resx">
+      <DependentUpon>ReportesUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaAdministrador.resx">
       <DependentUpon>VentanaAdministrador.cs</DependentUpon>
