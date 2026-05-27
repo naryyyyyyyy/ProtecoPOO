@@ -251,6 +251,50 @@ namespace ProtecoPOO.CasinoSQL
             }
             return reporte;
         }
+        public List<RegistroPartida> ObtenerHistorialPersonajeActual(int idUsuario, int idPersonajeGuardado)
+        {
+            var historial = new List<RegistroPartida>();
+
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = @"SELECT h.Id, h.UsuarioId, h.JuegoId, h.PersonajeId, 
+                                h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida,
+                                j.Nombre AS NombreJuego
+                                FROM historial_juegos h
+                                INNER JOIN juegos j ON h.JuegoId = j.Id
+                                WHERE h.UsuarioId = @idUsuario AND h.PersonajeId = @idPersonajeGuardado
+                                ORDER BY h.Id DESC;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    cmd.Parameters.AddWithValue("@idPersonajeGuardado", idPersonajeGuardado);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        while (rs.Read())
+                        {
+                            historial.Add(new RegistroPartida
+                            {
+                                // Llenamos los datos técnicos...
+                                Id = rs.GetInt32(rs.GetOrdinal("Id")),
+                                UsuarioId = rs.GetInt32(rs.GetOrdinal("UsuarioId")),
+                                JuegoId = rs.GetInt32(rs.GetOrdinal("JuegoId")),
+                                PersonajeId = rs.GetInt32(rs.GetOrdinal("PersonajeId")),
+                                SaldoInicial = Convert.ToDecimal(rs.GetValue(rs.GetOrdinal("SaldoInicial"))),
+                                NumReapuestas = rs.GetInt32(rs.GetOrdinal("NumReapuestas")),
+                                GananciaPerdida = Convert.ToDecimal(rs.GetValue(rs.GetOrdinal("GananciaPerdida"))),
+
+                                // Y llenamos el texto visual para la tabla
+                                NombreJuego = rs.GetString(rs.GetOrdinal("NombreJuego"))
+                            });
+                        }
+                    }
+                }
+            }
+            return historial;
+        }
 
     }
 }

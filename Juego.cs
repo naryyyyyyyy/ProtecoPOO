@@ -38,7 +38,6 @@ namespace ProtecoPOO
             SaldoJugador = saldoInicial;
         }
 
-        // VALIDACIÓN DEL PUNTO 2: Verifica si el jugador tiene fondos suficientes
         public bool ValidarYColocarApuesta(decimal montoApuesta)
         {
             // Si intenta apostar más de lo que tiene o cantidades negativas, no lo deja
@@ -52,10 +51,6 @@ namespace ProtecoPOO
             return true;
         }
 
-        // Método abstracto que cada juego implementará a su manera para calcular premios
-        //public abstract decimal Jugar(decimal montoApuesta);
-
-        // Actualiza el saldo sumando las ganancias obtenidas al terminar la mano
         public void RegistrarResultado(decimal ganancias)
         {
             SaldoJugador += ganancias;
