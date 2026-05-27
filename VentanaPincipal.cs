@@ -54,6 +54,8 @@ namespace ProtecoPOO
 
         private void btnCrearCuenta_Click(object sender, EventArgs e)
         {
+            
+
             VentanaElegirPersonaje pers = new VentanaElegirPersonaje();
             pers.ShowDialog();
         }

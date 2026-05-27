@@ -43,6 +43,7 @@ namespace ProtecoPOO
 
                 VentanaElegirPersonaje ventanaPadre = (VentanaElegirPersonaje)this.ParentForm;
                 ventanaPadre.AbrirFormEnPanel(new Form1());
+                ventanaPadre.Close();
             }
             else
             {
@@ -51,6 +52,8 @@ namespace ProtecoPOO
                     MessageBoxIcon.Warning);
                 return;
             }
+
+            
         }
     }
 }

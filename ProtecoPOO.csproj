@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="ReporteAdmin.cs" />
     <Compile Include="SesionGlobal.cs" />
+    <Compile Include="UsuariosForReporte.cs" />
     <Compile Include="VentanaAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>

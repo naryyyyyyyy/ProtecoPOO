@@ -11,11 +11,13 @@ namespace ProtecoPOO
         public string Nombre { get; set; }
         public int Id { get; set; }
         private string Contrasena { get; set; }
-        public Usuario(string nombre, int id, string contrasena)
+        public int PersonajeId { get; set; }
+        public Usuario(string nombre, int id, string contrasena, int personajeId)
         {
             Nombre = nombre;
             Id = id;
             Contrasena = contrasena;
+            PersonajeId = personajeId;
         }
     }
 }
