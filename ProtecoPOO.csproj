@@ -75,7 +75,7 @@
       <HintPath>packages\SQLitePCLRaw.provider.e_sqlite3.3.0.3\lib\net471\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
@@ -113,6 +113,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ruleta\Ruleta.cs" />
+    <Compile Include="Ruleta\RuletaApuesta.cs" />
     <Compile Include="VentanaAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +168,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VentanaRuleta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaRuleta.Designer.cs">
+      <DependentUpon>VentanaRuleta.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaPincipal.resx">
       <DependentUpon>VentanaPincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentanaRuleta.resx">
+      <DependentUpon>VentanaRuleta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaUsuario.resx">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
