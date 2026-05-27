@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCrearCuenta = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Papyrus", 70F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(177, 34);
+            this.label1.Location = new System.Drawing.Point(162, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(800, 220);
@@ -55,7 +55,7 @@
             // 
             this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLogin.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(634, 377);
+            this.btnLogin.Location = new System.Drawing.Point(607, 376);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(127, 44);
@@ -69,7 +69,7 @@
             // 
             this.btnCrearCuenta.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCrearCuenta.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrearCuenta.Location = new System.Drawing.Point(376, 377);
+            this.btnCrearCuenta.Location = new System.Drawing.Point(349, 376);
             this.btnCrearCuenta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCrearCuenta.Name = "btnCrearCuenta";
             this.btnCrearCuenta.Size = new System.Drawing.Size(181, 44);
@@ -79,24 +79,25 @@
             this.btnCrearCuenta.UseVisualStyleBackColor = true;
             this.btnCrearCuenta.Click += new System.EventHandler(this.btnCrearCuenta_Click);
             // 
-            // button3
+            // btnExit
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(514, 449);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(127, 43);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Salir";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(487, 448);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(127, 43);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.Text = "Salir";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // txtContrasena
             // 
             this.txtContrasena.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtContrasena.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContrasena.Location = new System.Drawing.Point(586, 307);
+            this.txtContrasena.Location = new System.Drawing.Point(571, 301);
             this.txtContrasena.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(214, 39);
@@ -108,7 +109,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Sylfaen", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(388, 230);
+            this.label2.Location = new System.Drawing.Point(373, 221);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(169, 52);
@@ -121,7 +122,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Sylfaen", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(326, 297);
+            this.label3.Location = new System.Drawing.Point(311, 288);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(231, 52);
@@ -132,7 +133,7 @@
             // 
             this.txtUsuario.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsuario.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(586, 243);
+            this.txtUsuario.Location = new System.Drawing.Point(571, 234);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(214, 39);
@@ -146,7 +147,7 @@
             this.ClientSize = new System.Drawing.Size(1129, 547);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.txtContrasena);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnCrearCuenta);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label3);
@@ -165,7 +166,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCrearCuenta;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

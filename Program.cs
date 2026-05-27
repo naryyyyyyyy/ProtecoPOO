@@ -17,7 +17,7 @@ namespace ProtecoPOO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VentanaRuleta());
+            Application.Run(new Form1());
         }
     }
 }

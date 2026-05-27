@@ -44,6 +44,9 @@ namespace ProtecoPOO
                 MessageBox.Show("Usuario no encontrado", "AVISO",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+
+                txtContrasena.Clear();
+                txtUsuario.Clear();
                 return;
             }
         }
@@ -52,6 +55,11 @@ namespace ProtecoPOO
         {
             VentanaElegirPersonaje pers = new VentanaElegirPersonaje();
             pers.ShowDialog();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
