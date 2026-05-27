@@ -97,6 +97,7 @@
     <Compile Include="AgregarRecursos.Designer.cs">
       <DependentUpon>AgregarRecursos.cs</DependentUpon>
     </Compile>
+    <Compile Include="ElementoCombo.cs" />
     <Compile Include="PersonajeGuardado.cs" />
     <Compile Include="PersonajesDB.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

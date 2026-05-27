@@ -137,7 +137,7 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
                 string query = @"SELECT Id, Nombre 
-                                FROM personajes 
+                                FROM Usuarios
                                 ORDER BY Id ASC;";
 
                 var rs = conn.ExecuteReader(query);
@@ -150,6 +150,51 @@ namespace ProtecoPOO.CasinoSQL
             }
 
             return usuarios;
+        }
+        public List<Personaje> GetAllPersonajes()
+        {
+            var personajes = new List<Personaje>();
+
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = @"SELECT Id, Nombre 
+                                FROM personajes 
+                                ORDER BY Id ASC;";
+
+                var rs = conn.ExecuteReader(query);
+                while (rs.Read())
+                {
+                    personajes.Add(new Personaje(rs.GetString("Nombre"),
+                                             rs.GetInt("Id")));
+                }
+            }
+
+            return personajes;
+        }
+        public List<ElementoCombo> GetAllJuegos()
+        {
+            var listaJuegos = new List<ElementoCombo>();
+
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                // Leemos solo el ID y el Nombre directamente de la tabla
+                string query = @"SELECT Id, Nombre
+                                 FROM juegos ORDER BY Id ASC;";
+                var rs = conn.ExecuteReader(query);
+
+                while (rs.Read())
+                {
+                    listaJuegos.Add(new ElementoCombo
+                    {
+                        Id = rs.GetInt32(rs.GetOrdinal("Id")),
+                        Nombre = rs.GetString(rs.GetOrdinal("Nombre"))
+                    });
+                }
+            }
+
+            return listaJuegos;
         }
     }
 }

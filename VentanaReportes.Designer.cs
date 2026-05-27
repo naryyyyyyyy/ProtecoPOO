@@ -30,37 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvReporteGlobal = new System.Windows.Forms.DataGridView();
+            this.reporteAdminBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.reportesFiltradosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.porUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.porJuegoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.porPersonajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.jugadorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.personajeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.juegoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saldoInicialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reapuestasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gananciaPerdidaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reporteAdminBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.globalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbFiltro = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteGlobal)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reporteAdminBindingSource)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvReporteGlobal
             // 
             this.dgvReporteGlobal.AutoGenerateColumns = false;
             this.dgvReporteGlobal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReporteGlobal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.jugadorDataGridViewTextBoxColumn,
-            this.personajeDataGridViewTextBoxColumn,
-            this.juegoDataGridViewTextBoxColumn,
-            this.saldoInicialDataGridViewTextBoxColumn,
-            this.reapuestasDataGridViewTextBoxColumn,
-            this.gananciaPerdidaDataGridViewTextBoxColumn});
             this.dgvReporteGlobal.DataSource = this.reporteAdminBindingSource;
             this.dgvReporteGlobal.Location = new System.Drawing.Point(53, 107);
             this.dgvReporteGlobal.Name = "dgvReporteGlobal";
@@ -112,85 +99,36 @@
             this.porJuegoToolStripMenuItem.Name = "porJuegoToolStripMenuItem";
             this.porJuegoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.porJuegoToolStripMenuItem.Text = "Por juego";
+            this.porJuegoToolStripMenuItem.Click += new System.EventHandler(this.porJuegoToolStripMenuItem_Click);
             // 
             // porPersonajeToolStripMenuItem
             // 
             this.porPersonajeToolStripMenuItem.Name = "porPersonajeToolStripMenuItem";
             this.porPersonajeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.porPersonajeToolStripMenuItem.Text = "Por personaje";
-            // 
-            // jugadorDataGridViewTextBoxColumn
-            // 
-            this.jugadorDataGridViewTextBoxColumn.DataPropertyName = "Jugador";
-            this.jugadorDataGridViewTextBoxColumn.HeaderText = "Jugador";
-            this.jugadorDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.jugadorDataGridViewTextBoxColumn.Name = "jugadorDataGridViewTextBoxColumn";
-            this.jugadorDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // personajeDataGridViewTextBoxColumn
-            // 
-            this.personajeDataGridViewTextBoxColumn.DataPropertyName = "Personaje";
-            this.personajeDataGridViewTextBoxColumn.HeaderText = "Personaje";
-            this.personajeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.personajeDataGridViewTextBoxColumn.Name = "personajeDataGridViewTextBoxColumn";
-            this.personajeDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // juegoDataGridViewTextBoxColumn
-            // 
-            this.juegoDataGridViewTextBoxColumn.DataPropertyName = "Juego";
-            this.juegoDataGridViewTextBoxColumn.HeaderText = "Juego";
-            this.juegoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.juegoDataGridViewTextBoxColumn.Name = "juegoDataGridViewTextBoxColumn";
-            this.juegoDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // saldoInicialDataGridViewTextBoxColumn
-            // 
-            this.saldoInicialDataGridViewTextBoxColumn.DataPropertyName = "SaldoInicial";
-            this.saldoInicialDataGridViewTextBoxColumn.HeaderText = "SaldoInicial";
-            this.saldoInicialDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.saldoInicialDataGridViewTextBoxColumn.Name = "saldoInicialDataGridViewTextBoxColumn";
-            this.saldoInicialDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // reapuestasDataGridViewTextBoxColumn
-            // 
-            this.reapuestasDataGridViewTextBoxColumn.DataPropertyName = "Reapuestas";
-            this.reapuestasDataGridViewTextBoxColumn.HeaderText = "Reapuestas";
-            this.reapuestasDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.reapuestasDataGridViewTextBoxColumn.Name = "reapuestasDataGridViewTextBoxColumn";
-            this.reapuestasDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // gananciaPerdidaDataGridViewTextBoxColumn
-            // 
-            this.gananciaPerdidaDataGridViewTextBoxColumn.DataPropertyName = "GananciaPerdida";
-            this.gananciaPerdidaDataGridViewTextBoxColumn.HeaderText = "GananciaPerdida";
-            this.gananciaPerdidaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.gananciaPerdidaDataGridViewTextBoxColumn.Name = "gananciaPerdidaDataGridViewTextBoxColumn";
-            this.gananciaPerdidaDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // reporteAdminBindingSource
-            // 
-            this.reporteAdminBindingSource.DataSource = typeof(ProtecoPOO.ReporteAdmin);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(522, 58);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 4;
+            this.porPersonajeToolStripMenuItem.Click += new System.EventHandler(this.porPersonajeToolStripMenuItem_Click);
             // 
             // globalToolStripMenuItem
             // 
             this.globalToolStripMenuItem.Name = "globalToolStripMenuItem";
             this.globalToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.globalToolStripMenuItem.Text = "Global";
+            this.globalToolStripMenuItem.Click += new System.EventHandler(this.globalToolStripMenuItem_Click);
+            // 
+            // cmbFiltro
+            // 
+            this.cmbFiltro.FormattingEnabled = true;
+            this.cmbFiltro.Location = new System.Drawing.Point(522, 58);
+            this.cmbFiltro.Name = "cmbFiltro";
+            this.cmbFiltro.Size = new System.Drawing.Size(121, 24);
+            this.cmbFiltro.TabIndex = 4;
             // 
             // VentanaReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbFiltro);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvReporteGlobal);
             this.Controls.Add(this.menuStrip1);
@@ -198,9 +136,9 @@
             this.Name = "VentanaReportes";
             this.Text = "VentanaReportes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteGlobal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reporteAdminBindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reporteAdminBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,6 +161,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn gananciaPerdidaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource reporteAdminBindingSource;
         private System.Windows.Forms.ToolStripMenuItem globalToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbFiltro;
     }
 }

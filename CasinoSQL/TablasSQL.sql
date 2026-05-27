@@ -74,10 +74,16 @@ INSERT INTO juegos (Id, Nombre) VALUES
 (3, 'Carrera de Caballos');
 
 -- Llenar los 3 personajes base
-INSERT INTO personajes (Id, Nombre, PrecioCompra, PrecioRevivir) VALUES 
-(1, 'Mago', 500, 250), 
-(2, 'Caballero', 500, 250), 
-(3, 'Picaro', 500, 250);
+INSERT INTO personajes (Nombre, PrecioCompra, PrecioRevivir) VALUES 
+('Bárbaro', 500, 250),
+('Pícaro', 500, 250),
+('Hechicero', 500, 250),
+('Bardo', 500, 250),
+('Hada', 500, 250),
+('Sirena', 500, 250),
+('Bruja', 500, 250),
+('Cazador', 500, 250),
+('Caballero', 500, 250);
 
 -- Llenar 5 administradores
 INSERT INTO administradores (Id, Nombre, Contrasena) VALUES 
