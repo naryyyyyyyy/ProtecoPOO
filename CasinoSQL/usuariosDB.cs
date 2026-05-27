@@ -50,11 +50,11 @@ namespace ProtecoPOO.CasinoSQL
                 // Armamos un query doble. 
                 // Primero inserta al usuario, luego inserta a su personaje inicial.
                 string query = @"
-                    INSERT INTO usuarios (Nombre, Contrasena) 
-                    VALUES (@nombre, @contrasena);
+            INSERT INTO usuarios (Nombre, Contrasena) 
+            VALUES (@nombre, @contrasena);
 
-                    INSERT INTO personajes_guardados (UsuarioId, PersonajeId, Saldo, EstaVivo) 
-                    VALUES (last_insert_rowid(), @personajeid, 1000, 1);";
+            INSERT INTO personajes_guardados (UsuarioId, PersonajeId, Saldo, EstaVivo) 
+            VALUES (last_insert_rowid(), @personajeid, 1000, 1);";
 
                 // Ejecutamos usando tu método de extensión mágico
                 conn.ExecuteNonQuery(query,

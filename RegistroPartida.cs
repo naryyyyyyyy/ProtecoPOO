@@ -15,6 +15,8 @@ namespace ProtecoPOO
         public decimal SaldoInicial {  get; set; }
         public int NumReapuestas {  get; set; }
         public decimal GananciaPerdida { get; set; }
+        public string NombreJuego { get; set; } // NO VISIBLE EN LA BASE DE DATOS
+        public RegistroPartida() { }
         public RegistroPartida(int id, int usuarioId, int juegoId,int personajeId, decimal saldoInicial, int numReapuestas, decimal ganancia)
         {
             Id = id;
