@@ -13,9 +13,9 @@ namespace ProtecoPOO
 {
     public partial class Form1 : Form
     {
-        usuariosDB usuariodb = new usuariosDB();
-        ReportesDB reportedb = new ReportesDB();
-        Usuario usuarioActual;
+        private usuariosDB usuariodb = new usuariosDB();
+        private ReportesDB reportedb = new ReportesDB();
+        private Usuario usuarioActual;
         public Form1()
         {
             InitializeComponent();
@@ -34,21 +34,44 @@ namespace ProtecoPOO
                 return;
             }
 
+            // 1. Validamos si existe
             if (usuariodb.UsuarioExistente(usuario, contraseña))
             {
+                // 2. Obtenemos su ID real de la base de datos
+                int idUsuario = usuariodb.ObtenerIdUsuario(usuario, contraseña);
+
+                // 3. Llenamos la primera parte de la SesionGlobal (Datos de la cuenta)
+                SesionGlobal.UsuarioId = idUsuario;
+                SesionGlobal.NombreUsuario = usuario;
+
+                // 4. Cargamos su inventario y elegimos el primero como "Default"
+                var inventarioPersonajes = usuariodb.ObtenerPersonajesDelUsuario(idUsuario);
+                var personajePrincipal = inventarioPersonajes.FirstOrDefault();
+
+                if (personajePrincipal != null)
+                {
+                    // 5. Llenamos la segunda parte de la SesionGlobal (Datos de la partida)
+                    SesionGlobal.PersonajeGuardadoId = personajePrincipal.Id; // Ranura
+                    SesionGlobal.PersonajeCatalogoId = personajePrincipal.PersonajeId; // Mago, Bárbaro, etc.
+                    SesionGlobal.SaldoActual = personajePrincipal.Saldo;
+                }
+
+                // 6. Finalmente, abrimos la ventana del libro
                 VentanaUsuario frm = new VentanaUsuario();
                 frm.Show();
+
+                // Limpiamos los campos por seguridad antes de ocultar
+                txtContrasena.Clear();
+                txtUsuario.Clear();
                 this.Hide();
             }
-
             else
             {
-                MessageBox.Show("Usuario no encontrado", "AVISO",
+                MessageBox.Show("Usuario no encontrado o contraseña incorrecta.", "AVISO",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
 
                 txtContrasena.Clear();
-                txtUsuario.Clear();
                 return;
             }
         }

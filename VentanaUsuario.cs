@@ -15,17 +15,34 @@ namespace ProtecoPOO
 {
     public partial class VentanaUsuario : Form
     {
+        private usuariosDB usuarios = new usuariosDB();
         public VentanaUsuario()
         {
 
             InitializeComponent();
             ValidacionDeRecursos();
 
-            
+
 
             //metodo apr los datos del usuario 
             //lblNombre=.....
             //lblSaldo=....
+            CargarHistorialEnPantalla();
+            lblUsuario.Text = SesionGlobal.NombreUsuario;
+        }
+        private void CargarHistorialEnPantalla()
+        {
+            dgvHistorial.DataSource = null;
+            dgvHistorial.AutoGenerateColumns = true;
+
+            // Asignamos tu clase reciclada
+            dgvHistorial.DataSource = usuarios.ObtenerHistorialPersonajeActual(SesionGlobal.UsuarioId, SesionGlobal.PersonajeGuardadoId);
+
+            // Escondemos las columnas técnicas (IDs) para que el jugador solo vea lo bonito
+            if (dgvHistorial.Columns.Contains("Id")) dgvHistorial.Columns["Id"].Visible = false;
+            if (dgvHistorial.Columns.Contains("UsuarioId")) dgvHistorial.Columns["UsuarioId"].Visible = false;
+            if (dgvHistorial.Columns.Contains("JuegoId")) dgvHistorial.Columns["JuegoId"].Visible = false;
+            if (dgvHistorial.Columns.Contains("PersonajeId")) dgvHistorial.Columns["PersonajeId"].Visible = false;
         }
 
         private void btnblackjack_Click(object sender, EventArgs e)
@@ -74,30 +91,18 @@ namespace ProtecoPOO
 
         private void btnRuleta_Click(object sender, EventArgs e)
         {
-           VentanaRuleta frm=new VentanaRuleta();
-            frm.ShowDialog();
-            CargarHistorial();
-            ValidacionDeRecursos();
+            VentanaRuleta ruleta = new VentanaRuleta();
+            ruleta.ShowDialog();
         }
 
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        private void VentanaUsuario_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Close();
-        }
+            var loginOriginal = Application.OpenForms.OfType<Form1>().FirstOrDefault();
 
-        private void btnCambiarPersonaje_Click(object sender, EventArgs e)
-        {
-            VentanaEditarPersonaje frm=new VentanaEditarPersonaje();
-            frm.ShowDialog();
-            CargarHistorial();
-            ValidacionDeRecursos();
-
-        }
-
-        private void reportesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReportesUsuario frm=new ReportesUsuario();
-            frm.ShowDialog();
+            if (loginOriginal != null)
+            {
+                loginOriginal.Show();
+            }
         }
     }
 }
