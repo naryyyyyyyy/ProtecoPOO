@@ -43,16 +43,25 @@ namespace ProtecoPOO.CasinoSQL
         }
         public void AgregarUsuario(string nombre, string contrasena, int personajeId)
         {
-            using (var conn = new SQLiteConnection(cadenaConexion))
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
 
-                string query = "INSERT INTO usuarios (Nombre, Contrasena, PersonajeId) VALUES\r\n(@nombre, @contrasena, @personajeid);";
+                // Armamos un query doble. 
+                // Primero inserta al usuario, luego inserta a su personaje inicial.
+                string query = @"
+                    INSERT INTO usuarios (Nombre, Contrasena) 
+                    VALUES (@nombre, @contrasena);
 
-                conn.ExecuteNonQuery(query, 
-                    ("@nombre", nombre), 
+                    INSERT INTO personajes_guardados (UsuarioId, PersonajeId, Saldo, EstaVivo) 
+                    VALUES (last_insert_rowid(), @personajeid, 1000, 1);";
+
+                // Ejecutamos usando tu método de extensión mágico
+                conn.ExecuteNonQuery(query,
+                    ("@nombre", nombre),
                     ("@contrasena", contrasena),
-                    ("@personajeid", personajeId));
+                    ("@personajeid", personajeId)
+                );
             }
         }
         public void BorrarUsuario(int UsuarioId)
