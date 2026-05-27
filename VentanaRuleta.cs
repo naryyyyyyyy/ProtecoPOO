@@ -86,6 +86,7 @@ namespace ProtecoPOO.Ruleta
             {
                 txtNumAp.Clear();
                 txtNumAp.Enabled = false;
+                cmbTipo.Enabled= true;
                 string cElegido = cmbTipo.Text;
                 if (cElegido == "" || cmbTipo.SelectedIndex == -1)
                 {
@@ -99,10 +100,11 @@ namespace ProtecoPOO.Ruleta
             }
             else if (tipo == "Número")
             {
+                txtNumAp.Enabled = true;
                 cmbTipo.Enabled= false;
-                if (int.TryParse(txtNumAp.Text, out int n))
+                if (int.TryParse(txtNumAp.Text, out int n)&& n > -1 && n< 37)
                 {
-                    // num, color vacio
+                    
                     ruleta.ApuestaRul = new Apuesta(n, "", monto);
                     apuestaValida = ruleta.ValidarYColocarApuesta(monto);
                 }
@@ -120,6 +122,8 @@ namespace ProtecoPOO.Ruleta
                 MessageBox.Show("Apuesta inválida o saldo insuficiente.");
             }
         }
+
+
         // if (cmbTipo.SelectedItem)
 
     }

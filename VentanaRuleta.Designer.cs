@@ -38,13 +38,15 @@
             this.lblSaldo = new System.Windows.Forms.Label();
             this.txtNumAp = new System.Windows.Forms.TextBox();
             this.cmbTipoAp = new System.Windows.Forms.ComboBox();
+            this.lstFondoRes = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnGirar
             // 
-            this.btnGirar.Location = new System.Drawing.Point(501, 331);
+            this.btnGirar.Location = new System.Drawing.Point(472, 343);
             this.btnGirar.Name = "btnGirar";
-            this.btnGirar.Size = new System.Drawing.Size(75, 43);
+            this.btnGirar.Size = new System.Drawing.Size(75, 53);
             this.btnGirar.TabIndex = 0;
             this.btnGirar.Text = "Girar";
             this.btnGirar.UseVisualStyleBackColor = true;
@@ -62,9 +64,9 @@
             this.lblApuesta.AutoSize = true;
             this.lblApuesta.Location = new System.Drawing.Point(83, 319);
             this.lblApuesta.Name = "lblApuesta";
-            this.lblApuesta.Size = new System.Drawing.Size(57, 16);
+            this.lblApuesta.Size = new System.Drawing.Size(169, 16);
             this.lblApuesta.TabIndex = 2;
-            this.lblApuesta.Text = "Apostar:";
+            this.lblApuesta.Text = "Apostar:(apuesta en juego)";
             // 
             // cmbTipo
             // 
@@ -73,7 +75,7 @@
             "Verde",
             "Rojo",
             "Negro"});
-            this.cmbTipo.Location = new System.Drawing.Point(427, 371);
+            this.cmbTipo.Location = new System.Drawing.Point(215, 369);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(121, 24);
             this.cmbTipo.TabIndex = 3;
@@ -82,7 +84,7 @@
             // 
             this.lblColor.AutoSize = true;
             this.lblColor.ForeColor = System.Drawing.Color.Cyan;
-            this.lblColor.Location = new System.Drawing.Point(634, 350);
+            this.lblColor.Location = new System.Drawing.Point(646, 158);
             this.lblColor.Name = "lblColor";
             this.lblColor.Size = new System.Drawing.Size(39, 16);
             this.lblColor.TabIndex = 4;
@@ -91,17 +93,17 @@
             // lblResultado
             // 
             this.lblResultado.AutoSize = true;
-            this.lblResultado.Location = new System.Drawing.Point(619, 331);
+            this.lblResultado.Location = new System.Drawing.Point(608, 183);
             this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(69, 16);
+            this.lblResultado.Size = new System.Drawing.Size(110, 16);
             this.lblResultado.TabIndex = 5;
-            this.lblResultado.Text = "Resultado";
+            this.lblResultado.Text = "Resultado (#giro)";
             // 
             // btnApostar
             // 
-            this.btnApostar.Location = new System.Drawing.Point(209, 370);
+            this.btnApostar.Location = new System.Drawing.Point(351, 350);
             this.btnApostar.Name = "btnApostar";
-            this.btnApostar.Size = new System.Drawing.Size(75, 23);
+            this.btnApostar.Size = new System.Drawing.Size(75, 39);
             this.btnApostar.TabIndex = 6;
             this.btnApostar.Text = "Apostar";
             this.btnApostar.UseVisualStyleBackColor = true;
@@ -112,15 +114,15 @@
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Location = new System.Drawing.Point(97, 264);
             this.lblSaldo.Name = "lblSaldo";
-            this.lblSaldo.Size = new System.Drawing.Size(43, 16);
+            this.lblSaldo.Size = new System.Drawing.Size(99, 16);
             this.lblSaldo.TabIndex = 7;
-            this.lblSaldo.Text = "Saldo";
+            this.lblSaldo.Text = "Saldo(del user)";
             // 
             // txtNumAp
             // 
-            this.txtNumAp.Location = new System.Drawing.Point(307, 371);
+            this.txtNumAp.Location = new System.Drawing.Point(215, 341);
             this.txtNumAp.Name = "txtNumAp";
-            this.txtNumAp.Size = new System.Drawing.Size(100, 22);
+            this.txtNumAp.Size = new System.Drawing.Size(121, 22);
             this.txtNumAp.TabIndex = 8;
             // 
             // cmbTipoAp
@@ -134,11 +136,30 @@
             this.cmbTipoAp.Size = new System.Drawing.Size(121, 24);
             this.cmbTipoAp.TabIndex = 9;
             // 
+            // lstFondoRes
+            // 
+            this.lstFondoRes.FormattingEnabled = true;
+            this.lstFondoRes.ItemHeight = 16;
+            this.lstFondoRes.Location = new System.Drawing.Point(593, 125);
+            this.lstFondoRes.Name = "lstFondoRes";
+            this.lstFondoRes.Size = new System.Drawing.Size(144, 84);
+            this.lstFondoRes.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(632, 96);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Ruleta:";
+            // 
             // VentanaRuleta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbTipoAp);
             this.Controls.Add(this.txtNumAp);
             this.Controls.Add(this.lblSaldo);
@@ -149,6 +170,7 @@
             this.Controls.Add(this.lblApuesta);
             this.Controls.Add(this.txtApuesta);
             this.Controls.Add(this.btnGirar);
+            this.Controls.Add(this.lstFondoRes);
             this.Name = "VentanaRuleta";
             this.Text = "VentanaRuleta";
             this.ResumeLayout(false);
@@ -168,5 +190,7 @@
         private System.Windows.Forms.Label lblSaldo;
         private System.Windows.Forms.TextBox txtNumAp;
         private System.Windows.Forms.ComboBox cmbTipoAp;
+        private System.Windows.Forms.ListBox lstFondoRes;
+        private System.Windows.Forms.Label label1;
     }
 }
