@@ -106,6 +106,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ReporteAdmin.cs" />
+    <Compile Include="Ruleta\Ruleta.cs" />
+    <Compile Include="Ruleta\RuletaApuesta.cs" />
     <Compile Include="SesionGlobal.cs" />
     <Compile Include="VentanaAdministrador.cs">
       <SubType>Form</SubType>
@@ -166,6 +168,12 @@
     <Compile Include="VentanaReportes.Designer.cs">
       <DependentUpon>VentanaReportes.cs</DependentUpon>
     </Compile>
+    <Compile Include="VentanaRuleta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaRuleta.Designer.cs">
+      <DependentUpon>VentanaRuleta.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaReportes.resx">
       <DependentUpon>VentanaReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentanaRuleta.resx">
+      <DependentUpon>VentanaRuleta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaUsuario.resx">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
