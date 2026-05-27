@@ -17,5 +17,8 @@ namespace ProtecoPOO
             Id = id;
             Contrasena = contrasena;
         }
+        public Usuario()
+        {
+        }
     }
 }
