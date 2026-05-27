@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
 using ProtecoPOO.CasinoSQL;
 using System.ComponentModel;
 using System.Data;

@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite; // <-- El nuevo paquete
 
 namespace ProtecoPOO.CasinoSQL
 {
     public static class SqlConnectionExtensions
     {
-        public static int ExecuteNonQuery(this SQLiteConnection conn, string commandText)
+        public static int ExecuteNonQuery(this SqliteConnection conn, string commandText)
         {
             var cmd = conn.CreateCommand();
             cmd.CommandText = commandText;
             return cmd.ExecuteNonQuery();
         }
 
-        public static int ExecuteNonQuery(this SQLiteConnection conn,
+        public static int ExecuteNonQuery(this SqliteConnection conn,
                                           string commandText,
                                           params (string, object)[] parameters)
         {
@@ -31,7 +31,7 @@ namespace ProtecoPOO.CasinoSQL
             return cmd.ExecuteNonQuery();
         }
 
-        public static SQLiteDataReader ExecuteReader(this SQLiteConnection conn,
+        public static SqliteDataReader ExecuteReader(this SqliteConnection conn,
                                                      string commandText)
         {
             var cmd = conn.CreateCommand();
@@ -39,7 +39,7 @@ namespace ProtecoPOO.CasinoSQL
             return cmd.ExecuteReader();
         }
 
-        public static SQLiteDataReader ExecuteReader(this SQLiteConnection conn,
+        public static SqliteDataReader ExecuteReader(this SqliteConnection conn,
                                                      string commandText,
                                                      params (string, object)[] parameters)
         {
@@ -54,13 +54,13 @@ namespace ProtecoPOO.CasinoSQL
             return cmd.ExecuteReader();
         }
 
-        public static string GetString(this SQLiteDataReader reader, string name)
+        public static string GetString(this SqliteDataReader reader, string name)
             => reader.GetString(reader.GetOrdinal(name));
 
-        public static int GetInt(this SQLiteDataReader reader, string name)
+        public static int GetInt(this SqliteDataReader reader, string name)
             => reader.GetInt32(reader.GetOrdinal(name));
 
-        public static double GetDouble(this SQLiteDataReader reader, string name)
+        public static double GetDouble(this SqliteDataReader reader, string name)
             => reader.GetDouble(reader.GetOrdinal(name));
     }
 }

@@ -14,7 +14,6 @@ namespace ProtecoPOO
     {
         public VentanaUsuario()
         {
-
             InitializeComponent();
             ValidacionDeRecursos();
 
