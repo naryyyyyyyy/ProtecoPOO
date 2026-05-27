@@ -13,5 +13,9 @@ namespace ProtecoPOO
         public int PersonajeId { get; set; } // 1=Mago, 2=Caballero, 3=Picaro
         public double Saldo { get; set; }
         public bool EstaVivo { get; set; }
+        public string Nombre { get; set; }
+
+        // Esta es la propiedad que leerá el DisplayMember de tu ComboBox
+        public string InfoVisual => $"{Nombre} (Ranura #{Id}) - Saldo: ${Saldo}";
     }
 }

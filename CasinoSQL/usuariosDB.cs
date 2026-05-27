@@ -79,24 +79,6 @@ namespace ProtecoPOO.CasinoSQL
                 conn.ExecuteNonQuery(queryUsuario, ("@id", UsuarioId));
             }
         }
-        /*public void AgregarRegistroPartida(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
-        {
-            RegistroPartida partida = new RegistroPartida(usuarioId, juegoId, saldoInicial, numReapuestas, ganancia);
-
-            using (var conn = new SQLiteConnection(cadenaConexion))
-            {
-                conn.Open();
-                string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
-                conn.ExecuteNonQuery(query,
-                ("@usuarioId", partida.UsuarioId),
-                ("@juegoid", partida.JuegoId),
-                ("@saldoInicial", partida.SaldoInicial),
-                ("@numReapuestas", partida.NumReapuestas),
-                ("@ganancia", partida.GananciaPerdida)
-                );
-            }
-        }*/
-
         public void AgregarRegistroPartida(RegistroPartida registro)
         {
             using (var conn = new SQLiteConnection(cadenaConexion))
@@ -112,7 +94,7 @@ namespace ProtecoPOO.CasinoSQL
                 );
             }
         }
-        
+
         public bool ContrasenaValida(int idUsuario, string contrasena)
         {
             using (var conn = new SQLiteConnection(cadenaConexion))
@@ -136,7 +118,6 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
         }
-
         public List<Usuario> GetAllUsuarios()
         {
             var usuarios = new List<Usuario>();
@@ -203,6 +184,114 @@ namespace ProtecoPOO.CasinoSQL
             }
 
             return listaJuegos;
+        }
+        public List<RegistroPartida> ObtenerHistorialPersonajeActual(int idUsuario, int idPersonajeGuardado)
+        {
+            var historial = new List<RegistroPartida>();
+
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = @"SELECT h.Id, h.UsuarioId, h.JuegoId, h.PersonajeId, 
+                                h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida,
+                                j.Nombre AS NombreJuego
+                                FROM historial_juegos h
+                                INNER JOIN juegos j ON h.JuegoId = j.Id
+                                WHERE h.UsuarioId = @idUsuario AND h.PersonajeId = @idPersonajeGuardado
+                                ORDER BY h.Id DESC;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    cmd.Parameters.AddWithValue("@idPersonajeGuardado", idPersonajeGuardado);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        while (rs.Read())
+                        {
+                            historial.Add(new RegistroPartida
+                            {
+                                // Llenamos los datos técnicos...
+                                Id = rs.GetInt32(rs.GetOrdinal("Id")),
+                                UsuarioId = rs.GetInt32(rs.GetOrdinal("UsuarioId")),
+                                JuegoId = rs.GetInt32(rs.GetOrdinal("JuegoId")),
+                                PersonajeId = rs.GetInt32(rs.GetOrdinal("PersonajeId")),
+                                SaldoInicial = Convert.ToDecimal(rs.GetValue(rs.GetOrdinal("SaldoInicial"))),
+                                NumReapuestas = rs.GetInt32(rs.GetOrdinal("NumReapuestas")),
+                                GananciaPerdida = Convert.ToDecimal(rs.GetValue(rs.GetOrdinal("GananciaPerdida"))),
+
+                                // Y llenamos el texto visual para la tabla
+                                NombreJuego = rs.GetString(rs.GetOrdinal("NombreJuego"))
+                            });
+                        }
+                    }
+                }
+            }
+            return historial;
+        }
+        public List<PersonajeGuardado> ObtenerPersonajesDelUsuario(int usuarioId)
+        {
+            var listaPersonajes = new List<PersonajeGuardado>();
+
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // Hacemos el JOIN para traernos el Nombre del catálogo
+                string query = @"SELECT pg.Id, 
+                                pg.UsuarioId,
+                                pg.PersonajeId, 
+                                p.Nombre, 
+                                pg.Saldo, 
+                                pg.EstaVivo
+                         FROM personajes_guardados pg
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         WHERE pg.UsuarioId = @usuarioId
+                         ORDER BY pg.Id ASC;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        while (rs.Read())
+                        {
+                            listaPersonajes.Add(new PersonajeGuardado
+                            {
+                                Id = rs.GetInt32(rs.GetOrdinal("Id")),
+                                UsuarioId = rs.GetInt32(rs.GetOrdinal("UsuarioId")),
+                                PersonajeId = rs.GetInt32(rs.GetOrdinal("PersonajeId")),
+                                Saldo = Convert.ToDouble(rs.GetValue(rs.GetOrdinal("Saldo"))),
+                                EstaVivo = rs.GetInt32(rs.GetOrdinal("EstaVivo")) == 1,
+
+                                // Llenamos el bolsillo extra visual
+                                Nombre = rs.GetString(rs.GetOrdinal("Nombre"))
+                            });
+                        }
+                    }
+                }
+            }
+
+            return listaPersonajes;
+        }
+
+        public int ObtenerIdUsuario(string nombre, string contrasena)
+        {
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = "SELECT Id FROM usuarios WHERE Nombre = @nombre AND Contrasena = @contrasena;";
+
+                using (var rs = conn.ExecuteReader(query, ("@nombre", nombre), ("@contrasena", contrasena)))
+                {
+                    if (rs.Read())
+                    {
+                        return rs.GetInt32(0); // Devuelve el ID numérico
+                    }
+                }
+            }
+            return 0; // Por si algo falla
         }
     }
 }
