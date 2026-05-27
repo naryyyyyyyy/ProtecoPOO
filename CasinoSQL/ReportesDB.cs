@@ -1,20 +1,28 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
 
 namespace ProtecoPOO.CasinoSQL
 {
     public class ReportesDB
     {
-        private string cadenaConexion = "Data Source=CasinoDB.db;";
+        private string cadenaConexion;
+        public ReportesDB()
+        {
+            string rutaEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+
+            string rutaProyecto = System.IO.Path.GetFullPath(System.IO.Path.Combine(rutaEjecutable, @"..\..\..\CasinoSQL\CasinoDB.db"));
+
+            cadenaConexion = $"Data Source={rutaProyecto};";
+        }
         public List<Personaje> GetAllPersonajes()
         {
             var personajes = new List<Personaje>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT Id, Nombre 
@@ -35,7 +43,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             var juegos = new List<Juego>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT Id, Nombre 
@@ -69,7 +77,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             var filtro = new List<Usuario>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT 
@@ -98,7 +106,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             var filtro = new List<Usuario>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT Id, Nombre, Saldo 
@@ -145,7 +153,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             var filtro = new List<Usuario>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT DISTINCT 
@@ -174,7 +182,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             var filtro = new List<Usuario>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT DISTINCT u.Id, u.Nombre, u.Saldo 
@@ -196,5 +204,34 @@ namespace ProtecoPOO.CasinoSQL
             return filtro;
         }
 
+        public List<Administrador> GetAllAdministradores()
+        {
+            List<Administrador> listaAdmins = new List<Administrador>();
+
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"SELECT Id, Nombre, Contrasena 
+                                FROM administradores 
+                                ORDER BY Nombre ASC;";
+
+                using (var rs = conn.ExecuteReader(query))
+                {
+                    while (rs.Read())
+                    {
+                        int id = rs.GetInt("Id");
+                        string nombre = rs.GetString("Nombre");
+                        string contrasena = rs.GetString("Contrasena");
+
+                        Administrador adminEncontrado = new Administrador(id, nombre, contrasena);
+
+                        listaAdmins.Add(adminEncontrado);
+                    }
+                }
+            }
+
+            return listaAdmins;
+        }
     }
 }

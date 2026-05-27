@@ -15,6 +15,7 @@ namespace ProtecoPOO
     {
         usuariosDB usuariodb = new usuariosDB();
         ReportesDB reportedb = new ReportesDB();
+        Usuario usuarioActual;
         public Form1()
         {
             InitializeComponent();
@@ -52,6 +53,12 @@ namespace ProtecoPOO
         {
             VentanaElegirPersonaje pers = new VentanaElegirPersonaje();
             pers.ShowDialog();
+        }
+
+        private void linkLblAdmin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            VentanaAdministrador ventanaAdministrador = new VentanaAdministrador();
+            ventanaAdministrador.ShowDialog();
         }
     }
 }

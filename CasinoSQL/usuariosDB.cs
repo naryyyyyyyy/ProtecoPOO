@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System.Data.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +10,19 @@ namespace ProtecoPOO.CasinoSQL
 {
     public class usuariosDB
     {
-        // CLICK DERECHO A LA CARPETA "CasinoSQL"
-        //click en "abrir en el explorador de archivos"
-        // click derecho al archivo "CasinoDB.db"
-        // pegar lo copiado DESPUES DEL IGUAL         |
-        //                                            |
-        //                                            v
-        private string cadenaConexion = @"Data Source=C:\Users\josue\OneDrive\Desktop\CARPETAS\C#\OTRAVEZ3\CasinoSQL\CasinoDB.db;";
+        private string cadenaConexion;
+        public usuariosDB()
+        {
+            string rutaEjecutable = AppDomain.CurrentDomain.BaseDirectory;
+
+            string rutaProyecto = System.IO.Path.GetFullPath(System.IO.Path.Combine(rutaEjecutable, @"..\..\..\CasinoSQL\CasinoDB.db"));
+
+            cadenaConexion = $"Data Source={rutaProyecto};";
+        }
         public bool UsuarioExistente(string nombre, string contrasena)
         {
             // 'using' asegura que la conexión se cierre automáticamente al terminar
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
 
@@ -41,7 +43,7 @@ namespace ProtecoPOO.CasinoSQL
         }
         public void AgregarUsuario(string nombre, string contrasena, int personajeId)
         {
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
 
@@ -56,7 +58,7 @@ namespace ProtecoPOO.CasinoSQL
         }
         public void BorrarUsuario(int UsuarioId)
         {
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
 
@@ -73,7 +75,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             RegistroPartida partida = new RegistroPartida(usuarioId, juegoId, saldoInicial, numReapuestas, ganancia);
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
@@ -88,7 +90,7 @@ namespace ProtecoPOO.CasinoSQL
         }
         public void AgregarRegistroPartida(RegistroPartida registro)
         {
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
@@ -105,7 +107,7 @@ namespace ProtecoPOO.CasinoSQL
         {
             var usuarios = new List<Usuario>();
 
-            using (var conn = new SqliteConnection(cadenaConexion))
+            using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
                 string query = @"SELECT Id, Nombre 
@@ -124,6 +126,30 @@ namespace ProtecoPOO.CasinoSQL
             }
 
             return usuarios;
+        }
+
+        public bool ValidarContrasena(int idUsuario, string contrasena)
+        {
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"SELECT COUNT(1) 
+                         FROM usuarios 
+                         WHERE Id = @idUsuario AND Contrasena = @contrasena;";
+
+                using (var rs = conn.ExecuteReader(query, ("@idUsuario", idUsuario), ("@contrasena", contrasena)))
+                {
+                    if (rs.Read())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
         }
     }
 }
