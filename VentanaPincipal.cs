@@ -37,7 +37,8 @@ namespace ProtecoPOO
             if (usuariodb.UsuarioExistente(usuario, contraseña))
             {
                 VentanaUsuario frm = new VentanaUsuario();
-                frm.ShowDialog();
+                frm.Show();
+                this.Hide();
             }
 
             else
