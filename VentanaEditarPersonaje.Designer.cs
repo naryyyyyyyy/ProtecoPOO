@@ -1,4 +1,4 @@
-﻿namespace ProtecoPOO
+﻿namespace ProtecoPOO.CasinoSQL
 {
     partial class VentanaEditarPersonaje
     {
@@ -97,6 +97,7 @@
             this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
             this.comprarToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.comprarToolStripMenuItem.Text = "Comprar";
+            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
             // 
             // VentanaEditarPersonaje
             // 
