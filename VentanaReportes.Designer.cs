@@ -39,6 +39,7 @@
             this.porPersonajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbFiltro = new System.Windows.Forms.ComboBox();
+            this.especificoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteGlobal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reporteAdminBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -82,7 +83,8 @@
             this.porUsuarioToolStripMenuItem,
             this.porJuegoToolStripMenuItem,
             this.porPersonajeToolStripMenuItem,
-            this.globalToolStripMenuItem});
+            this.globalToolStripMenuItem,
+            this.especificoToolStripMenuItem});
             this.reportesFiltradosToolStripMenuItem.Name = "reportesFiltradosToolStripMenuItem";
             this.reportesFiltradosToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.reportesFiltradosToolStripMenuItem.Text = "Reportes";
@@ -123,6 +125,13 @@
             this.cmbFiltro.Size = new System.Drawing.Size(121, 24);
             this.cmbFiltro.TabIndex = 4;
             // 
+            // especificoToolStripMenuItem
+            // 
+            this.especificoToolStripMenuItem.Name = "especificoToolStripMenuItem";
+            this.especificoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.especificoToolStripMenuItem.Text = "Especifico";
+            this.especificoToolStripMenuItem.Click += new System.EventHandler(this.especificoToolStripMenuItem_Click);
+            // 
             // VentanaReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -162,5 +171,6 @@
         private System.Windows.Forms.BindingSource reporteAdminBindingSource;
         private System.Windows.Forms.ToolStripMenuItem globalToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmbFiltro;
+        private System.Windows.Forms.ToolStripMenuItem especificoToolStripMenuItem;
     }
 }

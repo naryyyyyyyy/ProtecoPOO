@@ -93,5 +93,11 @@ namespace ProtecoPOO
             cmbFiltro.Enabled = false;
             dgvReporteGlobal.DataSource = reportes.GetReporteGlobalHistorial();
         }
+
+        private void especificoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAdminReportePersonalizado rp = new VentanaAdminReportePersonalizado();
+            rp.ShowDialog();
+        }
     }
 }

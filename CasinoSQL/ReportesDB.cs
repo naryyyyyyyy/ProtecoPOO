@@ -170,7 +170,6 @@ namespace ProtecoPOO.CasinoSQL
 
             return reporte;
         }
-
         public List<Administrador> GetAllAdministradores()
         {
             List<Administrador> listaAdmins = new List<Administrador>();
@@ -199,6 +198,58 @@ namespace ProtecoPOO.CasinoSQL
             }
 
             return listaAdmins;
+        }
+        public List<ReporteAdmin> GetReportePersonalizado(int idUsuario, int idJuego, int idPersonaje, bool ordenAscendente)
+        {
+            var reporte = new List<ReporteAdmin>();
+
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // La base del query con el truco WHERE 1=1
+                string query = @"SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+                                h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+                         FROM historial_juegos h
+                         INNER JOIN usuarios u ON h.UsuarioId = u.Id
+                         INNER JOIN juegos j ON h.JuegoId = j.Id
+                         INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         WHERE 1=1 ";
+
+                // Vamos construyendo el query según lo que pidió el admin
+                if (idUsuario > 0) query += " AND u.Id = @idUsuario";
+                if (idJuego > 0) query += " AND j.Id = @idJuego";
+                if (idPersonaje > 0) query += " AND p.Id = @idPersonaje";
+
+                // Ordenamiento dinámico
+                query += ordenAscendente ? " ORDER BY h.Id ASC;" : " ORDER BY h.Id DESC;";
+
+                // Usamos SQLiteCommand tradicional para poder inyectar los parámetros dinámicamente
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    if (idUsuario > 0) cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    if (idJuego > 0) cmd.Parameters.AddWithValue("@idJuego", idJuego);
+                    if (idPersonaje > 0) cmd.Parameters.AddWithValue("@idPersonaje", idPersonaje);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        while (rs.Read())
+                        {
+                            reporte.Add(new ReporteAdmin
+                            {
+                                Jugador = rs.GetString(rs.GetOrdinal("Jugador")),
+                                Personaje = rs.GetString(rs.GetOrdinal("Personaje")),
+                                Juego = rs.GetString(rs.GetOrdinal("Juego")),
+                                SaldoInicial = Convert.ToDouble(rs.GetValue(rs.GetOrdinal("SaldoInicial"))),
+                                Reapuestas = rs.GetInt32(rs.GetOrdinal("NumReapuestas")),
+                                GananciaPerdida = Convert.ToDouble(rs.GetValue(rs.GetOrdinal("GananciaPerdida")))
+                            });
+                        }
+                    }
+                }
+            }
+            return reporte;
         }
 
     }
