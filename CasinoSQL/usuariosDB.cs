@@ -71,7 +71,7 @@ namespace ProtecoPOO.CasinoSQL
                 conn.ExecuteNonQuery(queryUsuario, ("@id", UsuarioId));
             }
         }
-        public void AgregarRegistroPartida(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
+        /*public void AgregarRegistroPartida(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
         {
             RegistroPartida partida = new RegistroPartida(usuarioId, juegoId, saldoInicial, numReapuestas, ganancia);
 
@@ -84,10 +84,11 @@ namespace ProtecoPOO.CasinoSQL
                 ("@juegoid", partida.JuegoId),
                 ("@saldoInicial", partida.SaldoInicial),
                 ("@numReapuestas", partida.NumReapuestas),
-                ("@ganancia", partida.Ganancia)
+                ("@ganancia", partida.GananciaPerdida)
                 );
             }
-        }
+        }*/
+
         public void AgregarRegistroPartida(RegistroPartida registro)
         {
             using (var conn = new SQLiteConnection(cadenaConexion))
@@ -99,10 +100,35 @@ namespace ProtecoPOO.CasinoSQL
                 ("@juegoid", registro.JuegoId),
                 ("@saldoInicial", registro.SaldoInicial),
                 ("@numReapuestas", registro.NumReapuestas),
-                ("@ganancia", registro.Ganancia)
+                ("@ganancia", registro.GananciaPerdida)
                 );
             }
         }
+        
+        public bool ContrasenaValida(int idUsuario, string contrasena)
+        {
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"SELECT COUNT(1) 
+                                FROM administradores 
+                                WHERE Id = @idUsuario AND Contrasena = @contrasena;";
+
+                using (var rs = conn.ExecuteReader(query, ("@idUsuario", idUsuario), ("@contrasena", contrasena)))
+                {
+                    if (rs.Read())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
         public List<Usuario> GetAllUsuarios()
         {
             var usuarios = new List<Usuario>();
@@ -119,37 +145,11 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     usuarios.Add(new Usuario(rs.GetString("Nombre"),
                                              rs.GetInt("Id"),
-                                             rs.GetInt("PersonajeId"),
-                                             "",
-                                             Convert.ToDecimal(rs.GetDouble("Saldo"))));
+                                             ""));
                 }
             }
 
             return usuarios;
-        }
-
-        public bool ValidarContrasena(int idUsuario, string contrasena)
-        {
-            using (var conn = new SQLiteConnection(cadenaConexion))
-            {
-                conn.Open();
-
-                string query = @"SELECT COUNT(1) 
-                         FROM usuarios 
-                         WHERE Id = @idUsuario AND Contrasena = @contrasena;";
-
-                using (var rs = conn.ExecuteReader(query, ("@idUsuario", idUsuario), ("@contrasena", contrasena)))
-                {
-                    if (rs.Read())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
         }
     }
 }

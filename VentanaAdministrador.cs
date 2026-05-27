@@ -34,7 +34,7 @@ namespace ProtecoPOO
                     MessageBoxIcon.Warning);
                 return;
             }
-            if (usuarios.ValidarContrasena(adminId, contraseña))
+            if (!usuarios.ContrasenaValida(adminId, contraseña))
             {
                 MessageBox.Show("Contraseña invalida", "AVISO",
                     MessageBoxButtons.OK,
@@ -45,7 +45,7 @@ namespace ProtecoPOO
             {
                 this.Hide();
                 this.Close();
-                VentanaAdmin adminVentana = new VentanaAdmin();
+                VentanaReportes adminVentana = new VentanaReportes();
                 adminVentana.ShowDialog();
             }
         }

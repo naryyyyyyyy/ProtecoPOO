@@ -18,190 +18,157 @@ namespace ProtecoPOO.CasinoSQL
 
             cadenaConexion = $"Data Source={rutaProyecto};";
         }
-        public List<Personaje> GetAllPersonajes()
-        {
-            var personajes = new List<Personaje>();
 
+        // 1. FILTRO POR JUEGO
+        public List<ReporteAdmin> GetReportePorJuego(string nombreJuego)
+        {
+            var reporte = new List<ReporteAdmin>();
             using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
-                string query = @"SELECT Id, Nombre 
-                                FROM personajes 
-                                ORDER BY Id ASC;";
+                string query = @"SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+                                        h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+                                 FROM historial_juegos h
+                                 INNER JOIN usuarios u ON h.UsuarioId = u.Id
+                                 INNER JOIN juegos j ON h.JuegoId = j.Id
+                                 INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                                 INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                                 WHERE j.Nombre LIKE @filtro
+                                 ORDER BY h.Id DESC;";
 
-                var rs = conn.ExecuteReader(query);
+                // Le agregamos los '%' para que busque coincidencias parciales
+                var rs = conn.ExecuteReader(query, ("@filtro", "%" + nombreJuego + "%"));
+
                 while (rs.Read())
                 {
-                    personajes.Add(new Personaje(rs.GetString("Nombre"),
-                                                rs.GetInt("Id")));
-                }
-            }
-
-            return personajes;
-        }
-        public List<Juego> GetAllJuegos()
-        {
-            var juegos = new List<Juego>();
-
-            using (var conn = new SQLiteConnection(cadenaConexion))
-            {
-                conn.Open();
-                string query = @"SELECT Id, Nombre 
-                                FROM juegos 
-                                ORDER BY Id ASC;";
-
-                var rs = conn.ExecuteReader(query);
-                while (rs.Read())
-                {
-                    int id = rs.GetInt("Id");
-
-                    string nombreJuegoDb = rs.GetString("Nombre");
-                    string nombreClase = FormatearNombreClase(nombreJuegoDb);
-
-                    // PASO 2: Le decimos a la Reflexión que busque esa clase en tu proyecto.
-                    
-                    Type tipoClase = Type.GetType($"ProtecoPOO.{nombreClase}");
-
-                    // PASO 3: Si encontró la clase, la construye y la agrega a la lista
-                    if (tipoClase != null)
+                    reporte.Add(new ReporteAdmin
                     {
-                        Juego juegoInstancia = (Juego)Activator.CreateInstance(tipoClase, new object[] { nombreJuegoDb, id });
-                        juegos.Add(juegoInstancia);
-                    }
+                        Jugador = rs.GetString("Jugador"),
+                        Personaje = rs.GetString("Personaje"),
+                        Juego = rs.GetString("Juego"),
+                        SaldoInicial = rs.GetDouble("SaldoInicial"),
+                        Reapuestas = rs.GetInt("NumReapuestas"),
+                        GananciaPerdida = rs.GetDouble("GananciaPerdida")
+                    });
                 }
             }
-
-            return juegos;
+            return reporte;
         }
-        public List<Usuario> GetUsuariosPorPersonaje(string personaje)
+
+        // 2. FILTRO POR PERSONAJE
+        public List<ReporteAdmin> GetReportePorPersonaje(string nombrePersonaje)
         {
-            var filtro = new List<Usuario>();
+            var reporte = new List<ReporteAdmin>();
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = @"SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+                                        h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+                                 FROM historial_juegos h
+                                 INNER JOIN usuarios u ON h.UsuarioId = u.Id
+                                 INNER JOIN juegos j ON h.JuegoId = j.Id
+                                 INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                                 INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                                 WHERE p.Nombre LIKE @filtro
+                                 ORDER BY h.Id DESC;";
+
+                var rs = conn.ExecuteReader(query, ("@filtro", "%" + nombrePersonaje + "%"));
+
+                while (rs.Read())
+                {
+                    reporte.Add(new ReporteAdmin
+                    {
+                        Jugador = rs.GetString("Jugador"),
+                        Personaje = rs.GetString("Personaje"),
+                        Juego = rs.GetString("Juego"),
+                        SaldoInicial = rs.GetDouble("SaldoInicial"),
+                        Reapuestas = rs.GetInt("NumReapuestas"),
+                        GananciaPerdida = rs.GetDouble("GananciaPerdida")
+                    });
+                }
+            }
+            return reporte;
+        }
+
+        // 3. FILTRO POR USUARIO
+        public List<ReporteAdmin> GetReportePorUsuario(string nombreUsuario)
+        {
+            var reporte = new List<ReporteAdmin>();
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+                string query = @"SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+                                        h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+                                 FROM historial_juegos h
+                                 INNER JOIN usuarios u ON h.UsuarioId = u.Id
+                                 INNER JOIN juegos j ON h.JuegoId = j.Id
+                                 INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                                 INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                                 WHERE u.Nombre LIKE @filtro
+                                 ORDER BY h.Id DESC;";
+
+                var rs = conn.ExecuteReader(query, ("@filtro", "%" + nombreUsuario + "%"));
+
+                while (rs.Read())
+                {
+                    reporte.Add(new ReporteAdmin
+                    {
+                        Jugador = rs.GetString("Jugador"),
+                        Personaje = rs.GetString("Personaje"),
+                        Juego = rs.GetString("Juego"),
+                        SaldoInicial = rs.GetDouble("SaldoInicial"),
+                        Reapuestas = rs.GetInt("NumReapuestas"),
+                        GananciaPerdida = rs.GetDouble("GananciaPerdida")
+                    });
+                }
+            }
+            return reporte;
+        }
+
+        public List<ReporteAdmin> GetReporteGlobalHistorial()
+        {
+            var reporte = new List<ReporteAdmin>();
 
             using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
+
+                // El Query maestro: Une el historial con los nombres de juegos, usuarios y personajes
                 string query = @"SELECT 
-                                    u.Id AS UsuarioId, 
-                                    u.Nombre AS Jugador, 
-                                    u.Saldo, 
-                                    p.Nombre AS PersonajeElegido
-                                FROM usuarios u
-                                INNER JOIN personajes p ON u.PersonajeId = p.Id
-                                WHERE p.Nombre = @nombrePersonaje;";
+                            u.Nombre AS Jugador, 
+                            p.Nombre AS Personaje, 
+                            j.Nombre AS Juego, 
+                            h.SaldoInicial, 
+                            h.NumReapuestas, 
+                            h.GananciaPerdida
+                         FROM historial_juegos h
+                         INNER JOIN usuarios u ON h.UsuarioId = u.Id
+                         INNER JOIN juegos j ON h.JuegoId = j.Id
+                         INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         ORDER BY h.Id DESC;"; // ORDER BY h.Id DESC muestra las partidas más recientes primero
 
-                var rs = conn.ExecuteReader(query, ("@nombrePersonaje", personaje));
+                // Como no hay parámetros, usamos la extensión simple
+                var rs = conn.ExecuteReader(query);
+
                 while (rs.Read())
                 {
-                    filtro.Add(new Usuario(rs.GetString("Nombre"),
-                                           rs.GetInt("Id"),
-                                           rs.GetInt("PersonajeId"),
-                                           "",
-                                           Convert.ToDecimal(rs.GetDouble("Saldo"))));
+                    // Construimos el objeto del reporte usando tus métodos de extensión mágicos
+                    ReporteAdmin fila = new ReporteAdmin
+                    {
+                        Jugador = rs.GetString("Jugador"),
+                        Personaje = rs.GetString("Personaje"),
+                        Juego = rs.GetString("Juego"),
+                        SaldoInicial = rs.GetDouble("SaldoInicial"),
+                        Reapuestas = rs.GetInt("NumReapuestas"),
+                        GananciaPerdida = rs.GetDouble("GananciaPerdida")
+                    };
+
+                    reporte.Add(fila);
                 }
             }
 
-            return filtro;
-        }
-        public List<Usuario> GetUsuariosPorPersonaje(int personajeId)
-        {
-            var filtro = new List<Usuario>();
-
-            using (var conn = new SQLiteConnection(cadenaConexion))
-            {
-                conn.Open();
-                string query = @"SELECT Id, Nombre, Saldo 
-                                FROM usuarios 
-                                WHERE PersonajeId = @idPersonaje;";
-
-                var rs = conn.ExecuteReader(query, ("@idPersonaje", personajeId));
-                while (rs.Read())
-                {
-                    filtro.Add(new Usuario(rs.GetString("Nombre"),
-                                           rs.GetInt("Id"),
-                                           rs.GetInt("PersonajeId"),
-                                           "",
-                                           Convert.ToDecimal(rs.GetDouble("Saldo"))));
-                }
-            }
-
-            return filtro;
-        }
-        public string FormatearNombreClase(string nombreDb)
-        {
-            // Si el texto viene vacío o nulo, lo regresamos tal cual para evitar errores
-            if (string.IsNullOrWhiteSpace(nombreDb))
-            {
-                return string.Empty;
-            }
-
-            // 1. Separamos el texto en palabras usando los espacios como divisores
-            string[] palabras = nombreDb.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            for (int i = 0; i < palabras.Length; i++)
-            {
-                // 2. Convertimos toda la palabra a minúsculas por seguridad (ej. "CABALLOS" -> "caballos")
-                string palabra = palabras[i].ToLower();
-
-                // 3. Volvemos mayúscula solo la primera letra y le pegamos el resto de la palabra
-                palabras[i] = char.ToUpper(palabra[0]) + palabra.Substring(1);
-            }
-
-            // 4. Unimos todas las palabras del arreglo sin ningún espacio entre ellas
-            return string.Join("", palabras);
-        }
-        public List<Usuario> GetUsuariosPorJuego(string juego)
-        {
-            var filtro = new List<Usuario>();
-
-            using (var conn = new SQLiteConnection(cadenaConexion))
-            {
-                conn.Open();
-                string query = @"SELECT DISTINCT 
-                                u.Id AS UsuarioId, 
-                                u.Nombre AS Jugador, 
-                                u.Saldo
-                                FROM usuarios u
-                                INNER JOIN historial_juegos h ON u.Id = h.UsuarioId
-                                INNER JOIN juegos j ON h.JuegoId = j.Id
-                                WHERE j.Nombre = @nombreJuego;";
-
-                var rs = conn.ExecuteReader(query, ("@nombrejuego", juego));
-                while (rs.Read())
-                {
-                    filtro.Add(new Usuario(rs.GetString("Nombre"),
-                                           rs.GetInt("Id"),
-                                           rs.GetInt("PersonajeId"),
-                                           "",
-                                           Convert.ToDecimal(rs.GetDouble("Saldo"))));
-                }
-            }
-
-            return filtro;
-        }
-        public List<Usuario> GetUsuariosPorJuego(int juegoId)
-        {
-            var filtro = new List<Usuario>();
-
-            using (var conn = new SQLiteConnection(cadenaConexion))
-            {
-                conn.Open();
-                string query = @"SELECT DISTINCT u.Id, u.Nombre, u.Saldo 
-                                 FROM usuarios u
-                                 INNER JOIN historial_juegos h ON u.Id = h.UsuarioId
-                                 WHERE h.JuegoId = @idJuego;";
-
-                var rs = conn.ExecuteReader(query, ("@nombrejuego", juegoId));
-                while (rs.Read())
-                {
-                    filtro.Add(new Usuario(rs.GetString("Nombre"),
-                                           rs.GetInt("Id"),
-                                           rs.GetInt("PersonajeId"),
-                                           "",
-                                           Convert.ToDecimal(rs.GetDouble("Saldo"))));
-                }
-            }
-
-            return filtro;
+            return reporte;
         }
 
         public List<Administrador> GetAllAdministradores()
@@ -233,5 +200,6 @@ namespace ProtecoPOO.CasinoSQL
 
             return listaAdmins;
         }
+
     }
 }

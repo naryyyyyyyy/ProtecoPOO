@@ -8,18 +8,22 @@ namespace ProtecoPOO
 {
     public class RegistroPartida
     {
+        public int Id { get; set; }
         public int UsuarioId { get; set; }
         public int JuegoId { get; set; }
+        public int PersonajeId { get; set; }  // ID DE RANURA
         public decimal SaldoInicial {  get; set; }
         public int NumReapuestas {  get; set; }
-        public decimal Ganancia { get; set; }
-        public RegistroPartida(int usuarioId, int juegoId, decimal saldoInicial, int numReapuestas, decimal ganancia)
+        public decimal GananciaPerdida { get; set; }
+        public RegistroPartida(int id, int usuarioId, int juegoId,int personajeId, decimal saldoInicial, int numReapuestas, decimal ganancia)
         {
+            Id = id;
             UsuarioId = usuarioId;
             JuegoId = juegoId;
+            PersonajeId = personajeId;
             SaldoInicial = saldoInicial;
             NumReapuestas = numReapuestas;
-            Ganancia = ganancia;
+            GananciaPerdida = ganancia;
         }
     }
 }

@@ -1,14 +1,18 @@
-﻿-- ========================================================
--- 1. BORRADO DE TABLAS (En orden inverso de dependencia)
--- ========================================================
+﻿-- ============================================================================
+-- 1. LIMPIEZA TOTAL (En orden inverso para no romper las llaves foráneas)
+-- ============================================================================
 DROP TABLE IF EXISTS historial_juegos;
+DROP TABLE IF EXISTS personajes_guardados;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS administradores;
 DROP TABLE IF EXISTS personajes;
 DROP TABLE IF EXISTS juegos;
 
--- ========================================================
--- 2. CREACIÓN DE TABLAS INDEPENDIENTES (Catálogos)
--- ========================================================
+-- ============================================================================
+-- 2. CREACIÓN DE TABLAS
+-- ============================================================================
+
+-- Catálogos (Tablas independientes)
 CREATE TABLE juegos (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     Nombre TEXT NOT NULL
@@ -16,117 +20,130 @@ CREATE TABLE juegos (
 
 CREATE TABLE personajes (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Nombre TEXT NOT NULL
+    Nombre TEXT NOT NULL,
+    PrecioCompra DECIMAL NOT NULL DEFAULT 500,
+    PrecioRevivir DECIMAL NOT NULL DEFAULT 250
 );
 
--- ========================================================
--- 3. CREACIÓN DE TABLAS DEPENDIENTES
--- ========================================================
--- La tabla usuarios ahora depende de la tabla personajes
+CREATE TABLE administradores (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nombre TEXT NOT NULL,
+    Contrasena TEXT NOT NULL
+);
+
+-- Cuentas de Usuario
 CREATE TABLE usuarios (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     Nombre TEXT NOT NULL,
-    Contrasena TEXT NOT NULL,
+    Contrasena TEXT NOT NULL
+);
+
+-- Inventario de Personajes (Ranuras de cada usuario)
+CREATE TABLE personajes_guardados (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    UsuarioId INTEGER NOT NULL,
+    PersonajeId INTEGER NOT NULL, -- ID del catálogo (Mago, Caballero, Picaro)
     Saldo DECIMAL NOT NULL,
-    PersonajeId INTEGER NOT NULL,
+    EstaVivo INTEGER NOT NULL DEFAULT 1,
+    FOREIGN KEY (UsuarioId) REFERENCES usuarios(Id),
     FOREIGN KEY (PersonajeId) REFERENCES personajes(Id)
 );
 
--- El historial ahora depende tanto de usuarios como de juegos
+-- Historial de Juegos (Como lo tenías + PersonajeId + GananciaPerdida, sin fecha)
 CREATE TABLE historial_juegos (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     UsuarioId INTEGER NOT NULL,
     JuegoId INTEGER NOT NULL,
+    PersonajeId INTEGER NOT NULL, -- Hace referencia al personaje guardado que jugó
     SaldoInicial DECIMAL NOT NULL,
     NumReapuestas INTEGER NOT NULL,
-    Ganancia DECIMAL NOT NULL,
+    GananciaPerdida DECIMAL NOT NULL,
     FOREIGN KEY (UsuarioId) REFERENCES usuarios(Id),
-    FOREIGN KEY (JuegoId) REFERENCES juegos(Id)
+    FOREIGN KEY (JuegoId) REFERENCES juegos(Id),
+    FOREIGN KEY (PersonajeId) REFERENCES personajes_guardados(Id)
 );
 
--- ========================================================
--- 4. INSERCIÓN DE DATOS INICIALES (Catálogos)
--- ========================================================
--- Juegos (Id 1: Ruleta, Id 2: BlackJack, Id 3: Caballos)
-INSERT INTO juegos (Nombre) VALUES 
-('Ruleta'), 
-('BlackJack'), 
-('Carrera de caballos');
+-- ============================================================================
+-- 3. INSERCIÓN DE VALORES POR DEFECTO
+-- ============================================================================
 
--- Personajes (Id 1: Personaje 1, Id 2: Personaje 2, Id 3: Personaje 3)
-INSERT INTO personajes (Nombre) VALUES 
-('Mago'), 
-('Caballero'), 
-('Picaro');
+-- Llenar los 3 juegos
+INSERT INTO juegos (Id, Nombre) VALUES 
+(1, 'Ruleta'), 
+(2, 'BlackJack'), 
+(3, 'Carrera de Caballos');
 
--- ========================================================
--- 5. INSERCIÓN DE LOS 10 USUARIOS (Usando PersonajeId)
--- ========================================================
-INSERT INTO usuarios (Nombre, Contrasena, Saldo, PersonajeId) VALUES 
-('Juan Perez', 'clave123', 1500.50, 1),
-('Maria Garcia', 'maria_pass', 500.00, 2),
-('Luis Fernandez', 'luis2026', 0.00, 3),
-('Carmen Salinas', 'carmen1', 3200.75, 1),
-('Jorge Nitales', 'jorgepwd', 150.20, 2),
-('Andrea Lopez', 'andy_l', 850.00, 3),
-('Roberto Gomez', 'rob1234', 12000.00, 1),
-('Sofia Torres', 'sofi_t', 45.50, 2),
-('Miguel Diaz', 'mikediaz', 600.00, 3),
-('Elena Navarro', 'elena99', 1000.00, 1);
+-- Llenar los 3 personajes base
+INSERT INTO personajes (Id, Nombre, PrecioCompra, PrecioRevivir) VALUES 
+(1, 'Mago', 500, 250), 
+(2, 'Caballero', 500, 250), 
+(3, 'Picaro', 500, 250);
 
--- ========================================================
--- 6. INSERCIÓN DEL HISTORIAL (Usando UsuarioId y JuegoId)
--- ========================================================
-INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) VALUES 
--- Usuario 1 (Juan Perez)
-(1, 1, 1000.00, 2, 150.00),   -- 1 = Ruleta
-(1, 2, 1150.00, 0, -50.00),  -- 2 = BlackJack
-(1, 3, 1100.00, 1, 400.50),  -- 3 = Carrera de caballos
+-- Llenar 5 administradores
+INSERT INTO administradores (Id, Nombre, Contrasena) VALUES 
+(1, 'AdminPrincipal', 'admin123'),
+(2, 'GerenteTurno', 'gerente123'),
+(3, 'AuditorSistemas', 'auditor123'),
+(4, 'JefeSeguridad', 'seguridad123'),
+(5, 'SoporteTecnico', 'soporte123');
 
--- Usuario 2 (Maria Garcia)
-(2, 2, 1000.00, 3, 200.00),
-(2, 1, 1200.00, 1, -100.00),
-(2, 3, 1100.00, 0, -50.00),
+-- Llenar 5 usuarios normales
+INSERT INTO usuarios (Id, Nombre, Contrasena) VALUES 
+(1, 'JugadorUno', 'pass1'),
+(2, 'JugadorDos', 'pass2'),
+(3, 'JugadorTres', 'pass3'),
+(4, 'JugadorCuatro', 'pass4'),
+(5, 'JugadorCinco', 'pass5');
 
--- Usuario 3 (Luis Fernandez)
-(3, 3, 1000.00, 0, -200.00),
-(3, 1, 800.00, 4, 300.00),
-(3, 2, 1100.00, 1, -150.00),
+-- Asignar los 3 personajes a cada uno de los 5 usuarios (15 personajes en total)
+-- Usuario 1
+INSERT INTO personajes_guardados (Id, UsuarioId, PersonajeId, Saldo, EstaVivo) VALUES 
+(1, 1, 1, 1000, 1), (2, 1, 2, 850, 1), (3, 1, 3, 0, 0);
+-- Usuario 2
+INSERT INTO personajes_guardados (Id, UsuarioId, PersonajeId, Saldo, EstaVivo) VALUES 
+(4, 2, 1, 200, 1), (5, 2, 2, 1500, 1), (6, 2, 3, 300, 1);
+-- Usuario 3
+INSERT INTO personajes_guardados (Id, UsuarioId, PersonajeId, Saldo, EstaVivo) VALUES 
+(7, 3, 1, 0, 0), (8, 3, 2, 0, 0), (9, 3, 3, 5000, 1);
+-- Usuario 4
+INSERT INTO personajes_guardados (Id, UsuarioId, PersonajeId, Saldo, EstaVivo) VALUES 
+(10, 4, 1, 750, 1), (11, 4, 2, 120, 1), (12, 4, 3, 900, 1);
+-- Usuario 5
+INSERT INTO personajes_guardados (Id, UsuarioId, PersonajeId, Saldo, EstaVivo) VALUES 
+(13, 5, 1, 2500, 1), (14, 5, 2, 0, 0), (15, 5, 3, 400, 1);
 
--- Usuario 4 (Carmen Salinas)
-(4, 1, 1000.00, 2, 50.00),
-(4, 2, 1050.00, 1, 150.75),
-(4, 3, 1200.75, 5, 2000.00),
+-- Generar el historial: Cada usuario juega con sus 3 personajes en los 3 juegos (45 partidas)
+-- Formato: UsuarioId, JuegoId, PersonajeId(Ranura), SaldoInicial, NumReapuestas, GananciaPerdida
 
--- Usuario 5 (Jorge Nitales)
-(5, 2, 1000.00, 0, -500.00),
-(5, 3, 500.00, 1, -200.00),
-(5, 1, 300.00, 2, -149.80),
+-- Historial Usuario 1 (Juega con sus ranuras 1, 2 y 3)
+INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) VALUES 
+(1, 1, 1, 1000, 2, 150), (1, 2, 1, 1150, 0, -50), (1, 3, 1, 1100, 1, -100),
+(1, 1, 2, 800, 3, 50),   (1, 2, 2, 850, 1, 100),  (1, 3, 2, 950, 0, -100),
+(1, 1, 3, 200, 0, -200), (1, 2, 3, 0, 0, 0),      (1, 3, 3, 0, 0, 0);
 
--- Usuario 6 (Andrea Lopez)
-(6, 1, 1000.00, 1, -100.00),
-(6, 3, 900.00, 0, 50.00),
-(6, 2, 950.00, 2, -100.00),
+-- Historial Usuario 2 (Juega con sus ranuras 4, 5 y 6)
+INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) VALUES 
+(2, 1, 4, 300, 1, -100), (2, 2, 4, 200, 2, 200),  (2, 3, 4, 400, 0, -200),
+(2, 1, 5, 1000, 0, 500), (2, 2, 5, 1500, 3, -100),(2, 3, 5, 1400, 1, 100),
+(2, 1, 6, 300, 0, 150),  (2, 2, 6, 450, 1, -150), (2, 3, 6, 300, 2, 0);
 
--- Usuario 7 (Roberto Gomez)
-(7, 3, 1000.00, 0, 5000.00),
-(7, 2, 6000.00, 4, 4000.00),
-(7, 1, 10000.00, 3, 2000.00),
+-- Historial Usuario 3 (Juega con sus ranuras 7, 8 y 9)
+INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) VALUES 
+(3, 1, 7, 100, 0, -100), (3, 2, 7, 0, 0, 0),      (3, 3, 7, 0, 0, 0),
+(3, 1, 8, 50, 1, -50),   (3, 2, 8, 0, 0, 0),      (3, 3, 8, 0, 0, 0),
+(3, 1, 9, 4000, 4, 500), (3, 2, 9, 4500, 2, 300), (3, 3, 9, 4800, 5, 200);
 
--- Usuario 8 (Sofia Torres)
-(8, 1, 1000.00, 5, -500.00),
-(8, 2, 500.00, 2, -400.00),
-(8, 3, 100.00, 1, -54.50),
+-- Historial Usuario 4 (Juega con sus ranuras 10, 11 y 12)
+INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) VALUES 
+(4, 1, 10, 500, 1, 250), (4, 2, 10, 750, 0, -100),(4, 3, 10, 650, 2, 100),
+(4, 1, 11, 200, 3, -80), (4, 2, 11, 120, 1, 50),  (4, 3, 11, 170, 0, -50),
+(4, 1, 12, 1000, 0, -100),(4, 2, 12, 900, 1, 200), (4, 3, 12, 1100, 2, -200);
 
--- Usuario 9 (Miguel Diaz)
-(9, 2, 1000.00, 0, 100.00),
-(9, 1, 1100.00, 1, -200.00),
-(9, 3, 900.00, 2, -300.00),
-
--- Usuario 10 (Elena Navarro)
-(10, 3, 1000.00, 1, 200.00),
-(10, 1, 1200.00, 0, -100.00),
-(10, 2, 1100.00, 1, -100.00);
+-- Historial Usuario 5 (Juega con sus ranuras 13, 14 y 15)
+INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) VALUES 
+(5, 1, 13, 2000, 0, 300), (5, 2, 13, 2300, 4, 100), (5, 3, 13, 2400, 1, 100),
+(5, 1, 14, 50, 2, -50),   (5, 2, 14, 0, 0, 0),      (5, 3, 14, 0, 0, 0),
+(5, 1, 15, 300, 1, 150),  (5, 2, 15, 450, 0, -50),  (5, 3, 15, 400, 3, 0);
 
 -- ========================================================
 -- =                 QUERIES USUARIOS                     =
