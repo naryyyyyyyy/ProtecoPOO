@@ -14,6 +14,7 @@ namespace ProtecoPOO.Ruleta
         public VentanaRuleta()
         {
             InitializeComponent();
+            
             decimal saldoDeBaseDatos = 1000;
             ruleta.CargarSaldoInicial(saldoDeBaseDatos);
             ActualizarInterfazSaldos();

@@ -64,7 +64,7 @@ namespace ProtecoPOO
                 picCarriles[i].Image = actual.Icon;
                 picCarriles[i].SizeMode = PictureBoxSizeMode.Zoom;
 
-                lstCompetidores.Items.Add($"Carril: {i + 1} - #{actual.Id}º - {actual.Name}");
+                lstCompetidores.Items.Add($"Carril: {i + 1} - #{actual.Id}º - {actual.Name}- {actual.GetType().Name}");
             }
 
             cmbApuestaPuesto.Enabled = true;

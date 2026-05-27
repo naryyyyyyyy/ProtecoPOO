@@ -9,7 +9,7 @@ namespace ProtecoPOO.CasinoSQL
 {
     public class ReportesDB
     {
-        private string cadenaConexion = "Data Source=CasinoDB.db;";
+        private string cadenaConexion = @"Data Source=C:\Users\maria\Downloads\repo\POOAvances8\CasinoSQL\CasinoDB.db;";
         public List<Personaje> GetAllPersonajes()
         {
             var personajes = new List<Personaje>();

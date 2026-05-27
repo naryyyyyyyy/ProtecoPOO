@@ -69,9 +69,9 @@
             this.lblPuesto.BackColor = System.Drawing.Color.Transparent;
             this.lblPuesto.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPuesto.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblPuesto.Location = new System.Drawing.Point(798, 488);
+            this.lblPuesto.Location = new System.Drawing.Point(865, 477);
             this.lblPuesto.Name = "lblPuesto";
-            this.lblPuesto.Size = new System.Drawing.Size(87, 31);
+            this.lblPuesto.Size = new System.Drawing.Size(75, 26);
             this.lblPuesto.TabIndex = 24;
             this.lblPuesto.Text = "Puesto";
             // 
@@ -82,9 +82,9 @@
             this.lblCaballo.BackColor = System.Drawing.Color.Transparent;
             this.lblCaballo.Font = new System.Drawing.Font("Sylfaen", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCaballo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblCaballo.Location = new System.Drawing.Point(854, 456);
+            this.lblCaballo.Location = new System.Drawing.Point(915, 452);
             this.lblCaballo.Name = "lblCaballo";
-            this.lblCaballo.Size = new System.Drawing.Size(288, 26);
+            this.lblCaballo.Size = new System.Drawing.Size(245, 22);
             this.lblCaballo.TabIndex = 23;
             this.lblCaballo.Text = "Caballo: Ninguno Registrado";
             // 
@@ -97,10 +97,9 @@
             "1",
             "2",
             "3"});
-            this.cmbApuestaPuesto.Location = new System.Drawing.Point(859, 524);
-            this.cmbApuestaPuesto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbApuestaPuesto.Location = new System.Drawing.Point(920, 506);
             this.cmbApuestaPuesto.Name = "cmbApuestaPuesto";
-            this.cmbApuestaPuesto.Size = new System.Drawing.Size(52, 28);
+            this.cmbApuestaPuesto.Size = new System.Drawing.Size(47, 24);
             this.cmbApuestaPuesto.TabIndex = 22;
             // 
             // btnApostar
@@ -108,10 +107,9 @@
             this.btnApostar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnApostar.Font = new System.Drawing.Font("Sylfaen", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApostar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnApostar.Location = new System.Drawing.Point(1106, 523);
-            this.btnApostar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnApostar.Location = new System.Drawing.Point(1139, 505);
             this.btnApostar.Name = "btnApostar";
-            this.btnApostar.Size = new System.Drawing.Size(84, 29);
+            this.btnApostar.Size = new System.Drawing.Size(75, 23);
             this.btnApostar.TabIndex = 21;
             this.btnApostar.Text = "Apostar";
             this.btnApostar.UseVisualStyleBackColor = true;
@@ -122,11 +120,10 @@
             this.lstCompetidores.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lstCompetidores.Font = new System.Drawing.Font("Sylfaen", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstCompetidores.FormattingEnabled = true;
-            this.lstCompetidores.ItemHeight = 26;
-            this.lstCompetidores.Location = new System.Drawing.Point(858, 284);
-            this.lstCompetidores.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lstCompetidores.ItemHeight = 22;
+            this.lstCompetidores.Location = new System.Drawing.Point(860, 282);
             this.lstCompetidores.Name = "lstCompetidores";
-            this.lstCompetidores.Size = new System.Drawing.Size(346, 160);
+            this.lstCompetidores.Size = new System.Drawing.Size(423, 158);
             this.lstCompetidores.TabIndex = 20;
             // 
             // btnIniciarCarrera
@@ -135,10 +132,9 @@
             this.btnIniciarCarrera.BackColor = System.Drawing.Color.SeaShell;
             this.btnIniciarCarrera.Font = new System.Drawing.Font("Sylfaen", 9F, System.Drawing.FontStyle.Bold);
             this.btnIniciarCarrera.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnIniciarCarrera.Location = new System.Drawing.Point(228, 496);
-            this.btnIniciarCarrera.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnIniciarCarrera.Location = new System.Drawing.Point(300, 452);
             this.btnIniciarCarrera.Name = "btnIniciarCarrera";
-            this.btnIniciarCarrera.Size = new System.Drawing.Size(112, 68);
+            this.btnIniciarCarrera.Size = new System.Drawing.Size(100, 54);
             this.btnIniciarCarrera.TabIndex = 18;
             this.btnIniciarCarrera.Text = "Iniciar Carrera";
             this.btnIniciarCarrera.UseVisualStyleBackColor = false;
@@ -150,10 +146,9 @@
             this.btnNuevaCarrera.BackColor = System.Drawing.Color.SeaShell;
             this.btnNuevaCarrera.Font = new System.Drawing.Font("Sylfaen", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuevaCarrera.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnNuevaCarrera.Location = new System.Drawing.Point(107, 496);
-            this.btnNuevaCarrera.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnNuevaCarrera.Location = new System.Drawing.Point(192, 452);
             this.btnNuevaCarrera.Name = "btnNuevaCarrera";
-            this.btnNuevaCarrera.Size = new System.Drawing.Size(91, 68);
+            this.btnNuevaCarrera.Size = new System.Drawing.Size(81, 54);
             this.btnNuevaCarrera.TabIndex = 17;
             this.btnNuevaCarrera.Text = "Nueva Carrera";
             this.btnNuevaCarrera.UseVisualStyleBackColor = false;
@@ -166,11 +161,10 @@
             this.listBox1.Font = new System.Drawing.Font("Sylfaen", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.ForeColor = System.Drawing.Color.Gold;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 23;
-            this.listBox1.Location = new System.Drawing.Point(858, 71);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBox1.ItemHeight = 19;
+            this.listBox1.Location = new System.Drawing.Point(860, 112);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(244, 165);
+            this.listBox1.Size = new System.Drawing.Size(217, 118);
             this.listBox1.TabIndex = 16;
             // 
             // panel1
@@ -185,70 +179,63 @@
             this.panel1.Controls.Add(this.picCarril2);
             this.panel1.Controls.Add(this.picCarril4);
             this.panel1.Controls.Add(this.picCarril3);
-            this.panel1.Location = new System.Drawing.Point(107, 60);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Location = new System.Drawing.Point(192, 103);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(675, 422);
+            this.panel1.Size = new System.Drawing.Size(600, 338);
             this.panel1.TabIndex = 15;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // picCarril6
             // 
             this.picCarril6.BackColor = System.Drawing.Color.Transparent;
-            this.picCarril6.Location = new System.Drawing.Point(3, 354);
-            this.picCarril6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picCarril6.Location = new System.Drawing.Point(3, 283);
             this.picCarril6.Name = "picCarril6";
-            this.picCarril6.Size = new System.Drawing.Size(55, 62);
+            this.picCarril6.Size = new System.Drawing.Size(49, 50);
             this.picCarril6.TabIndex = 5;
             this.picCarril6.TabStop = false;
             // 
             // picCarril5
             // 
             this.picCarril5.BackColor = System.Drawing.Color.Transparent;
-            this.picCarril5.Location = new System.Drawing.Point(3, 284);
-            this.picCarril5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picCarril5.Location = new System.Drawing.Point(3, 227);
             this.picCarril5.Name = "picCarril5";
-            this.picCarril5.Size = new System.Drawing.Size(55, 62);
+            this.picCarril5.Size = new System.Drawing.Size(49, 50);
             this.picCarril5.TabIndex = 6;
             this.picCarril5.TabStop = false;
             // 
             // picCarril1
             // 
             this.picCarril1.BackColor = System.Drawing.Color.Transparent;
-            this.picCarril1.Location = new System.Drawing.Point(3, 4);
-            this.picCarril1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picCarril1.Location = new System.Drawing.Point(3, 3);
             this.picCarril1.Name = "picCarril1";
-            this.picCarril1.Size = new System.Drawing.Size(55, 62);
+            this.picCarril1.Size = new System.Drawing.Size(49, 50);
             this.picCarril1.TabIndex = 4;
             this.picCarril1.TabStop = false;
             // 
             // picCarril2
             // 
             this.picCarril2.BackColor = System.Drawing.Color.Transparent;
-            this.picCarril2.Location = new System.Drawing.Point(3, 74);
-            this.picCarril2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picCarril2.Location = new System.Drawing.Point(3, 59);
             this.picCarril2.Name = "picCarril2";
-            this.picCarril2.Size = new System.Drawing.Size(55, 62);
+            this.picCarril2.Size = new System.Drawing.Size(49, 50);
             this.picCarril2.TabIndex = 3;
             this.picCarril2.TabStop = false;
             // 
             // picCarril4
             // 
             this.picCarril4.BackColor = System.Drawing.Color.Transparent;
-            this.picCarril4.Location = new System.Drawing.Point(3, 214);
-            this.picCarril4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picCarril4.Location = new System.Drawing.Point(3, 171);
             this.picCarril4.Name = "picCarril4";
-            this.picCarril4.Size = new System.Drawing.Size(55, 62);
+            this.picCarril4.Size = new System.Drawing.Size(49, 50);
             this.picCarril4.TabIndex = 2;
             this.picCarril4.TabStop = false;
             // 
             // picCarril3
             // 
             this.picCarril3.BackColor = System.Drawing.Color.Transparent;
-            this.picCarril3.Location = new System.Drawing.Point(3, 144);
-            this.picCarril3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picCarril3.Location = new System.Drawing.Point(3, 115);
             this.picCarril3.Name = "picCarril3";
-            this.picCarril3.Size = new System.Drawing.Size(55, 62);
+            this.picCarril3.Size = new System.Drawing.Size(49, 50);
             this.picCarril3.TabIndex = 1;
             this.picCarril3.TabStop = false;
             // 
@@ -263,9 +250,9 @@
             this.lblsaldo.AutoSize = true;
             this.lblsaldo.BackColor = System.Drawing.Color.Transparent;
             this.lblsaldo.Font = new System.Drawing.Font("Sylfaen", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblsaldo.Location = new System.Drawing.Point(863, 565);
+            this.lblsaldo.Location = new System.Drawing.Point(923, 539);
             this.lblsaldo.Name = "lblsaldo";
-            this.lblsaldo.Size = new System.Drawing.Size(99, 26);
+            this.lblsaldo.Size = new System.Drawing.Size(84, 22);
             this.lblsaldo.TabIndex = 25;
             this.lblsaldo.Text = "Saldo act";
             // 
@@ -276,9 +263,9 @@
             this.lblApuestaEnJuego.BackColor = System.Drawing.Color.Transparent;
             this.lblApuestaEnJuego.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblApuestaEnJuego.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblApuestaEnJuego.Location = new System.Drawing.Point(918, 488);
+            this.lblApuestaEnJuego.Location = new System.Drawing.Point(972, 477);
             this.lblApuestaEnJuego.Name = "lblApuestaEnJuego";
-            this.lblApuestaEnJuego.Size = new System.Drawing.Size(192, 31);
+            this.lblApuestaEnJuego.Size = new System.Drawing.Size(167, 26);
             this.lblApuestaEnJuego.TabIndex = 26;
             this.lblApuestaEnJuego.Text = "ApuestaEnJuego";
             // 
@@ -288,10 +275,9 @@
             this.btnSalir.BackColor = System.Drawing.Color.SeaShell;
             this.btnSalir.Font = new System.Drawing.Font("Sylfaen", 9F, System.Drawing.FontStyle.Bold);
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSalir.Location = new System.Drawing.Point(379, 496);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSalir.Location = new System.Drawing.Point(434, 452);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(84, 68);
+            this.btnSalir.Size = new System.Drawing.Size(75, 54);
             this.btnSalir.TabIndex = 27;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -300,10 +286,9 @@
             // txtApuesta
             // 
             this.txtApuesta.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtApuesta.Location = new System.Drawing.Point(924, 524);
-            this.txtApuesta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApuesta.Location = new System.Drawing.Point(977, 506);
             this.txtApuesta.Name = "txtApuesta";
-            this.txtApuesta.Size = new System.Drawing.Size(176, 26);
+            this.txtApuesta.Size = new System.Drawing.Size(157, 22);
             this.txtApuesta.TabIndex = 28;
             // 
             // label2
@@ -313,9 +298,9 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Sylfaen", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(853, 31);
+            this.label2.Location = new System.Drawing.Point(855, 80);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 36);
+            this.label2.Size = new System.Drawing.Size(83, 31);
             this.label2.TabIndex = 29;
             this.label2.Text = "Podio:";
             // 
@@ -326,19 +311,19 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(852, 249);
+            this.label3.Location = new System.Drawing.Point(854, 254);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(268, 31);
+            this.label3.Size = new System.Drawing.Size(233, 26);
             this.label3.TabIndex = 30;
             this.label3.Text = "Competidores actuales:";
             // 
             // CarreraCaballos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1263, 632);
+            this.ClientSize = new System.Drawing.Size(1316, 616);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtApuesta);
@@ -355,7 +340,6 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CarreraCaballos";
             this.Text = "CarreraCaballos";
             this.panel1.ResumeLayout(false);

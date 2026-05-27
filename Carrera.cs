@@ -35,18 +35,18 @@ public class Carrera : Juego
     public void LlenarRooster()
     {
         rooster = new List<Caballo> {
-            new CaballoChaser(1,"Great Grey Silf"),
-            new CaballoChaser(2, "Furtive Pygmy"),
+            new Chaser(1,"Great Grey Silf"),
+            new Chaser(2, "Furtive Pygmy"),
             new Goldship(3, "Gold Ship"),
-            new CaballoBetweener(4, "Abyss Walker"),
-            new CaballoBetweener(5, "Chaos Quelaag"),
-            new CaballoBetweener(6, "Bed of Chaos"),
-            new CaballoLeader(7, "Execution Smough"),
-            new CaballoLeader(8, "Gravelord Nito"),
-            new CaballoLeader(9, "Iron Golem"),
-            new CaballoRunner(10, "Lord of Cinder"),
-            new CaballoRunner(11, "Slayer Ornstein"),
-            new CaballoRunner(12, "Father Manus")
+            new Betweener(4, "Abyss Walker"),
+            new Betweener(5, "Chaos Quelaag"),
+            new Betweener(6, "Bed of Chaos"),
+            new Leader(7, "Execution Smough"),
+            new Leader(8, "Gravelord Nito"),
+            new Leader(9, "Iron Golem"),
+            new Runner(10, "Lord of Cinder"),
+            new Runner(11, "Slayer Ornstein"),
+            new Runner(12, "Father Manus")
         };
     }
 
