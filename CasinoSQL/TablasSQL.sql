@@ -1,12 +1,13 @@
 ﻿-- ============================================================================
 -- 1. LIMPIEZA TOTAL (En orden inverso para no romper las llaves foráneas)
 -- ============================================================================
+DROP TABLE IF EXISTS tipos_personaje;
 DROP TABLE IF EXISTS historial_juegos;
 DROP TABLE IF EXISTS personajes_guardados;
 DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS administradores;
-DROP TABLE IF EXISTS personajes;
 DROP TABLE IF EXISTS juegos;
+DROP TABLE IF EXISTS personajes;
 
 -- ============================================================================
 -- 2. CREACIÓN DE TABLAS
@@ -32,17 +33,18 @@ CREATE TABLE administradores (
 );
 
 -- Cuentas de Usuario
-CREATE TABLE usuarios (
+CREATE TABLE [usuarios] (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     Nombre TEXT NOT NULL,
-    Contrasena TEXT NOT NULL
+    Contrasena TEXT NOT NULL,
+    PersonajeId INTEGER REFERENCES [personajes]([Id])
 );
 
 -- Inventario de Personajes (Ranuras de cada usuario)
 CREATE TABLE personajes_guardados (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    UsuarioId INTEGER NOT NULL,
-    PersonajeId INTEGER NOT NULL, -- ID del catálogo (Mago, Caballero, Picaro)
+    UsuarioId INTEGER NOT NULL REFERENCES [usuarios]([Id]),
+    PersonajeId INTEGER NOT NULL REFERENCES [personajes]([Id]),  -- ID del catálogo (Mago, Caballero, Picaro)
     Saldo DECIMAL NOT NULL,
     EstaVivo INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (UsuarioId) REFERENCES usuarios(Id),
@@ -94,12 +96,12 @@ INSERT INTO administradores (Id, Nombre, Contrasena) VALUES
 (5, 'SoporteTecnico', 'soporte123');
 
 -- Llenar 5 usuarios normales
-INSERT INTO usuarios (Id, Nombre, Contrasena) VALUES 
-(1, 'JugadorUno', 'pass1'),
-(2, 'JugadorDos', 'pass2'),
-(3, 'JugadorTres', 'pass3'),
-(4, 'JugadorCuatro', 'pass4'),
-(5, 'JugadorCinco', 'pass5');
+INSERT INTO usuarios (Id, Nombre, Contrasena, PersonajeId) VALUES 
+(1, 'JugadorUno', 'pass1',2),
+(2, 'JugadorDos', 'pass2',1),
+(3, 'JugadorTres', 'pass3',1),
+(4, 'JugadorCuatro', 'pass4',3),
+(5, 'JugadorCinco', 'pass5',2);
 
 -- Asignar los 3 personajes a cada uno de los 5 usuarios (15 personajes en total)
 -- Usuario 1
@@ -161,12 +163,12 @@ FROM usuarios
 WHERE Nombre = @nombre AND Contrasena = @contrasena;
 
 --Guardar registro de partida
-INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) 
-VALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);
+INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, GananciaPerdida) 
+VALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @gananciaPerdida);
 
 --Añadir usuario
 INSERT INTO usuarios (Nombre, Contrasena, Saldo, PersonajeId) VALUES
-(@nombre, @contrasena, 1000, @personajeid);
+(@nombre, @contrasena,1000, @personajeid);
 
 --Borrar usuario
 DELETE FROM historial_juegos WHERE UsuarioId = @id;
