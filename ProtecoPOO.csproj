@@ -102,6 +102,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarRecursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgregarRecursos.Designer.cs">
+      <DependentUpon>AgregarRecursos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,6 +172,9 @@
     <Compile Include="VentanaUsuario.Designer.cs">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AgregarRecursos.resx">
+      <DependentUpon>AgregarRecursos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CarreraCaballos.resx">
       <DependentUpon>CarreraCaballos.cs</DependentUpon>
     </EmbeddedResource>
