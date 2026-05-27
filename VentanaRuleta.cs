@@ -18,6 +18,7 @@ namespace ProtecoPOO.Ruleta
             ruleta.CargarSaldoInicial(saldoDeBaseDatos);
             ActualizarInterfazSaldos();
             btnGirar.Enabled = false;
+            
 
         }
         private void ActualizarInterfazSaldos()

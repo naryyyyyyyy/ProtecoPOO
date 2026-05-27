@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaRuleta));
             this.btnGirar = new System.Windows.Forms.Button();
             this.txtApuesta = new System.Windows.Forms.TextBox();
             this.lblApuesta = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@
             this.cmbTipoAp = new System.Windows.Forms.ComboBox();
             this.lstFondoRes = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.picRuleta = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picRuleta)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGirar
@@ -154,6 +157,18 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Ruleta:";
             // 
+            // picRuleta
+            // 
+            this.picRuleta.BackColor = System.Drawing.Color.Transparent;
+            this.picRuleta.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picRuleta.BackgroundImage")));
+            this.picRuleta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picRuleta.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picRuleta.Location = new System.Drawing.Point(215, 12);
+            this.picRuleta.Name = "picRuleta";
+            this.picRuleta.Size = new System.Drawing.Size(342, 272);
+            this.picRuleta.TabIndex = 12;
+            this.picRuleta.TabStop = false;
+            // 
             // VentanaRuleta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -171,8 +186,10 @@
             this.Controls.Add(this.txtApuesta);
             this.Controls.Add(this.btnGirar);
             this.Controls.Add(this.lstFondoRes);
+            this.Controls.Add(this.picRuleta);
             this.Name = "VentanaRuleta";
             this.Text = "VentanaRuleta";
+            ((System.ComponentModel.ISupportInitialize)(this.picRuleta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +209,6 @@
         private System.Windows.Forms.ComboBox cmbTipoAp;
         private System.Windows.Forms.ListBox lstFondoRes;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox picRuleta;
     }
 }
