@@ -207,6 +207,7 @@
             this.DoubleBuffered = true;
             this.Name = "VentanaRuleta";
             this.Text = "VentanaRuleta";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VentanaRuleta_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.picRuleta)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

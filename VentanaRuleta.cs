@@ -1,38 +1,47 @@
-﻿using System;
+﻿using ProtecoPOO.CasinoSQL;
+using ProtecoPOO.Ruleta;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using ProtecoPOO.Ruleta;
 
 namespace ProtecoPOO.Ruleta
 {
     public partial class VentanaRuleta : Form
     {
-        private Ruleta ruleta = new Ruleta("Ruleta", 1);
+        private Ruleta ruleta = new Ruleta("Ruleta", 1); // ID del juego = 1
         private int resultado;
+
+        // ADICIONES PARA SINCRONIZACIÓN
+        private usuariosDB usuariodb = new usuariosDB();
+        private bool guardadoProcesado = false;
+        private int contador = 0; // Registra el número de giros realizados
 
         public VentanaRuleta()
         {
             InitializeComponent();
 
-            decimal saldoDeBaseDatos = 1000;
-            ruleta.CargarSaldoInicial(saldoDeBaseDatos);
+            // Vincular el evento de cierre para salvar progreso de forma autónoma
+            this.FormClosing += VentanaRuleta_FormClosing;
+
+            // Cargar saldo dinámico desde la sesión global
+            decimal saldoInicial = (decimal)SesionGlobal.SaldoActual;
+            ruleta.CargarSaldoInicial(saldoInicial);
+
             ActualizarInterfazSaldos();
             btnGirar.Enabled = false;
-
-
         }
         private void ActualizarInterfazSaldos()
         {
 
             lblSaldo.Text = "Tu Saldo Actual: $" + ruleta.SaldoJugador;
-            lblApuesta.Text = $"Apuesta en juego:"  + ruleta.ApuestaActual;
-            
+            lblApuesta.Text = $"Apuesta en juego:" + ruleta.ApuestaActual;
+
         }
 
         private void btnGirar_Click(object sender, EventArgs e)
         {
-
+            contador++; // Incrementar actividad para el historial_juegos
             resultado = ruleta.Girar();
             string cGanador = ruleta.Color(resultado);
 
@@ -97,7 +106,7 @@ namespace ProtecoPOO.Ruleta
                 txtNumAp.Clear();
                 cmbTipo.Enabled = true;
                 txtNumAp.Enabled = false;
-                
+
                 string cElegido = cmbTipo.Text;
                 if (cElegido == "" || cmbTipo.SelectedIndex == -1)
                 {
@@ -124,9 +133,9 @@ namespace ProtecoPOO.Ruleta
                     cmbTipo.Enabled = false;
                 }
                 else { MessageBox.Show("Por favor especifique numero"); }
-                
+
             }
-        
+
 
             //final
             if (apuestaValida)
@@ -135,11 +144,54 @@ namespace ProtecoPOO.Ruleta
                 btnApostar.Enabled = false;
                 ActualizarInterfazSaldos();
             }
-          
+
+        }
+        private void VentanaRuleta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TerminarJuego();
         }
 
+        private void TerminarJuego()
+        {
 
-        // if (cmbTipo.SelectedItem)
+            if (guardadoProcesado) return;
+            guardadoProcesado = true;
+            if (contador > 0)
+            {
+                try
+                {
+                    double saldoFinal = (double)ruleta.SaldoJugador;
+                    decimal gananciaNeta = (decimal)ruleta.SaldoJugador - (decimal)SesionGlobal.SaldoActual;
 
+                    // Instanciar DTO conforme a la firma de historial_juegos
+                    RegistroPartida reg = new RegistroPartida(
+                        1,
+                        SesionGlobal.UsuarioId,
+                        ruleta.JuegoId, // Retorna 1
+                        SesionGlobal.PersonajeGuardadoId,
+                        (decimal)SesionGlobal.SaldoActual,
+                        contador,
+                        gananciaNeta
+                    );
+
+                    // Escritura en base de datos
+                    usuariodb.AgregarRegistroPartida(reg);
+                    usuariodb.ActualizarSaldoPersonaje(SesionGlobal.PersonajeGuardadoId, saldoFinal);
+
+                    // Sincronización del estado de la sesión en memoria ram
+                    SesionGlobal.SaldoActual = saldoFinal;
+                }
+
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al sincronizar Ruleta con la Base de Datos: " + ex.Message,
+                                    "Fallo Runtime", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    guardadoProcesado = false; // Habilitar reintento en caso de fallo de red/E-S
+                }
+
+            }
+        }
     }
 }
+            
