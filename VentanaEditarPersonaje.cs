@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,14 @@ using System.Windows.Forms;
 
 namespace ProtecoPOO.CasinoSQL
 {
-    private ReportesDB repos;
-
-
     public partial class VentanaEditarPersonaje : Form
     {
+        ReportesDB reportes;
         public VentanaEditarPersonaje(ReportesDB repos)
         {
-            this.repos = repos;
+            reportes = repos;
 
             InitializeComponent();
-            //cmbELeccionPersonaje.DataSource = repos.Get
         }
 
         private void comprarToolStripMenuItem_Click(object sender, EventArgs e)

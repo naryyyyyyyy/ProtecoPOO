@@ -19,6 +19,7 @@ namespace ProtecoPOO
         {
             InitializeComponent();
             dgvReporteGlobal.DataSource = reportes.GetReporteGlobalHistorial();
+            dgvReporteGlobal.AutoGenerateColumns = true;
         }
 
         private void porUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,6 +92,8 @@ namespace ProtecoPOO
         private void globalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cmbFiltro.Enabled = false;
+            dgvReporteGlobal.DataSource = null;
+            dgvReporteGlobal.AutoGenerateColumns = true;
             dgvReporteGlobal.DataSource = reportes.GetReporteGlobalHistorial();
         }
 

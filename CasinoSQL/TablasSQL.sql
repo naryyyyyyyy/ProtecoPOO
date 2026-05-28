@@ -259,6 +259,7 @@ INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
 INNER JOIN personajes p ON pg.PersonajeId = p.Id
 WHERE p.Nombre LIKE @filtro
 ORDER BY h.Id DESC;
+
 -- GetReportesPorUsuario
 SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
 h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
@@ -299,3 +300,21 @@ INNER JOIN juegos j ON h.JuegoId = j.Id
 INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
 INNER JOIN personajes p ON pg.PersonajeId = p.Id
 WHERE 1=1 
+
+-- 3 mas ricos
+SELECT u.Nombre, SUM(Saldo) AS p
+FROM personajes_guardados pg
+INNER JOIN usuarios u ON u.Id = pg.UsuarioId
+WHERE pg.EstaVivo = 1
+GROUP BY pg.UsuarioId, u.Nombre
+ORDER BY p DESC
+LIMIT 3
+
+SELECT p.Nombre AS TipoPersonaje, COUNT(h.Id) AS TotalPartidas
+FROM historial_juegos h
+INNER JOIN juegos j ON h.JuegoId = j.Id
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE j.Nombre = 'BlackJack'
+GROUP BY p.Id, p.Nombre
+ORDER BY TotalPartidas DESC;

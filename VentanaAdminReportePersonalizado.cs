@@ -52,7 +52,7 @@ namespace ProtecoPOO
             int idGame = cmbJuego.SelectedValue != null ? (int)cmbJuego.SelectedValue : 0;
             int idChar = cmbPersonaje.SelectedValue != null ? (int)cmbPersonaje.SelectedValue : 0;
 
-            bool esAscendente = !chkAscendente.Checked;
+            bool esAscendente = chkAscendente.Checked;
 
             dgvReportePersonalizado.DataSource = null;
             dgvReportePersonalizado.AutoGenerateColumns = true;

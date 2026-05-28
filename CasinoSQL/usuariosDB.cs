@@ -100,7 +100,7 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                string query = @"SELECT COUNT(1) 
+                string query = @"SELECT Id
                                 FROM administradores 
                                 WHERE Id = @idUsuario AND Contrasena = @contrasena;";
 
@@ -361,6 +361,47 @@ namespace ProtecoPOO.CasinoSQL
 
             // Por si ocurre alguna anomalía y el usuario no tiene personajes
             return "Sin personajes disponibles";
+        }
+        public void ActualizarSaldoPersonaje(int idRanura, double nuevoSaldo)
+        {
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // Actualizamos ÚNICAMENTE la ranura específica, no todo el usuario
+                string query = @"UPDATE personajes_guardados 
+                         SET Saldo = @nuevoSaldo 
+                         WHERE Id = @idRanura;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    // Pasamos los valores seguros para evitar inyecciones SQL
+                    cmd.Parameters.AddWithValue("@nuevoSaldo", nuevoSaldo);
+                    cmd.Parameters.AddWithValue("@idRanura", idRanura);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void BorrarPersonajeCompletamente(int idRanura)
+        {
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // El orden es vital: Primero borramos las partidas, luego la ranura del personaje
+                string query = @"
+            DELETE FROM historial_juegos WHERE PersonajeId = @idRanura;
+            DELETE FROM personajes_guardados WHERE Id = @idRanura;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    // Usamos el ID exacto de la ranura para no tocar a los otros personajes del usuario
+                    cmd.Parameters.AddWithValue("@idRanura", idRanura);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

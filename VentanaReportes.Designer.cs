@@ -38,8 +38,9 @@
             this.porJuegoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.porPersonajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmbFiltro = new System.Windows.Forms.ComboBox();
             this.especificoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sqLiteCommand1 = new System.Data.SQLite.SQLiteCommand();
+            this.cmbFiltro = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteGlobal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reporteAdminBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -92,45 +93,49 @@
             // porUsuarioToolStripMenuItem
             // 
             this.porUsuarioToolStripMenuItem.Name = "porUsuarioToolStripMenuItem";
-            this.porUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.porUsuarioToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.porUsuarioToolStripMenuItem.Text = "Por usuario";
             this.porUsuarioToolStripMenuItem.Click += new System.EventHandler(this.porUsuarioToolStripMenuItem_Click);
             // 
             // porJuegoToolStripMenuItem
             // 
             this.porJuegoToolStripMenuItem.Name = "porJuegoToolStripMenuItem";
-            this.porJuegoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.porJuegoToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.porJuegoToolStripMenuItem.Text = "Por juego";
             this.porJuegoToolStripMenuItem.Click += new System.EventHandler(this.porJuegoToolStripMenuItem_Click);
             // 
             // porPersonajeToolStripMenuItem
             // 
             this.porPersonajeToolStripMenuItem.Name = "porPersonajeToolStripMenuItem";
-            this.porPersonajeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.porPersonajeToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.porPersonajeToolStripMenuItem.Text = "Por personaje";
             this.porPersonajeToolStripMenuItem.Click += new System.EventHandler(this.porPersonajeToolStripMenuItem_Click);
             // 
             // globalToolStripMenuItem
             // 
             this.globalToolStripMenuItem.Name = "globalToolStripMenuItem";
-            this.globalToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.globalToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.globalToolStripMenuItem.Text = "Global";
             this.globalToolStripMenuItem.Click += new System.EventHandler(this.globalToolStripMenuItem_Click);
-            // 
-            // cmbFiltro
-            // 
-            this.cmbFiltro.FormattingEnabled = true;
-            this.cmbFiltro.Location = new System.Drawing.Point(522, 58);
-            this.cmbFiltro.Name = "cmbFiltro";
-            this.cmbFiltro.Size = new System.Drawing.Size(121, 24);
-            this.cmbFiltro.TabIndex = 4;
             // 
             // especificoToolStripMenuItem
             // 
             this.especificoToolStripMenuItem.Name = "especificoToolStripMenuItem";
-            this.especificoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.especificoToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.especificoToolStripMenuItem.Text = "Especifico";
             this.especificoToolStripMenuItem.Click += new System.EventHandler(this.especificoToolStripMenuItem_Click);
+            // 
+            // sqLiteCommand1
+            // 
+            this.sqLiteCommand1.CommandText = null;
+            // 
+            // cmbFiltro
+            // 
+            this.cmbFiltro.FormattingEnabled = true;
+            this.cmbFiltro.Location = new System.Drawing.Point(515, 63);
+            this.cmbFiltro.Name = "cmbFiltro";
+            this.cmbFiltro.Size = new System.Drawing.Size(183, 24);
+            this.cmbFiltro.TabIndex = 3;
             // 
             // VentanaReportes
             // 
@@ -170,7 +175,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn gananciaPerdidaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource reporteAdminBindingSource;
         private System.Windows.Forms.ToolStripMenuItem globalToolStripMenuItem;
-        private System.Windows.Forms.ComboBox cmbFiltro;
         private System.Windows.Forms.ToolStripMenuItem especificoToolStripMenuItem;
+        private System.Data.SQLite.SQLiteCommand sqLiteCommand1;
+        private System.Windows.Forms.ComboBox cmbFiltro;
     }
 }
