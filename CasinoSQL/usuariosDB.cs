@@ -85,16 +85,23 @@ namespace ProtecoPOO.CasinoSQL
             using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
-                string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
-                conn.ExecuteNonQuery(query,
-                ("@usuarioId", registro.UsuarioId),
-                ("@juegoid", registro.JuegoId),
-                ("@saldoInicial", registro.SaldoInicial),
-                ("@numReapuestas", registro.NumReapuestas),
-                ("@ganancia", registro.GananciaPerdida)
-                );
+                string query = @"INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) 
+                         VALUES (@usuarioId, @juegoId, @personajeId, @saldoInicial, @numReapuestas, @gananciaPerdida);";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@usuarioId", registro.UsuarioId);
+                    cmd.Parameters.AddWithValue("@juegoId", registro.JuegoId);
+                    cmd.Parameters.AddWithValue("@personajeId", registro.PersonajeId);
+                    cmd.Parameters.AddWithValue("@saldoInicial", registro.SaldoInicial);
+                    cmd.Parameters.AddWithValue("@numReapuestas", registro.NumReapuestas);
+                    cmd.Parameters.AddWithValue("@gananciaPerdida", registro.GananciaPerdida);
+
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
+        
 
         public bool ContrasenaValida(int idUsuario, string contrasena)
         {
