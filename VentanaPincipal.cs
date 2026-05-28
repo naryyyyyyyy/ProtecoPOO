@@ -20,7 +20,6 @@ namespace ProtecoPOO
         {
             InitializeComponent();
         }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string usuario = txtUsuario.Text;
@@ -70,7 +69,7 @@ namespace ProtecoPOO
                 MessageBox.Show("Usuario no encontrado o contraseña incorrecta.", "AVISO",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-
+                txtUsuario.Clear();
                 txtContrasena.Clear();
                 return;
             }
@@ -92,5 +91,20 @@ namespace ProtecoPOO
         {
             Application.Exit();
         }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtContrasena.Focus();
+            }
+        }
+
+        private void txtContrasena_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnLogin.PerformClick();
+        }
+
     }
 }

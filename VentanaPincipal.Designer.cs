@@ -103,6 +103,7 @@
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(214, 39);
             this.txtContrasena.TabIndex = 3;
+            this.txtContrasena.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContrasena_KeyDown);
             // 
             // label2
             // 
@@ -139,6 +140,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(214, 39);
             this.txtUsuario.TabIndex = 3;
+            this.txtUsuario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsuario_KeyDown);
             // 
             // linkLblAdmin
             // 

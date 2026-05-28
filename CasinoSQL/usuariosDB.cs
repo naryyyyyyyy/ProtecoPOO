@@ -101,7 +101,7 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                string query = @"SELECT COUNT(1) 
+                string query = @"SELECT Id 
                                 FROM administradores 
                                 WHERE Id = @idUsuario AND Contrasena = @contrasena;";
 
