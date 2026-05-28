@@ -99,5 +99,31 @@ namespace ProtecoPOO
             VentanaAdminReportePersonalizado rp = new VentanaAdminReportePersonalizado();
             rp.ShowDialog();
         }
+
+        private void cmbFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbFiltro.SelectedItem == null) return;
+
+            dgvReporteGlobal.DataSource = null;
+            dgvReporteGlobal.AutoGenerateColumns = true;
+
+            if (cmbFiltro.SelectedItem is Usuario usuarioSeleccionado)
+            {
+                dgvReporteGlobal.DataSource = reportes.GetReportePorUsuario(usuarioSeleccionado.Nombre);
+            }
+            else if (cmbFiltro.SelectedItem is ElementoCombo juegoSeleccionado)
+            {
+                dgvReporteGlobal.DataSource = reportes.GetReportePorJuego(juegoSeleccionado.Nombre);
+            }
+            else if (cmbFiltro.SelectedItem is Personaje personajeSeleccionado)
+            {
+                dgvReporteGlobal.DataSource = reportes.GetReportePorPersonaje(personajeSeleccionado.Nombre);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
