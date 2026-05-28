@@ -45,6 +45,7 @@
             this.pcbPersonaje = new System.Windows.Forms.PictureBox();
             this.btnCambiarPersonaje = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.lblSaldoP = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbPersonaje)).BeginInit();
             this.SuspendLayout();
@@ -249,6 +250,17 @@
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
+            // lblSaldoP
+            // 
+            this.lblSaldoP.AutoSize = true;
+            this.lblSaldoP.BackColor = System.Drawing.Color.Transparent;
+            this.lblSaldoP.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaldoP.Location = new System.Drawing.Point(151, 418);
+            this.lblSaldoP.Name = "lblSaldoP";
+            this.lblSaldoP.Size = new System.Drawing.Size(70, 31);
+            this.lblSaldoP.TabIndex = 12;
+            this.lblSaldoP.Text = "saldo";
+            // 
             // VentanaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -256,6 +268,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(748, 542);
+            this.Controls.Add(this.lblSaldoP);
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.btnCambiarPersonaje);
             this.Controls.Add(this.pcbPersonaje);
@@ -303,5 +316,6 @@
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.Label lblSaldoP;
     }
 }
