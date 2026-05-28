@@ -15,9 +15,10 @@ namespace ProtecoPOO.CasinoSQL
         {
             string rutaEjecutable = AppDomain.CurrentDomain.BaseDirectory;
 
-            string rutaProyecto = System.IO.Path.GetFullPath(System.IO.Path.Combine(rutaEjecutable, @"..\..\..\CasinoSQL\CasinoDB.db"));
+            string rutaProyecto = System.IO.Path.GetFullPath(System.IO.Path.Combine(rutaEjecutable, @"..\..\..\CasinoSQL\BaseDatosPoo.db"));
 
             cadenaConexion = $"Data Source={rutaProyecto};";
+
         }
         public bool UsuarioExistente(string nombre, string contrasena)
         {

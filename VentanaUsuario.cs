@@ -117,6 +117,7 @@ namespace ProtecoPOO
 
         private void CargarAvatar()
         {
+
             switch (SesionGlobal.PersonajeCatalogoId)
             {
                 case 1:

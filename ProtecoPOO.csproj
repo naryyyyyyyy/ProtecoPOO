@@ -242,6 +242,9 @@
     <EmbeddedResource Include="VentanaUsuario.resx">
       <DependentUpon>VentanaUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="CasinoSQL\BaseDatosPoo.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="CasinoSQL\CasinoDB.db" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ReporteAdmin.datasource" />
