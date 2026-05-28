@@ -484,5 +484,85 @@ namespace ProtecoPOO.CasinoSQL
 
             return tabla;
         }
+        public List<Personaje> ObtenerPersonajesDisponibles(int usuarioId)
+        {
+            var lista = new List<Personaje>();
+
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"
+                    SELECT *
+                    FROM personajes
+                    WHERE Id NOT IN
+                    (
+                        SELECT PersonajeId
+                        FROM personajes_guardados
+                        WHERE UsuarioId = @usuarioId
+                    );";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        while (rs.Read())
+                        {
+                            lista.Add(new Personaje(
+                                rs.GetString(rs.GetOrdinal("Nombre")),
+                                rs.GetInt32(rs.GetOrdinal("Id"))
+                            ));
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
+        public void ComprarPersonaje(
+            int usuarioId,
+            int personajeId,
+            double saldoNuevo)
+        {
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"
+                    INSERT INTO personajes_guardados
+                    (
+                        UsuarioId,
+                        PersonajeId,
+                        Saldo,
+                        EstaVivo
+                    )
+                    VALUES
+                    (
+                        @usuarioId,
+                        @personajeId,
+                        1000,
+                        1
+                    );
+
+                    UPDATE personajes_guardados
+                    SET Saldo = @saldoNuevo
+                    WHERE Id = @idRanuraActual;
+                    ";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
+                    cmd.Parameters.AddWithValue("@personajeId", personajeId);
+                    cmd.Parameters.AddWithValue("@saldoNuevo", saldoNuevo);
+                    cmd.Parameters.AddWithValue("@idRanuraActual",
+                        SesionGlobal.PersonajeGuardadoId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

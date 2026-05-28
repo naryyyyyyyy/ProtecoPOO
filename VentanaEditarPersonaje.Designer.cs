@@ -41,6 +41,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Sylfaen", 20F, System.Drawing.FontStyle.Bold);
@@ -54,6 +55,7 @@
             // 
             // btnElegir
             // 
+            this.btnElegir.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnElegir.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnElegir.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.btnElegir.Location = new System.Drawing.Point(42, 474);
@@ -67,6 +69,7 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSalir.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnSalir.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Location = new System.Drawing.Point(683, 474);
@@ -80,6 +83,7 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEliminar.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnEliminar.Font = new System.Drawing.Font("Sylfaen", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.Location = new System.Drawing.Point(522, 474);
@@ -93,6 +97,7 @@
             // 
             // cmbELeccionPersonaje
             // 
+            this.cmbELeccionPersonaje.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbELeccionPersonaje.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Italic);
             this.cmbELeccionPersonaje.FormattingEnabled = true;
             this.cmbELeccionPersonaje.Location = new System.Drawing.Point(164, 407);
@@ -104,6 +109,7 @@
             // 
             // picPersonaje
             // 
+            this.picPersonaje.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picPersonaje.BackColor = System.Drawing.Color.Transparent;
             this.picPersonaje.Location = new System.Drawing.Point(272, 135);
             this.picPersonaje.Name = "picPersonaje";
@@ -113,6 +119,7 @@
             // 
             // btnComprarPersonaje
             // 
+            this.btnComprarPersonaje.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnComprarPersonaje.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnComprarPersonaje.Font = new System.Drawing.Font("Sylfaen", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComprarPersonaje.Location = new System.Drawing.Point(284, 474);
@@ -122,6 +129,7 @@
             this.btnComprarPersonaje.TabIndex = 4;
             this.btnComprarPersonaje.Text = "Comprar personaje";
             this.btnComprarPersonaje.UseVisualStyleBackColor = false;
+            this.btnComprarPersonaje.Click += new System.EventHandler(this.btnComprarPersonaje_Click);
             // 
             // VentanaEditarPersonaje
             // 

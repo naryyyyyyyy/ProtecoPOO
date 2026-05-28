@@ -69,8 +69,10 @@ namespace ProtecoPOO
             //Metodo apra extaer el saldo del usuario
             //pordia ser el get ususario().Saldo;
             //lblSaldo.Text=Getusuario.saldo();
-           
-            
+
+            lblSaldoP.Text = SesionGlobal.SaldoActual.ToString();
+
+            CargarHistorialEnPantalla();
         }
         private void CargarHistorial()
         {
@@ -106,9 +108,14 @@ namespace ProtecoPOO
         }
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            Form1 frm = new Form1();
-            frm.Show();
+            var loginOriginal = Application.OpenForms.OfType<Form1>().FirstOrDefault();
 
+            if (loginOriginal != null)
+            {
+                loginOriginal.Show();
+            }
+
+            this.FormClosed -= VentanaUsuario_FormClosed;
             this.Close();
         }
         private void lblUsuario_Click(object sender, EventArgs e)

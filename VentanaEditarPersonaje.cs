@@ -135,5 +135,22 @@ namespace ProtecoPOO.CasinoSQL
         {
             this.Close();
         }
+
+        private void btnComprarPersonaje_Click(object sender, EventArgs e)
+        {
+            AgregarRecursos frm = new AgregarRecursos();
+            frm.ShowDialog();
+
+            CargarPersonajes();
+        }
+
+        private void CargarPersonajes()
+        {
+            cmbELeccionPersonaje.DataSource = null;
+            cmbELeccionPersonaje.DataSource = usuarios.ObtenerPersonajesDelUsuario(SesionGlobal.UsuarioId);
+
+            cmbELeccionPersonaje.DisplayMember = "InfoVisual";
+            cmbELeccionPersonaje.ValueMember = "Id";
+        }
     }
 }
