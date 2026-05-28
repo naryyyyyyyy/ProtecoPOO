@@ -47,7 +47,6 @@
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbPersonaje)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnblackjack
@@ -235,7 +234,6 @@
             this.btnCambiarPersonaje.TabIndex = 10;
             this.btnCambiarPersonaje.Text = "Cambiar Personaje";
             this.btnCambiarPersonaje.UseVisualStyleBackColor = false;
-            this.btnCambiarPersonaje.Click += new System.EventHandler(this.btnCambiarPersonaje_Click);
             // 
             // btnCerrarSesion
             // 
@@ -249,24 +247,7 @@
             this.btnCerrarSesion.Text = "Cerrar Sesión";
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reportesToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(499, 24);
-            this.menuStrip1.TabIndex = 12;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Text = "Reportes";
-            this.reportesToolStripMenuItem.Click += new System.EventHandler(this.reportesToolStripMenuItem_Click);
-            // 
+            //
             // VentanaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -296,8 +277,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VentanaUsuario_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbPersonaje)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

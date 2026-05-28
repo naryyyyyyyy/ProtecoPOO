@@ -104,5 +104,13 @@ namespace ProtecoPOO
                 loginOriginal.Show();
             }
         }
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            frm.Show();
+
+            this.Close();
+        }
+        
     }
 }

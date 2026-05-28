@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace ProtecoPOO.CasinoSQL
 {
-    private ReportesDB repos;
 
 
     public partial class VentanaEditarPersonaje : Form
     {
+
+    private ReportesDB repos;
         public VentanaEditarPersonaje(ReportesDB repos)
         {
             this.repos = repos;
