@@ -22,8 +22,6 @@ namespace ProtecoPOO
             InitializeComponent();
             ValidacionDeRecursos();
 
-
-
             //metodo apr los datos del usuario 
             //lblNombre=.....
             //lblSaldo=....
@@ -115,5 +113,50 @@ namespace ProtecoPOO
         {
             lblUsuario.Text = SesionGlobal.NombreUsuario;
         }
+
+        private void CargarAvatar()
+        {
+            switch (SesionGlobal.PersonajeCatalogoId)
+            {
+                case 1:
+                    pcbPersonaje.Image = Properties.Resources.barbaro;
+                    break;
+
+                case 2:
+                    pcbPersonaje.Image = Properties.Resources.picaro;
+                    break;
+
+                case 3:
+                    pcbPersonaje.Image = Properties.Resources.hechicero;
+                    break;
+
+                case 4:
+                    pcbPersonaje.Image = Properties.Resources.bardo;
+                    break;
+
+                case 5:
+                    pcbPersonaje.Image = Properties.Resources.hada;
+                    break;
+
+                case 6:
+                    pcbPersonaje.Image = Properties.Resources.sirena;
+                    break;
+
+                case 7:
+                    pcbPersonaje.Image = Properties.Resources.bruja;
+                    break;
+
+                case 8:
+                    pcbPersonaje.Image = Properties.Resources.cazador;
+                    break;
+
+                case 9:
+                    pcbPersonaje.Image = Properties.Resources.caballero;
+                    break;
+            }
+
+            pcbPersonaje.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
     }
 }

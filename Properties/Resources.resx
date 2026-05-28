@@ -198,7 +198,6 @@
   </data>
   <data name="between" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\between.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	  
   </data>
   <data name="chaser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chaser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,5 +294,32 @@
   </data>
   <data name="runner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\runner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="picaro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\387ab2d3-000c-4d22-895f-a5d934ee74ee-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bardo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deb8f57a-1221-4397-88af-0f7a79117434-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hada" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3ffd1f20-76f4-4b9b-a989-d6b28a75825e-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sirena" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\470f24be-9d24-4f86-bef0-dc4de3affd17-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bruja" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\d01fd68f-9ed5-4fce-92cb-12be8554c555-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="barbaro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\08b18532-0247-48b0-8893-3781db1a8a4f-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="caballero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\419c1485-b36f-47d5-870d-baf6b98713b4-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hechicero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\e4addf94-38cc-4f5f-a8cc-441f0d42a813-Photoroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cazador" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image-Photoroom (8).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
