@@ -76,7 +76,7 @@
             this.lblResultado.BackColor = System.Drawing.Color.Transparent;
             this.lblResultado.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultado.ForeColor = System.Drawing.Color.Transparent;
-            this.lblResultado.Location = new System.Drawing.Point(831, 478);
+            this.lblResultado.Location = new System.Drawing.Point(782, 478);
             this.lblResultado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblResultado.Name = "lblResultado";
             this.lblResultado.Size = new System.Drawing.Size(32, 31);
@@ -90,7 +90,7 @@
             this.lblPuntosJugador.BackColor = System.Drawing.Color.Transparent;
             this.lblPuntosJugador.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPuntosJugador.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblPuntosJugador.Location = new System.Drawing.Point(831, 429);
+            this.lblPuntosJugador.Location = new System.Drawing.Point(782, 428);
             this.lblPuntosJugador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPuntosJugador.Name = "lblPuntosJugador";
             this.lblPuntosJugador.Size = new System.Drawing.Size(32, 31);
