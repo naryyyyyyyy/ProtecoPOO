@@ -51,7 +51,7 @@ namespace ProtecoPOO
                 {
                     // 5. Llenamos la segunda parte de la SesionGlobal (Datos de la partida)
                     SesionGlobal.PersonajeGuardadoId = personajePrincipal.Id; // Ranura
-                    SesionGlobal.PersonajeCatalogoId = usuariodb.ObtenerPersonajeSeleccionado(idUsuario);
+                    SesionGlobal.PersonajeCatalogoId = personajePrincipal.PersonajeId;
                     SesionGlobal.SaldoActual = personajePrincipal.Saldo;
                 }
 

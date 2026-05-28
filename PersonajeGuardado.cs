@@ -16,6 +16,6 @@ namespace ProtecoPOO
         public string Nombre { get; set; }
 
         // Esta es la propiedad que leerá el DisplayMember de tu ComboBox
-        public string InfoVisual => $"{Nombre} (Ranura #{Id}) - Saldo: ${Saldo}";
+        public string InfoVisual => $"{Nombre} - Saldo: ${Saldo}";
     }
 }

@@ -118,9 +118,9 @@ namespace ProtecoPOO
 
         private void CargarAvatar()
         {
-
             switch (SesionGlobal.PersonajeCatalogoId)
             {
+                 
                 case 1:
                     pcbPersonaje.Image = Properties.Resources.barbaro;
                     break;
@@ -161,5 +161,14 @@ namespace ProtecoPOO
             pcbPersonaje.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
+        private void btnCambiarPersonaje_Click(object sender, EventArgs e)
+        {
+            VentanaEditarPersonaje frm = new VentanaEditarPersonaje();
+            frm.ShowDialog();
+
+            lblSaldoP.Text = "$" + SesionGlobal.SaldoActual;
+            CargarAvatar();
+            CargarHistorialEnPantalla();
+        }
     }
 }

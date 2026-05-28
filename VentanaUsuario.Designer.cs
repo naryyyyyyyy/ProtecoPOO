@@ -236,6 +236,7 @@
             this.btnCambiarPersonaje.TabIndex = 10;
             this.btnCambiarPersonaje.Text = "Cambiar Personaje";
             this.btnCambiarPersonaje.UseVisualStyleBackColor = false;
+            this.btnCambiarPersonaje.Click += new System.EventHandler(this.btnCambiarPersonaje_Click);
             // 
             // btnCerrarSesion
             // 
