@@ -1,4 +1,5 @@
 ﻿using CarreraCaballos;
+using ProtecoPOO.CasinoSQL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,15 +14,22 @@ namespace ProtecoPOO
         private Caballo caballoApuesta = null;
         private int puestoAp = 0;
 
-        // Identificador del usuario en sesión (procedente del Login)
-        private string nombreUsuarioActual = "Juan Pérez";
+        // Instanciación del manejador de base de datos
+        private usuariosDB usuariodb = new usuariosDB();
+
+        private string nombreUsuarioActual = SesionGlobal.NombreUsuario;
+        private int contador = 0; // Rastrea el número de apuestas realizadas
+        private int cId = 3; // ID del juego de carreras
+        private string cName = "Carrera de Caballos";
 
         public CarreraCaballos()
         {
             InitializeComponent();
+            usuariodb = new usuariosDB();
 
-            int cId = 4; // ID asignado al juego de carreras
-            string cName = "Carrera de Caballos";
+            // Vinculación del evento de cierre para asegurar persistencia autónoma
+            this.FormClosing += CarreraCaballos_FormClosing;
+
             double distanciaMeta = (panel1.Width - 100) - picCarril1.Width;
 
             carrera = new Carrera(cName, cId, distanciaMeta);
@@ -30,13 +38,13 @@ namespace ProtecoPOO
                 picCarril1, picCarril2, picCarril3, picCarril4, picCarril5, picCarril6
             };
 
-            // SIMULACIÓN: Carga de saldo inicial desde la Base de Datos
-            decimal saldoDeBaseDatos = 1000;
-            carrera.CargarSaldoInicial(saldoDeBaseDatos);
+            // Carga real del saldo desde el estado global de la sesión
+            decimal saldoInicial = (decimal)SesionGlobal.SaldoActual;
+            carrera.CargarSaldoInicial(saldoInicial);
 
             ActualizarInterfazSaldos();
 
-            // Estado inicial de controles de juego
+            // Estado inicial de controles
             btnIniciarCarrera.Enabled = false;
             btnApostar.Enabled = false;
             cmbApuestaPuesto.Enabled = false;
@@ -69,7 +77,7 @@ namespace ProtecoPOO
 
             cmbApuestaPuesto.Enabled = true;
             btnApostar.Enabled = true;
-            btnIniciarCarrera.Enabled = false; // Requiere apuesta previa
+            btnIniciarCarrera.Enabled = false;
         }
 
         private void btnApostar_Click(object sender, EventArgs e)
@@ -86,21 +94,21 @@ namespace ProtecoPOO
                 return;
             }
 
-            // Validación de formato numérico de la apuesta
             if (!decimal.TryParse(txtApuesta.Text, out decimal monto) || monto <= 0)
             {
                 MessageBox.Show("Por favor, ingresa un monto de apuesta válido.", "Atención");
                 return;
             }
 
-            // HERENCIA: Validación y deducción de saldo mediante la clase padre
             if (!carrera.ValidarYColocarApuesta(monto))
             {
                 MessageBox.Show("No cuentas con saldo suficiente para realizar esta apuesta o el monto es inválido.", "Fondos Insuficientes");
                 return;
             }
 
-            // Registro local de la apuesta
+            // Incrementar contador de apuestas válidas
+            contador++;
+
             int comp = lstCompetidores.SelectedIndex;
             caballoApuesta = carrera.Competidores[comp];
             puestoAp = Convert.ToInt32(cmbApuestaPuesto.SelectedItem);
@@ -108,14 +116,12 @@ namespace ProtecoPOO
 
             ActualizarInterfazSaldos();
 
-            // Bloqueo de controles de configuración de apuesta
             btnApostar.Enabled = false;
             cmbApuestaPuesto.Enabled = false;
             txtApuesta.Enabled = false;
             btnNuevaCarrera.Enabled = false;
             btnSalir.Enabled = false;
 
-            // Habilitación del disparo del juego
             btnIniciarCarrera.Enabled = true;
         }
 
@@ -143,8 +149,6 @@ namespace ProtecoPOO
                 }
             }
 
-           // panel1.Invalidate();
-
             if (carrera.Podio.Count == carrera.Competidores.Count)
             {
                 timer1.Stop();
@@ -154,11 +158,9 @@ namespace ProtecoPOO
 
         private void FinalizarCarreraMesa()
         {
-            // Determinación del dictamen de la apuesta
             string dictamen = carrera.EvaluarResultadoApuesta(caballoApuesta, puestoAp);
             int lugarReal = carrera.Podio.IndexOf(caballoApuesta) + 1;
 
-            // HERENCIA: Cálculo de ganancias y actualización de saldo
             decimal ganancias = carrera.CalcularPagoEstandar(dictamen);
             carrera.RegistrarResultado(ganancias);
 
@@ -173,11 +175,11 @@ namespace ProtecoPOO
 
             ActualizarInterfazSaldos();
             btnNuevaCarrera.Enabled = true;
+            btnSalir.Enabled = true; // Habilitar salida tras resolver el flujo de dinero
         }
 
         private void btnNuevaCarrera_Click(object sender, EventArgs e)
         {
-            // HERENCIA/CONTROL: Si se quedó sin saldo, se le expulsa de inmediato
             if (carrera.SaldoJugador <= 0)
             {
                 MessageBox.Show("Te has quedado sin dinero en tu cuenta de casino. Serás redirigido al menú.", "Fin del Juego");
@@ -200,43 +202,16 @@ namespace ProtecoPOO
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            // =========================================================================
-            // REFERENCIA DE CONEXIÓN Y PERSISTENCIA DE DATOS (Manejador BD)
-            // =========================================================================
-            /*
-            try
+            this.Close(); // Invoca automáticamente el evento CarreraCaballos_FormClosing
+        }
+
+        // Manejador centralizado de Persistencia en SQLite
+        private void CarreraCaballos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (contador > 0)
             {
-                using (SqlConnection conexion = new SqlConnection("Server=TU_SERVIDOR; Database=CasinoPOO; Integrated Security=True;"))
-                {
-                    conexion.Open();
-
-                    // 1. UPDATE: Modificación del saldo final del jugador (idJugador, saldo final)
-                    string querySaldo = "UPDATE Usuarios SET Saldo = @saldoFinal WHERE NombreUsuario = @usuario";
-                    using (SqlCommand cmdSaldo = new SqlCommand(querySaldo, conexion))
-                    {
-                        cmdSaldo.Parameters.AddWithValue("@saldoFinal", carrera.SaldoJugador);
-                        cmdSaldo.Parameters.AddWithValue("@usuario", nombreUsuarioActual);
-                        cmdSaldo.ExecuteNonQuery();
-                    }
-
-                    // 2. INSERT: Reporte de bitácora para la base de datos de auditoría
-                    string queryHistorial = "INSERT INTO HistorialJugadas (Usuario, JuegoID, SaldoFinalRetiro, Fecha) VALUES (@usuario, @juegoId, @saldoFinal, GETDATE())";
-                    using (SqlCommand cmdHist = new SqlCommand(queryHistorial, conexion))
-                    {
-                        cmdHist.Parameters.AddWithValue("@usuario", nombreUsuarioActual);
-                        cmdHist.Parameters.AddWithValue("@juegoId", carrera.JuegoId);
-                        cmdHist.Parameters.AddWithValue("@saldoFinal", carrera.SaldoJugador);
-                        cmdHist.ExecuteNonQuery();
-                    }
-                }
+                TerminarJuego();
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error al sincronizar con la Base de Datos: " + ex.Message);
-            }
-            */
-
-            this.Close();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -257,5 +232,39 @@ namespace ProtecoPOO
             Font fMeta = new Font("Impact", 16);
             g.DrawString("META", fMeta, Brushes.Gold, xMeta + 10, panel1.Height - 30);
         }
+        private void TerminarJuego()
+        {
+            try
+            {
+                double saldoFinal = (double)carrera.SaldoJugador;
+                // Calcular ganancia neta (Cast explícito a decimal)
+                decimal gananciaNeta = (decimal)carrera.SaldoJugador - (decimal)SesionGlobal.SaldoActual;
+
+                // Estructurar el registro de partida
+                RegistroPartida reg = new RegistroPartida(1,
+
+                    SesionGlobal.UsuarioId,
+                    cId,
+                    SesionGlobal.PersonajeGuardadoId,
+                    (decimal)SesionGlobal.SaldoActual,
+                    contador,
+                    gananciaNeta
+                );
+
+                // Persistencia a través de la instancia ya inicializada
+                usuariodb.AgregarRegistroPartida(reg);
+                usuariodb.ActualizarSaldoPersonaje(SesionGlobal.PersonajeGuardadoId, saldoFinal);
+
+                // Sincronizar estado global
+                SesionGlobal.SaldoActual = saldoFinal;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al sincronizar con la Base de Datos: " + ex.Message, "Fallo Runtine", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+
 }
