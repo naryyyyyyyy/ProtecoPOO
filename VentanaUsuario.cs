@@ -27,6 +27,7 @@ namespace ProtecoPOO
             //lblSaldo=....
             CargarHistorialEnPantalla();
             lblUsuario.Text = SesionGlobal.NombreUsuario;
+            CargarAvatar();
         }
         private void CargarHistorialEnPantalla()
         {
