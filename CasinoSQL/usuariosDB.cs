@@ -294,5 +294,27 @@ namespace ProtecoPOO.CasinoSQL
             }
             return 0; // Por si algo falla
         }
+
+        public int ObtenerPersonajeSeleccionado(int usuarioId)
+        {
+            using (var conn = new SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"SELECT PersonajeId
+                         FROM usuarios
+                         WHERE Id = @id";
+
+                using (var rs = conn.ExecuteReader(query, ("@id", usuarioId)))
+                {
+                    if (rs.Read())
+                    {
+                        return rs.GetInt32(0);
+                    }
+                }
+            }
+
+            return 1; // Bárbaro por defecto
+        }
     }
 }
