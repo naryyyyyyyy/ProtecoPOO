@@ -242,7 +242,7 @@ namespace ProtecoPOO
                 );
 
                 usuariodb.AgregarRegistroPartida(reg);
-                usuariodb.ActualizarSaldoPersonaje(SesionGlobal.PersonajeGuardadoId, saldoFinal);
+                usuariodb.ActualizarSaldoPersonaje(SesionGlobal.PersonajeCatalogoId, saldoFinal);
 
                 SesionGlobal.SaldoActual = saldoFinal;
             }

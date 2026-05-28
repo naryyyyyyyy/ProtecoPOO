@@ -85,13 +85,14 @@ namespace ProtecoPOO.CasinoSQL
             using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
-                string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia) \r\nVALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);";
+                string query = "INSERT INTO historial_juegos (UsuarioId, JuegoId,PersonajeId, SaldoInicial, NumReapuestas, GananciaPerdida) \r\nVALUES (@usuarioId, @juegoid,@personajeId, @saldoInicial, @numReapuestas, @gananciaPerdida);";
                 conn.ExecuteNonQuery(query,
                 ("@usuarioId", registro.UsuarioId),
                 ("@juegoid", registro.JuegoId),
+                ("@personajeId", registro.PersonajeId),
                 ("@saldoInicial", registro.SaldoInicial),
                 ("@numReapuestas", registro.NumReapuestas),
-                ("@ganancia", registro.GananciaPerdida)
+                ("@gananciaPerdida", registro.GananciaPerdida)
                 );
             }
         }

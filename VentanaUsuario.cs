@@ -25,6 +25,7 @@ namespace ProtecoPOO
             //metodo apr los datos del usuario 
             //lblNombre=.....
             //lblSaldo=....
+            
             CargarHistorialEnPantalla();
             lblUsuario.Text = SesionGlobal.NombreUsuario;
             lblSaldoP.Text = "$" + SesionGlobal.SaldoActual.ToString();
