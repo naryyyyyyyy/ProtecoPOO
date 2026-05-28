@@ -1,6 +1,4 @@
-﻿-- ============================================================================
--- 1. LIMPIEZA TOTAL (En orden inverso para no romper las llaves foráneas)
--- ============================================================================
+﻿
 DROP TABLE IF EXISTS tipos_personaje;
 DROP TABLE IF EXISTS historial_juegos;
 DROP TABLE IF EXISTS personajes_guardados;
@@ -9,9 +7,9 @@ DROP TABLE IF EXISTS administradores;
 DROP TABLE IF EXISTS juegos;
 DROP TABLE IF EXISTS personajes;
 
--- ============================================================================
--- 2. CREACIÓN DE TABLAS
--- ============================================================================
+-- ===============================================================
+--                       CREACIÓN DE TABLAS
+-- ===============================================================
 
 -- Catálogos (Tablas independientes)
 CREATE TABLE juegos (
@@ -65,9 +63,9 @@ CREATE TABLE historial_juegos (
     FOREIGN KEY (PersonajeId) REFERENCES personajes_guardados(Id)
 );
 
--- ============================================================================
--- 3. INSERCIÓN DE VALORES POR DEFECTO
--- ============================================================================
+-- ===============================================================
+-- =                   INSERCIÓN DE VALORES                      =
+-- ===============================================================
 
 -- Llenar los 3 juegos
 INSERT INTO juegos (Id, Nombre) VALUES 
@@ -153,70 +151,151 @@ INSERT INTO historial_juegos (UsuarioId, JuegoId, PersonajeId, SaldoInicial, Num
 (5, 1, 14, 50, 2, -50),   (5, 2, 14, 0, 0, 0),      (5, 3, 14, 0, 0, 0),
 (5, 1, 15, 300, 1, 150),  (5, 2, 15, 450, 0, -50),  (5, 3, 15, 400, 3, 0);
 
+
+
 -- ========================================================
 -- =                 QUERIES USUARIOS                     =
 -- ========================================================
 
---Validar usuario
-SELECT Id
-FROM usuarios
-WHERE Nombre = @nombre AND Contrasena = @contrasena;
+-- usuario existente
+SELECT Id FROM usuarios WHERE Nombre = @nombre AND Contrasena = @contrasena;
 
---Guardar registro de partida
-INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, GananciaPerdida) 
-VALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @gananciaPerdida);
+-- agregar usuario
+INSERT INTO usuarios (Nombre, Contrasena) 
+VALUES (@nombre, @contrasena);
+INSERT INTO personajes_guardados (UsuarioId, PersonajeId, Saldo, EstaVivo) 
+VALUES (last_insert_rowid(), @personajeid, 1000, 1);
 
---Añadir usuario
-INSERT INTO usuarios (Nombre, Contrasena, Saldo, PersonajeId) VALUES
-(@nombre, @contrasena,1000, @personajeid);
-
---Borrar usuario
+-- borrar usuario
 DELETE FROM historial_juegos WHERE UsuarioId = @id;
-DELETE FROM usuarios WHERE Id = @id;
+
+-- agregar registro partida
+INSERT INTO historial_juegos (UsuarioId, JuegoId, SaldoInicial, NumReapuestas, Ganancia)
+VALUES (@usuarioId, @juegoid, @saldoInicial, @numReapuestas, @ganancia);
+
+-- contraseña valida
+SELECT COUNT(1) 
+FROM administradores 
+WHERE Id = @idUsuario AND Contrasena = @contrasena;
+
+-- GetAllUsuarios
+SELECT Id, Nombre 
+FROM Usuarios
+ORDER BY Id ASC;
+
+-- GetAllPersonajes
+SELECT Id, Nombre 
+FROM personajes 
+ORDER BY Id ASC;
+
+-- GetAllJuegos
+SELECT Id, Nombre
+FROM juegos ORDER BY Id ASC;
+
+-- obtener historial personaje actual
+SELECT h.Id, h.UsuarioId, h.JuegoId, h.PersonajeId, 
+h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida,
+j.Nombre AS NombreJuego
+FROM historial_juegos h
+INNER JOIN juegos j ON h.JuegoId = j.Id
+WHERE h.UsuarioId = @idUsuario AND h.PersonajeId = @idPersonajeGuardado
+ORDER BY h.Id DESC;
+
+-- obtener personajes del usuario
+SELECT pg.Id, 
+pg.UsuarioId,
+pg.PersonajeId, 
+p.Nombre, 
+pg.Saldo, 
+pg.EstaVivo
+FROM personajes_guardados pg
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE pg.UsuarioId = @usuarioId
+ORDER BY pg.Id ASC;
+
+-- obtener usuario
+SELECT Id FROM usuarios WHERE Nombre = @nombre AND Contrasena = @contrasena;
+
+-- obtener personaje mas jugado
+SELECT p.Nombre, COUNT(h.Id) AS TotalPartidas
+FROM historial_juegos h
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE h.UsuarioId = @idUsuario
+GROUP BY h.PersonajeId, p.Nombre
+ORDER BY TotalPartidas DESC
+LIMIT 1;
+
+-- obtener personaje mas rico
+SELECT p.Nombre, pg.Saldo
+FROM personajes_guardados pg
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE pg.UsuarioId = @idUsuario
+ORDER BY pg.Saldo DESC
+LIMIT 1;
 
 -- ========================================================
 -- =                 QUERIES REPORTES                     =
 -- ========================================================
 
---Obtener todos los personajes
-SELECT Id, Nombre 
-FROM personajes 
-ORDER BY Id ASC;
-
---Obtener todos los juegos
-SELECT Id, Nombre 
-FROM juegos 
-ORDER BY Id ASC;
-
---USUARIOS POR PERSONAJE
---  dado el nombre
-SELECT 
-    u.Id AS UsuarioId, 
-    u.Nombre AS Jugador, 
-    u.Saldo, 
-    p.Nombre AS PersonajeElegido
-FROM usuarios u
-INNER JOIN personajes p ON u.PersonajeId = p.Id
-WHERE p.Nombre = @nombrePersonaje; --> nombre solicitado
-
---  dado el id
-SELECT Id, Nombre, Saldo 
-FROM usuarios 
-WHERE PersonajeId = @idPersonaje;
-
---USUARIOS POR JUEGO
---  dado el nombre
-SELECT DISTINCT 
-    u.Id AS UsuarioId, 
-    u.Nombre AS Jugador, 
-    u.Saldo
-FROM usuarios u
-INNER JOIN historial_juegos h ON u.Id = h.UsuarioId
+-- GetReportePorJuego
+SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+FROM historial_juegos h
+INNER JOIN usuarios u ON h.UsuarioId = u.Id
 INNER JOIN juegos j ON h.JuegoId = j.Id
-WHERE j.Nombre = @nombreJuego; --> nombre solicitado
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE j.Nombre LIKE @filtro
+ORDER BY h.Id DESC;
 
---  dado el id
-SELECT DISTINCT u.Id, u.Nombre, u.Saldo 
-FROM usuarios u
-INNER JOIN historial_juegos h ON u.Id = h.UsuarioId
-WHERE h.JuegoId = @idJuego;
+-- GetReportePorPersonaje
+SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+FROM historial_juegos h
+INNER JOIN usuarios u ON h.UsuarioId = u.Id
+INNER JOIN juegos j ON h.JuegoId = j.Id
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE p.Nombre LIKE @filtro
+ORDER BY h.Id DESC;
+-- GetReportesPorUsuario
+SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+FROM historial_juegos h
+INNER JOIN usuarios u ON h.UsuarioId = u.Id
+INNER JOIN juegos j ON h.JuegoId = j.Id
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE u.Nombre LIKE @filtro
+ORDER BY h.Id DESC;
+
+-- GetReporteGlobal
+SELECT 
+u.Nombre AS Jugador, 
+p.Nombre AS Personaje, 
+j.Nombre AS Juego, 
+h.SaldoInicial, 
+h.NumReapuestas, 
+h.GananciaPerdida
+FROM historial_juegos h
+INNER JOIN usuarios u ON h.UsuarioId = u.Id
+INNER JOIN juegos j ON h.JuegoId = j.Id
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+ORDER BY h.Id DESC;
+
+-- GetAllAdministradores
+SELECT Id, Nombre, Contrasena 
+FROM administradores 
+ORDER BY Nombre ASC;
+
+-- GetReportePersonalizado
+SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
+h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
+FROM historial_juegos h
+INNER JOIN usuarios u ON h.UsuarioId = u.Id
+INNER JOIN juegos j ON h.JuegoId = j.Id
+INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+INNER JOIN personajes p ON pg.PersonajeId = p.Id
+WHERE 1=1 

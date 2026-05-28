@@ -52,7 +52,6 @@ namespace ProtecoPOO.CasinoSQL
                 string query = @"
             INSERT INTO usuarios (Nombre, Contrasena) 
             VALUES (@nombre, @contrasena);
-
             INSERT INTO personajes_guardados (UsuarioId, PersonajeId, Saldo, EstaVivo) 
             VALUES (last_insert_rowid(), @personajeid, 1000, 1);";
 
@@ -292,6 +291,76 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
             return 0; // Por si algo falla
+        }
+        public string ObtenerPersonajeMasJugado(int idUsuario)
+        {
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // Agrupamos por personaje, contamos las partidas, ordenamos de mayor a menor y sacamos el #1
+                string query = @"SELECT p.Nombre, COUNT(h.Id) AS TotalPartidas
+                         FROM historial_juegos h
+                         INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         WHERE h.UsuarioId = @idUsuario
+                         GROUP BY h.PersonajeId, p.Nombre
+                         ORDER BY TotalPartidas DESC
+                         LIMIT 1;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        if (rs.Read())
+                        {
+                            string nombrePersonaje = rs.GetString(rs.GetOrdinal("Nombre"));
+                            int totalPartidas = rs.GetInt32(rs.GetOrdinal("TotalPartidas"));
+
+                            return $"{nombrePersonaje} ({totalPartidas} partidas)";
+                        }
+                    }
+                }
+            }
+
+            // Si el usuario acaba de crear su cuenta y no ha jugado nada, devolvemos este texto
+            return "Aún no hay partidas registradas";
+        }
+        public string ObtenerPersonajeMasRico(int idUsuario)
+        {
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // Unimos el inventario con el catálogo, ordenamos por dinero y tomamos el #1
+                string query = @"SELECT p.Nombre, pg.Saldo
+                         FROM personajes_guardados pg
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         WHERE pg.UsuarioId = @idUsuario
+                         ORDER BY pg.Saldo DESC
+                         LIMIT 1;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        if (rs.Read())
+                        {
+                            string nombrePersonaje = rs.GetString(rs.GetOrdinal("Nombre"));
+                            double saldoMayor = Convert.ToDouble(rs.GetValue(rs.GetOrdinal("Saldo")));
+
+                            return $"{nombrePersonaje} (${saldoMayor})";
+                        }
+                    }
+                }
+            }
+
+            // Por si ocurre alguna anomalía y el usuario no tiene personajes
+            return "Sin personajes disponibles";
         }
     }
 }
