@@ -37,36 +37,45 @@
             // cmbFiltro
             // 
             this.cmbFiltro.FormattingEnabled = true;
-            this.cmbFiltro.Location = new System.Drawing.Point(123, 67);
+            this.cmbFiltro.Items.AddRange(new object[] {
+            "Por saldo",
+            "Por partidas"});
+            this.cmbFiltro.Location = new System.Drawing.Point(164, 82);
+            this.cmbFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbFiltro.Name = "cmbFiltro";
-            this.cmbFiltro.Size = new System.Drawing.Size(121, 21);
+            this.cmbFiltro.Size = new System.Drawing.Size(160, 24);
             this.cmbFiltro.TabIndex = 0;
             // 
             // dgvRepostesUsusario
             // 
             this.dgvRepostesUsusario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRepostesUsusario.Location = new System.Drawing.Point(123, 121);
+            this.dgvRepostesUsusario.Location = new System.Drawing.Point(164, 149);
+            this.dgvRepostesUsusario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvRepostesUsusario.Name = "dgvRepostesUsusario";
-            this.dgvRepostesUsusario.Size = new System.Drawing.Size(407, 215);
+            this.dgvRepostesUsusario.RowHeadersWidth = 51;
+            this.dgvRepostesUsusario.Size = new System.Drawing.Size(543, 265);
             this.dgvRepostesUsusario.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(563, 134);
+            this.button1.Location = new System.Drawing.Point(751, 165);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 45);
             this.button1.TabIndex = 2;
-            this.button1.Text = "btnSalir";
+            this.button1.Text = "Generar Reporte";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ReportesUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvRepostesUsusario);
             this.Controls.Add(this.cmbFiltro);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ReportesUsuario";
             this.Text = "ReportesUsuario";
             ((System.ComponentModel.ISupportInitialize)(this.dgvRepostesUsusario)).EndInit();

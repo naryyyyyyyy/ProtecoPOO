@@ -170,5 +170,11 @@ namespace ProtecoPOO
             CargarAvatar();
             CargarHistorialEnPantalla();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ReportesUsuario frm= new ReportesUsuario();
+            frm.ShowDialog();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtecoPOO.CasinoSQL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,26 @@ namespace ProtecoPOO
 {
     public partial class ReportesUsuario : Form
     {
+        usuariosDB usuario = new usuariosDB();
         public ReportesUsuario()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dgvRepostesUsusario.DataSource = null;
+            string opcion = cmbFiltro.SelectedItem.ToString();
+            if(opcion == "Por saldo")
+            {
+                dgvRepostesUsusario.DataSource = usuario.ReportePersonajesPorSaldo(SesionGlobal.UsuarioId);
+                dgvRepostesUsusario.AutoGenerateColumns = true;
+            }
+            else if(opcion == "Por partidas")
+            {
+                dgvRepostesUsusario.DataSource = usuario.ReportePersonajesPorReapuestas(SesionGlobal.UsuarioId);
+                dgvRepostesUsusario.AutoGenerateColumns = true;
+            }
         }
     }
 }

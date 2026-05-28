@@ -427,5 +427,62 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
         }
+        public System.Data.DataTable ReportePersonajesPorSaldo(int idUsuario)
+        {
+            var tabla = new System.Data.DataTable();
+
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                string query = @"SELECT p.Nombre AS Personaje, pg.Saldo 
+                         FROM personajes_guardados pg
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         WHERE pg.UsuarioId = @idUsuario
+                         ORDER BY pg.Saldo DESC;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        tabla.Load(rs);
+                    }
+                }
+            }
+
+            return tabla;
+        }
+        public System.Data.DataTable ReportePersonajesPorReapuestas(int idUsuario)
+        {
+            var tabla = new System.Data.DataTable();
+
+            using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
+            {
+                conn.Open();
+
+                // Sumamos las reapuestas de cada partida y agrupamos por el ID de la ranura del personaje
+                string query = @"SELECT p.Nombre AS Personaje, SUM(h.NumReapuestas) AS TotalReapuestas 
+                         FROM historial_juegos h
+                         INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
+                         INNER JOIN personajes p ON pg.PersonajeId = p.Id
+                         WHERE h.UsuarioId = @idUsuario
+                         GROUP BY pg.Id, p.Nombre
+                         ORDER BY TotalReapuestas DESC;";
+
+                using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (var rs = cmd.ExecuteReader())
+                    {
+                        tabla.Load(rs);
+                    }
+                }
+            }
+
+            return tabla;
+        }
     }
 }
