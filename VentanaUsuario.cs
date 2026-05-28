@@ -111,6 +111,9 @@ namespace ProtecoPOO
 
             this.Close();
         }
-        
+        private void lblUsuario_Click(object sender, EventArgs e)
+        {
+            lblUsuario.Text = SesionGlobal.NombreUsuario;
+        }
     }
 }
