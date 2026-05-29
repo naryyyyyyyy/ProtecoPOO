@@ -53,5 +53,21 @@ namespace ProtecoPOO
                 return;
             }
         }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                txtContraseña.Focus();
+            }
+        }
+
+        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnCrearCuenta.PerformClick();
+            }
+        }
     }
 }
