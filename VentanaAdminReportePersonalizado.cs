@@ -75,5 +75,10 @@ namespace ProtecoPOO
             if (dgvReportePersonalizado.Columns.Contains("Personaje"))
                 dgvReportePersonalizado.Columns["Personaje"].Visible = (idChar == 0);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

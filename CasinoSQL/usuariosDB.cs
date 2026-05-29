@@ -22,7 +22,6 @@ namespace ProtecoPOO.CasinoSQL
         }
         public bool UsuarioExistente(string nombre, string contrasena)
         {
-            // 'using' asegura que la conexión se cierre automáticamente al terminar
             using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
@@ -48,8 +47,6 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Armamos un query doble. 
-                // Primero inserta al usuario, luego inserta a su personaje inicial.
                 string query = @"
             INSERT INTO usuarios (Nombre, Contrasena) 
             VALUES (@nombre, @contrasena);
@@ -57,7 +54,6 @@ namespace ProtecoPOO.CasinoSQL
             INSERT INTO personajes_guardados (UsuarioId, PersonajeId, Saldo, EstaVivo) 
             VALUES (last_insert_rowid(), @personajeid, 1000, 1);";
 
-                // Ejecutamos usando tu método de extensión mágico
                 conn.ExecuteNonQuery(query,
                     ("@nombre", nombre),
                     ("@contrasena", contrasena),
@@ -71,11 +67,9 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Limpiar el historial del usuario
                 string queryHistorial = "DELETE FROM historial_juegos WHERE UsuarioId = @id;";
                 conn.ExecuteNonQuery(queryHistorial, ("@id", UsuarioId));
 
-                // Borrar al usuario de la base de datos
                 string queryUsuario = "DELETE FROM usuarios WHERE Id = @id;";
                 conn.ExecuteNonQuery(queryUsuario, ("@id", UsuarioId));
             }
@@ -170,7 +164,6 @@ namespace ProtecoPOO.CasinoSQL
             using (var conn = new SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
-                // Leemos solo el ID y el Nombre directamente de la tabla
                 string query = @"SELECT Id, Nombre
                                  FROM juegos ORDER BY Id ASC;";
                 var rs = conn.ExecuteReader(query);
@@ -213,7 +206,6 @@ namespace ProtecoPOO.CasinoSQL
                         {
                             historial.Add(new RegistroPartida
                             {
-                                // Llenamos los datos técnicos...
                                 Id = rs.GetInt32(rs.GetOrdinal("Id")),
                                 UsuarioId = rs.GetInt32(rs.GetOrdinal("UsuarioId")),
                                 JuegoId = rs.GetInt32(rs.GetOrdinal("JuegoId")),
@@ -239,7 +231,6 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Hacemos el JOIN para traernos el Nombre del catálogo
                 string query = @"SELECT pg.Id, 
                                 pg.UsuarioId,
                                 pg.PersonajeId, 
@@ -267,7 +258,6 @@ namespace ProtecoPOO.CasinoSQL
                                 Saldo = Convert.ToDouble(rs.GetValue(rs.GetOrdinal("Saldo"))),
                                 EstaVivo = rs.GetInt32(rs.GetOrdinal("EstaVivo")) == 1,
 
-                                // Llenamos el bolsillo extra visual
                                 Nombre = rs.GetString(rs.GetOrdinal("Nombre"))
                             });
                         }
@@ -323,7 +313,6 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Agrupamos por personaje, contamos las partidas, ordenamos de mayor a menor y sacamos el #1
                 string query = @"SELECT p.Nombre, COUNT(h.Id) AS TotalPartidas
                  FROM historial_juegos h
                  INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
@@ -350,7 +339,6 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
 
-            // Si el usuario acaba de crear su cuenta y no ha jugado nada, devolvemos este texto
             return "Aún no hay partidas registradas";
         }
         public string ObtenerPersonajeMasRico(int idUsuario)
@@ -359,7 +347,6 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Unimos el inventario con el catálogo, ordenamos por dinero y tomamos el #1
                 string query = @"SELECT p.Nombre, pg.Saldo
                  FROM personajes_guardados pg
                  INNER JOIN personajes p ON pg.PersonajeId = p.Id
@@ -384,7 +371,6 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
 
-            // Por si ocurre alguna anomalía y el usuario no tiene personajes
             return "Sin personajes disponibles";
         }
         public void ActualizarSaldoPersonaje(int idRanura, double nuevoSaldo)
@@ -393,14 +379,12 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Actualizamos ÚNICAMENTE la ranura específica, no todo el usuario
                 string query = @"UPDATE personajes_guardados 
                  SET Saldo = @nuevoSaldo 
                  WHERE Id = @idRanura;";
 
                 using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
                 {
-                    // Pasamos los valores seguros para evitar inyecciones SQL
                     cmd.Parameters.AddWithValue("@nuevoSaldo", nuevoSaldo);
                     cmd.Parameters.AddWithValue("@idRanura", idRanura);
 
@@ -414,14 +398,12 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // El orden es vital: Primero borramos las partidas, luego la ranura del personaje
                 string query = @"
     DELETE FROM historial_juegos WHERE PersonajeId = @idRanura;
     DELETE FROM personajes_guardados WHERE Id = @idRanura;";
 
                 using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
                 {
-                    // Usamos el ID exacto de la ranura para no tocar a los otros personajes del usuario
                     cmd.Parameters.AddWithValue("@idRanura", idRanura);
 
                     cmd.ExecuteNonQuery();
@@ -463,7 +445,6 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // Sumamos las reapuestas de cada partida y agrupamos por el ID de la ranura del personaje
                 string query = @"SELECT p.Nombre AS Personaje, SUM(h.NumReapuestas) AS TotalReapuestas 
                          FROM historial_juegos h
                          INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id

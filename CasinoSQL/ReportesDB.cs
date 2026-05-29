@@ -36,7 +36,6 @@ namespace ProtecoPOO.CasinoSQL
                                  WHERE j.Nombre LIKE @filtro
                                  ORDER BY h.Id DESC;";
 
-                // Le agregamos los '%' para que busque coincidencias parciales
                 var rs = conn.ExecuteReader(query, ("@filtro", "%" + nombreJuego + "%"));
 
                 while (rs.Read())
@@ -133,7 +132,6 @@ namespace ProtecoPOO.CasinoSQL
             {
                 conn.Open();
 
-                // El Query maestro: Une el historial con los nombres de juegos, usuarios y personajes
                 string query = @"SELECT 
                             u.Nombre AS Jugador, 
                             p.Nombre AS Personaje, 
@@ -146,14 +144,12 @@ namespace ProtecoPOO.CasinoSQL
                          INNER JOIN juegos j ON h.JuegoId = j.Id
                          INNER JOIN personajes_guardados pg ON h.PersonajeId = pg.Id
                          INNER JOIN personajes p ON pg.PersonajeId = p.Id
-                         ORDER BY h.Id DESC;"; // ORDER BY h.Id DESC muestra las partidas más recientes primero
+                         ORDER BY h.Id DESC;"; 
 
-                // Como no hay parámetros, usamos la extensión simple
                 var rs = conn.ExecuteReader(query);
 
                 while (rs.Read())
                 {
-                    // Construimos el objeto del reporte usando tus métodos de extensión mágicos
                     ReporteAdmin fila = new ReporteAdmin
                     {
                         Jugador = rs.GetString("Jugador"),
@@ -206,8 +202,6 @@ namespace ProtecoPOO.CasinoSQL
             using (var conn = new System.Data.SQLite.SQLiteConnection(cadenaConexion))
             {
                 conn.Open();
-
-                // La base del query con el truco WHERE 1=1
                 string query = @"SELECT u.Nombre AS Jugador, p.Nombre AS Personaje, j.Nombre AS Juego, 
                                 h.SaldoInicial, h.NumReapuestas, h.GananciaPerdida
                          FROM historial_juegos h
@@ -217,15 +211,12 @@ namespace ProtecoPOO.CasinoSQL
                          INNER JOIN personajes p ON pg.PersonajeId = p.Id
                          WHERE 1=1 ";
 
-                // Vamos construyendo el query según lo que pidió el admin
                 if (idUsuario > 0) query += " AND u.Id = @idUsuario";
                 if (idJuego > 0) query += " AND j.Id = @idJuego";
                 if (idPersonaje > 0) query += " AND p.Id = @idPersonaje";
 
-                // Ordenamiento dinámico
                 query += ordenAscendente ? " ORDER BY h.Id ASC;" : " ORDER BY h.Id DESC;";
 
-                // Usamos SQLiteCommand tradicional para poder inyectar los parámetros dinámicamente
                 using (var cmd = new System.Data.SQLite.SQLiteCommand(query, conn))
                 {
                     if (idUsuario > 0) cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
@@ -251,6 +242,5 @@ namespace ProtecoPOO.CasinoSQL
             }
             return reporte;
         }
-
     }
 }

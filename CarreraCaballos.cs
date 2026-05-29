@@ -14,12 +14,11 @@ namespace ProtecoPOO
         private Caballo caballoApuesta = null;
         private int puestoAp = 0;
 
-        // Instanciación del manejador de base de datos
         private usuariosDB usuariodb = new usuariosDB();
 
         private string nombreUsuarioActual = SesionGlobal.NombreUsuario;
-        private int contador = 0; // Rastrea el número de apuestas realizadas
-        private int cId = 3; // ID del juego de carreras
+        private int contador = 0; 
+        private int cId = 3; 
         private string cName = "Carrera de Caballos";
 
         public CarreraCaballos()
@@ -27,7 +26,6 @@ namespace ProtecoPOO
             InitializeComponent();
             usuariodb = new usuariosDB();
 
-            // Vinculación del evento de cierre para asegurar persistencia autónoma
             this.FormClosing += CarreraCaballos_FormClosing;
 
             double distanciaMeta = (panel1.Width - 100) - picCarril1.Width;
@@ -38,13 +36,11 @@ namespace ProtecoPOO
                 picCarril1, picCarril2, picCarril3, picCarril4, picCarril5, picCarril6
             };
 
-            // Carga real del saldo desde el estado global de la sesión
             decimal saldoInicial = (decimal)SesionGlobal.SaldoActual;
             carrera.CargarSaldoInicial(saldoInicial);
 
             ActualizarInterfazSaldos();
 
-            // Estado inicial de controles
             btnIniciarCarrera.Enabled = false;
             btnApostar.Enabled = false;
             cmbApuestaPuesto.Enabled = false;
@@ -106,7 +102,6 @@ namespace ProtecoPOO
                 return;
             }
 
-            // Incrementar contador de apuestas válidas
             contador++;
 
             int comp = lstCompetidores.SelectedIndex;
@@ -202,10 +197,9 @@ namespace ProtecoPOO
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close(); // Invoca automáticamente el evento CarreraCaballos_FormClosing
+            this.Close(); 
         }
 
-        // Manejador centralizado de Persistencia en SQLite
         private void CarreraCaballos_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (contador > 0)
@@ -237,10 +231,9 @@ namespace ProtecoPOO
             try
             {
                 double saldoFinal = (double)carrera.SaldoJugador;
-                // Calcular ganancia neta (Cast explícito a decimal)
+                // Calcul
                 decimal gananciaNeta = (decimal)carrera.SaldoJugador - (decimal)SesionGlobal.SaldoActual;
 
-                // Estructurar el registro de partida
                 RegistroPartida reg = new RegistroPartida(1,
 
                     SesionGlobal.UsuarioId,
@@ -251,11 +244,9 @@ namespace ProtecoPOO
                     gananciaNeta
                 );
 
-                // Persistencia a través de la instancia ya inicializada
                 usuariodb.AgregarRegistroPartida(reg);
                 usuariodb.ActualizarSaldoPersonaje(SesionGlobal.PersonajeGuardadoId, saldoFinal);
 
-                // Sincronizar estado global
                 SesionGlobal.SaldoActual = saldoFinal;
 
 

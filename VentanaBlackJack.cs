@@ -57,30 +57,24 @@ namespace ProtecoPOO
                 return;
             }
 
-            // Actualizamos los labels 
+            
             lbsaldo.Text = "Tu Saldo: $" + juegoBJ.SaldoJugador;
             lblApuestaEnJuego.Text = "Apuesta en juego: $" + juegoBJ.ApuestaActual;
-
-            // Bloqueamos el botón de apostar 
             btnAceptarApuesta.Enabled = false;
             txtApuesta.Enabled = false;
 
-            // Activamos los botones de acción del juego
             btnPedir.Enabled = true;
             btnPlantarse.Enabled = true;
 
-            // Iniciamos la ronda lógica y limpiamos paneles visuales
             juegoBJ.IniciarNuevaMano();
             flowJugador.Controls.Clear();
             flowCasa.Controls.Clear();
             lblResultado.Text = "Tu turno. ¿Pides o te plantas?";
 
-            // Repartimos las cartas iniciales (2 al jugador, 1 a la casa)
             RepartirCartaVisual(juegoBJ.cartasJugador, flowJugador);
             RepartirCartaVisual(juegoBJ.cartasJugador, flowJugador);
             RepartirCartaVisual(juegoBJ.cartasCasa, flowCasa);
 
-            // Actualizamos los puntajes iniciales en pantalla
             lblPuntosJugador.Text = "Puntos Jugador: " + juegoBJ.CalcularPuntos(juegoBJ.cartasJugador);
             lblPuntosCasa.Text = "Puntos Casa: ?";
 
@@ -96,15 +90,12 @@ namespace ProtecoPOO
 
             mano.Add(nombreCarta);
 
-            // Crear el control de imagen visualmente
             PictureBox pic = new PictureBox();
-            pic.Size = new System.Drawing.Size(90, 130); // Tamaño de la carta
-            pic.SizeMode = PictureBoxSizeMode.StretchImage; // Ajustar imagen al tamaño
+            pic.Size = new System.Drawing.Size(90, 130); // Tamañ
+            pic.SizeMode = PictureBoxSizeMode.StretchImage; // Ajustar image
 
-            // Buscar la imagen en tus recursos por su nombre (c1, d5, etc.) usando el espacio de nombres del equipo
             pic.Image = (System.Drawing.Image)ProtecoPOO.Properties.Resources.ResourceManager.GetObject(nombreCarta);
 
-            // Agregar la imagen al panel 
             panel.Controls.Add(pic);
         }
 
@@ -144,7 +135,6 @@ namespace ProtecoPOO
 
             lblPuntosCasa.Text = "Puntos Casa: " + puntosCasa;
 
-            // Definimos quién ganó según las reglas del Blackjack y actualizamos el estado
             if (puntosCasa > 21)
             {
                 lblResultado.Text = "¡La casa se pasó de 21! ¡TÚ GANAS! 🎉";
@@ -170,7 +160,6 @@ namespace ProtecoPOO
 
         private void FinalizarManoMesa(string dictamen)
         {
-            // Apagamos controles de acción
             btnPedir.Enabled = false;
             btnPlantarse.Enabled = false;
 

@@ -49,5 +49,13 @@ namespace ProtecoPOO
                 adminVentana.ShowDialog();
             }
         }
+
+        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
+        }
     }
 }

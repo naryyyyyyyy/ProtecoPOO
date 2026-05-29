@@ -12,19 +12,17 @@ namespace ProtecoPOO.Ruleta
         private Ruleta ruleta = new Ruleta("Ruleta", 1); // ID del juego = 1
         private int resultado;
 
-        // ADICIONES PARA SINCRONIZACIÓN
+        
         private usuariosDB usuariodb = new usuariosDB();
         private bool guardadoProcesado = false;
-        private int contador = 0; // Registra el número de giros realizados
+        private int contador = 0; //
 
         public VentanaRuleta()
         {
             InitializeComponent();
 
-            // Vincular el evento de cierre para salvar progreso de forma autónoma
             this.FormClosing += VentanaRuleta_FormClosing;
 
-            // Cargar saldo dinámico desde la sesión global
             decimal saldoInicial = (decimal)SesionGlobal.SaldoActual;
             ruleta.CargarSaldoInicial(saldoInicial);
 
@@ -187,7 +185,7 @@ namespace ProtecoPOO.Ruleta
                 {
                     MessageBox.Show("Error al sincronizar Ruleta con la Base de Datos: " + ex.Message,
                                     "Fallo Runtime", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    guardadoProcesado = false; // Habilitar reintento en caso de fallo de red/E-S
+                    guardadoProcesado = false; 
                 }
 
             }

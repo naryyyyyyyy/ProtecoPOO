@@ -17,8 +17,15 @@ namespace ProtecoPOO
         public ReportesUsuario()
         {
             InitializeComponent();
+            CargarEstadisticas();
+
         }
 
+        private void CargarEstadisticas()
+        {
+            lblMasJugado.Text = usuario.ObtenerPersonajeMasJugado(SesionGlobal.UsuarioId);
+            lblMasRico.Text = usuario.ObtenerPersonajeMasRico(SesionGlobal.UsuarioId);
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             dgvRepostesUsusario.DataSource = null;

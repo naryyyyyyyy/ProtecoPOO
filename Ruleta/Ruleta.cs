@@ -32,7 +32,7 @@ namespace ProtecoPOO.Ruleta
         }
         public string EvaluarResultado(int resultadoGiro)
         {
-            // Si es diferente de -1, el usuario apostó a un número específico
+           
             if (ApuestaRul.Numero != -1)
             {
                 if (ApuestaRul.Numero == resultadoGiro)
