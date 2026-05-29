@@ -17,13 +17,6 @@ public class Carrera : Juego
         LlenarRooster();
     }
 
-    /*public override decimal Jugar(decimal montoApuesta)
-    {
-        // Implementación requerida por la estructura abstracta
-        return 0;
-    }*/
-
-    // Evalúa el resultado final basándose en el caballo seleccionado y el puesto apostado
     public string EvaluarResultadoApuesta(Caballo caballoApostado, int puestoApostado)
     {
         if (caballoApostado == null || Podio.Count == 0) return "PERDIO";

@@ -11,11 +11,11 @@ namespace ProtecoPOO
         public int Id { get; set; }
         public int UsuarioId { get; set; }
         public int JuegoId { get; set; }
-        public int PersonajeId { get; set; }  // ID DE RANURA
+        public int PersonajeId { get; set; }
         public decimal SaldoInicial {  get; set; }
         public int NumReapuestas {  get; set; }
         public decimal GananciaPerdida { get; set; }
-        public string NombreJuego { get; set; } // NO VISIBLE EN LA BASE DE DATOS
+        public string NombreJuego { get; set; }
         public RegistroPartida() { }
         public RegistroPartida(int id, int usuarioId, int juegoId,int personajeId, decimal saldoInicial, int numReapuestas, decimal ganancia)
         {

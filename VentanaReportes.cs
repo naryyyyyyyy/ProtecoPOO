@@ -25,16 +25,12 @@ namespace ProtecoPOO
         {
             cmbFiltro.Enabled = true;
 
-            // 1. Limpieza y configuración del ComboBox
             cmbFiltro.DataSource = null;
             cmbFiltro.ValueMember = "Id";
             cmbFiltro.DisplayMember = "Nombre";
-
-            // 2. Carga de datos de usuarios
             cmbFiltro.DataSource = usuarios.GetAllUsuarios();
             cmbFiltro.Refresh();
 
-            // 3. Filtrado inicial seguro en el DataGridView
             if (cmbFiltro.SelectedItem is Usuario usuarioSeleccionado)
             {
                 dgvReporteGlobal.DataSource = null;
@@ -47,16 +43,13 @@ namespace ProtecoPOO
         {
             cmbFiltro.Enabled = true;
 
-            // 1. Limpieza y configuración del ComboBox
             cmbFiltro.DataSource = null;
             cmbFiltro.ValueMember = "Id";
             cmbFiltro.DisplayMember = "Nombre";
 
-            // 2. Carga de datos de juegos
             cmbFiltro.DataSource = usuarios.GetAllJuegos();
             cmbFiltro.Refresh();
 
-            // 3. Filtrado inicial seguro en el DataGridView
             if (cmbFiltro.SelectedItem is ElementoCombo juegoSeleccionado)
             {
                 dgvReporteGlobal.DataSource = null;
@@ -70,16 +63,12 @@ namespace ProtecoPOO
         {
             cmbFiltro.Enabled = true;
 
-            // 1. Limpieza y configuración del ComboBox
             cmbFiltro.DataSource = null;
             cmbFiltro.ValueMember = "Id";
             cmbFiltro.DisplayMember = "Nombre";
-
-            // 2. Carga de datos de personajes
             cmbFiltro.DataSource = usuarios.GetAllPersonajes();
             cmbFiltro.Refresh();
 
-            // 3. Filtrado inicial seguro en el DataGridView
             if (cmbFiltro.SelectedItem is ElementoCombo personajeSeleccionado)
             {
                 dgvReporteGlobal.DataSource = null;

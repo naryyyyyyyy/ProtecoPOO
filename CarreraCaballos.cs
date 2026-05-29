@@ -170,7 +170,7 @@ namespace ProtecoPOO
 
             ActualizarInterfazSaldos();
             btnNuevaCarrera.Enabled = true;
-            btnSalir.Enabled = true; // Habilitar salida tras resolver el flujo de dinero
+            btnSalir.Enabled = true; 
         }
 
         private void btnNuevaCarrera_Click(object sender, EventArgs e)

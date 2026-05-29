@@ -21,11 +21,6 @@ namespace ProtecoPOO
 
             InitializeComponent();
             
-
-            //metodo apr los datos del usuario 
-            //lblNombre=.....
-            //lblSaldo=....
-            
             CargarHistorialEnPantalla();
             lblUsuario.Text = SesionGlobal.NombreUsuario;
             lblSaldoP.Text = "$" + SesionGlobal.SaldoActual.ToString();
@@ -36,10 +31,8 @@ namespace ProtecoPOO
             dgvHistorial.DataSource = null;
             dgvHistorial.AutoGenerateColumns = true;
 
-            // Asignamos tu clase reciclada
             dgvHistorial.DataSource = usuarios.ObtenerHistorialPersonajeActual(SesionGlobal.UsuarioId, SesionGlobal.PersonajeGuardadoId);
 
-            // Escondemos las columnas técnicas (IDs) para que el jugador solo vea lo bonito
             if (dgvHistorial.Columns.Contains("Id")) dgvHistorial.Columns["Id"].Visible = false;
             if (dgvHistorial.Columns.Contains("UsuarioId")) dgvHistorial.Columns["UsuarioId"].Visible = false;
             if (dgvHistorial.Columns.Contains("JuegoId")) dgvHistorial.Columns["JuegoId"].Visible = false;
@@ -48,13 +41,10 @@ namespace ProtecoPOO
 
         private void btnblackjack_Click(object sender, EventArgs e)
         {
-            //validacion de que si tenga almas para jugar
             VentanaBlackJack frm=new VentanaBlackJack();
             frm.ShowDialog();
             CargarHistorialEnPantalla();
             lblSaldoP.Text = SesionGlobal.SaldoActual.ToString();
-
-
         }
 
         private void btnCarreraCaballos_Click(object sender, EventArgs e)
@@ -69,9 +59,6 @@ namespace ProtecoPOO
         {
             AgregarRecursos frm=new AgregarRecursos();
             frm.ShowDialog();
-            //Metodo apra extaer el saldo del usuario
-            //pordia ser el get ususario().Saldo;
-            //lblSaldo.Text=Getusuario.saldo();
 
             lblSaldoP.Text = SesionGlobal.SaldoActual.ToString();
 

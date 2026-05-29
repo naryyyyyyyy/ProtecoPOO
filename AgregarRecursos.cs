@@ -13,10 +13,6 @@ namespace ProtecoPOO
 {
     public partial class AgregarRecursos : Form
     {
-        /// <summary>
-        /// se tiene que pasar el objeto usuario a esta ventana para qu ese pueda guardar con el id
-        /// </summary>
-        /// 
         usuariosDB usuarios = new usuariosDB();
         public AgregarRecursos()
         {

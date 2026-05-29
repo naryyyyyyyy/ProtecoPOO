@@ -19,7 +19,6 @@ namespace ProtecoPOO.CasinoSQL
             cadenaConexion = $"Data Source={rutaProyecto};";
         }
 
-        // 1. FILTRO POR JUEGO
         public List<ReporteAdmin> GetReportePorJuego(string nombreJuego)
         {
             var reporte = new List<ReporteAdmin>();
@@ -54,7 +53,6 @@ namespace ProtecoPOO.CasinoSQL
             return reporte;
         }
 
-        // 2. FILTRO POR PERSONAJE
         public List<ReporteAdmin> GetReportePorPersonaje(string nombrePersonaje)
         {
             var reporte = new List<ReporteAdmin>();
@@ -89,7 +87,6 @@ namespace ProtecoPOO.CasinoSQL
             return reporte;
         }
 
-        // 3. FILTRO POR USUARIO
         public List<ReporteAdmin> GetReportePorUsuario(string nombreUsuario)
         {
             var reporte = new List<ReporteAdmin>();

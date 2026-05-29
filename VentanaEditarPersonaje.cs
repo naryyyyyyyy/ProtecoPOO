@@ -23,7 +23,6 @@ namespace ProtecoPOO.CasinoSQL
             cmbELeccionPersonaje.DataSource = usuarios.ObtenerPersonajesDelUsuario(SesionGlobal.UsuarioId);
             cmbELeccionPersonaje.DisplayMember = "InfoVisual";
             cmbELeccionPersonaje.ValueMember = "Id";
-            //cmbELeccionPersonaje.DataSource = repos.Get
 
             if(cmbELeccionPersonaje.Items.Count > 0)
             {

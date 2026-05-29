@@ -32,11 +32,11 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     if (rs.Read())
                     {
-                        return true; // El usuario existe y la contraseña es correcta
+                        return true;
                     }
                     else
                     {
-                        return false; // El usuario no existe o la contraseña está mal
+                        return false;
                     }
                 }
             }
@@ -213,8 +213,6 @@ namespace ProtecoPOO.CasinoSQL
                                 SaldoInicial = Convert.ToDecimal(rs.GetValue(rs.GetOrdinal("SaldoInicial"))),
                                 NumReapuestas = rs.GetInt32(rs.GetOrdinal("NumReapuestas")),
                                 GananciaPerdida = Convert.ToDecimal(rs.GetValue(rs.GetOrdinal("GananciaPerdida"))),
-
-                                // Y llenamos el texto visual para la tabla
                                 NombreJuego = rs.GetString(rs.GetOrdinal("NombreJuego"))
                             });
                         }
@@ -279,11 +277,11 @@ namespace ProtecoPOO.CasinoSQL
                 {
                     if (rs.Read())
                     {
-                        return rs.GetInt32(0); // Devuelve el ID numérico
+                        return rs.GetInt32(0);
                     }
                 }
+                return 0;
             }
-            return 0; // Por si algo falla
         }
 
         public int ObtenerPersonajeSeleccionado(int usuarioId)
@@ -305,7 +303,7 @@ namespace ProtecoPOO.CasinoSQL
                 }
             }
 
-            return 1; // Bárbaro por defecto
+            return 1; // barbaro por defecto
         }
         public string ObtenerPersonajeMasJugado(int idUsuario)
         {

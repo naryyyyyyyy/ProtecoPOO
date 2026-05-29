@@ -91,8 +91,8 @@ namespace ProtecoPOO
             mano.Add(nombreCarta);
 
             PictureBox pic = new PictureBox();
-            pic.Size = new System.Drawing.Size(90, 130); // Tamañ
-            pic.SizeMode = PictureBoxSizeMode.StretchImage; // Ajustar image
+            pic.Size = new System.Drawing.Size(90, 130);
+            pic.SizeMode = PictureBoxSizeMode.StretchImage;
 
             pic.Image = (System.Drawing.Image)ProtecoPOO.Properties.Resources.ResourceManager.GetObject(nombreCarta);
 

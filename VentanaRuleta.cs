@@ -9,7 +9,7 @@ namespace ProtecoPOO.Ruleta
 {
     public partial class VentanaRuleta : Form
     {
-        private Ruleta ruleta = new Ruleta("Ruleta", 1); // ID del juego = 1
+        private Ruleta ruleta = new Ruleta("Ruleta", 1);
         private int resultado;
 
         
@@ -39,7 +39,7 @@ namespace ProtecoPOO.Ruleta
 
         private void btnGirar_Click(object sender, EventArgs e)
         {
-            contador++; // reapuestas
+            contador++; 
             resultado = ruleta.Girar();
             string cGanador = ruleta.Color(resultado);
 
@@ -82,7 +82,7 @@ namespace ProtecoPOO.Ruleta
 
         private void btnApostar_Click(object sender, EventArgs e)
         {
-            // validar monto cmbox
+
             if (!decimal.TryParse(txtApuesta.Text, out decimal monto) || monto <= 0)
             {
                 MessageBox.Show("Monto inválido.");
@@ -94,11 +94,9 @@ namespace ProtecoPOO.Ruleta
                 return;
             }
 
-            //iniciar apuesta y obt de q tipo
             string tipo = cmbTipoAp.SelectedItem.ToString();
             bool apuestaValida = false;
 
-            // logica segun los casos (color, num)
             if (tipo == "Color")
             {
                 txtNumAp.Clear();
@@ -134,8 +132,6 @@ namespace ProtecoPOO.Ruleta
 
             }
 
-
-            //final
             if (apuestaValida)
             {
                 btnGirar.Enabled = true;
@@ -161,18 +157,16 @@ namespace ProtecoPOO.Ruleta
                     double saldoFinal = (double)ruleta.SaldoJugador;
                     decimal gananciaNeta = (decimal)ruleta.SaldoJugador - (decimal)SesionGlobal.SaldoActual;
 
-                    // pegar tabla
                     RegistroPartida reg = new RegistroPartida(
                         1,
                         SesionGlobal.UsuarioId,
-                        ruleta.JuegoId, // Retorna id
+                        ruleta.JuegoId,
                         SesionGlobal.PersonajeGuardadoId,
                         (decimal)SesionGlobal.SaldoActual,
                         contador,
                         gananciaNeta
                     );
 
-                    // sincroni base de datos
                     usuariodb.AgregarRegistroPartida(reg);
                     usuariodb.ActualizarSaldoPersonaje(SesionGlobal.PersonajeGuardadoId, saldoFinal);
 
